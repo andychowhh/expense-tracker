@@ -1,4 +1,5 @@
 import React from "react";
+import PriceInput from "./priceInput";
 
 const RecordExpense = () => {
   return (
@@ -11,6 +12,7 @@ const RecordExpense = () => {
           This information will be displayed publicly so be careful what you
           share.
         </p>
+        <PriceInput/>
       </div>
     </div>
   );
