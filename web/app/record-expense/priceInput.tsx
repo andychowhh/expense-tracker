@@ -2,7 +2,7 @@ import React from "react";
 
 const PriceInput = () => {
   return (
-    <div className="w-2/6">
+    <div className="w-1/6">
       <label
         htmlFor="price"
         className="block text-sm font-medium leading-6 text-gray-900"
