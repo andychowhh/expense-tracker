@@ -3,7 +3,7 @@ import CategorySelect from "./CategorySelect";
 
 export default function RecordExpense() {
   return (
-    <form className="mx-auto lg:my-7 max-w-7xl px-4 py-8 sm:px-6 lg:px-8 lg:border lg:border-gray-200">
+    <form className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:my-4 lg:px-8 xl:border xl:border-gray-200">
       <div className="space-y-12">
         <div className="border-b border-gray-900/10 pb-12">
           <h2 className="text-base font-semibold leading-7 text-gray-900">
