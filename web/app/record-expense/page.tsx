@@ -3,7 +3,7 @@ import CategorySelect from "./CategorySelect";
 
 export default function RecordExpense() {
   return (
-    <form className="mx-auto my-7 max-w-7xl px-4 py-8 sm:px-6 lg:px-8 lg:border lg:border-gray-200">
+    <form className="mx-auto lg:my-7 max-w-7xl px-4 py-8 sm:px-6 lg:px-8 lg:border lg:border-gray-200">
       <div className="space-y-12">
         <div className="border-b border-gray-900/10 pb-12">
           <h2 className="text-base font-semibold leading-7 text-gray-900">
@@ -26,7 +26,7 @@ export default function RecordExpense() {
               </div>
             </div>
 
-            <div className="sm:col-span-4">
+            <div className="sm:col-span-4 sm:max-w-sm">
               <label
                 htmlFor="amount"
                 className="block text-sm font-medium leading-6 text-gray-900"
@@ -107,7 +107,7 @@ export default function RecordExpense() {
       <div className="mt-6 flex items-center justify-end gap-x-6">
         <button
           type="submit"
-          className="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+          className="w-full rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm sm:w-auto hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
         >
           Add
         </button>
