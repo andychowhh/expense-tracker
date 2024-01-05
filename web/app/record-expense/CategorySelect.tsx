@@ -1,15 +1,10 @@
 "use client";
 
-import { Fragment, useState } from "react";
+import { Fragment } from "react";
 import { Listbox, Transition } from "@headlessui/react";
 import { CheckIcon, ChevronUpDownIcon } from "@heroicons/react/20/solid";
 import Image from "next/image";
-
-export interface Category {
-  id: number;
-  name: string;
-  avatar: string;
-}
+import { Category } from "@/types";
 
 const CATEGORIES: Category[] = [
   {
@@ -23,17 +18,17 @@ const CATEGORIES: Category[] = [
     avatar: "/images/snack.png",
   },
   {
-    id: 2,
+    id: 3,
     name: "Transportation",
     avatar: "/images/transportation.png",
   },
   {
-    id: 3,
+    id: 4,
     name: "Shopping",
     avatar: "/images/shopping.png",
   },
   {
-    id: 4,
+    id: 5,
     name: "Entertainment",
     avatar: "/images/entertainment.png",
   },
@@ -52,8 +47,6 @@ export default function CategorySelect({
   selected = CATEGORIES[0],
   onChange,
 }: CategorySelectProp) {
-  // const [selected, setSelected] = useState(CATEGORIES[0]);
-
   return (
     <Listbox value={selected} onChange={(item) => onChange(item)}>
       {({ open }) => (
