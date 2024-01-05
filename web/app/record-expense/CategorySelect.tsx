@@ -5,7 +5,13 @@ import { Listbox, Transition } from "@headlessui/react";
 import { CheckIcon, ChevronUpDownIcon } from "@heroicons/react/20/solid";
 import Image from "next/image";
 
-const CATEGORIES = [
+export interface Category {
+  id: number;
+  name: string;
+  avatar: string;
+}
+
+const CATEGORIES: Category[] = [
   {
     id: 1,
     name: "Food",
@@ -37,11 +43,19 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-export default function Example() {
-  const [selected, setSelected] = useState(CATEGORIES[0]);
+interface CategorySelectProp {
+  selected: Category;
+  onChange: (item: Category) => void;
+}
+
+export default function CategorySelect({
+  selected = CATEGORIES[0],
+  onChange,
+}: CategorySelectProp) {
+  // const [selected, setSelected] = useState(CATEGORIES[0]);
 
   return (
-    <Listbox value={selected} onChange={setSelected}>
+    <Listbox value={selected} onChange={(item) => onChange(item)}>
       {({ open }) => (
         <>
           {/* <Listbox.Label className="block text-sm font-medium leading-6 text-gray-900">

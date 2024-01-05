@@ -5,13 +5,13 @@ import { Controller, SubmitHandler, useForm } from "react-hook-form";
 
 import { PhotoIcon } from "@heroicons/react/24/solid";
 
-import CategorySelect from "./CategorySelect";
+import CategorySelect, { Category } from "./CategorySelect";
 
 import "react-datepicker/dist/react-datepicker.css";
 
 interface Inputs {
   date: Date;
-  category: string;
+  category: Category;
   amount: number;
   note: string;
 }
@@ -66,7 +66,16 @@ export default function RecordExpense() {
                 Category
               </label>
               <div className="mt-2">
-                <CategorySelect />
+                <Controller
+                  control={control}
+                  name="category"
+                  render={({ field }) => (
+                    <CategorySelect
+                      selected={field.value}
+                      onChange={(item) => field.onChange(item)}
+                    />
+                  )}
+                />
               </div>
             </div>
 
