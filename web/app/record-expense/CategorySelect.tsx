@@ -5,7 +5,7 @@ import { Listbox, Transition } from "@headlessui/react";
 import { CheckIcon, ChevronUpDownIcon } from "@heroicons/react/20/solid";
 import Image from "next/image";
 
-const people = [
+const CATEGORIES = [
   {
     id: 1,
     name: "Food",
@@ -38,7 +38,7 @@ function classNames(...classes) {
 }
 
 export default function Example() {
-  const [selected, setSelected] = useState(people[3]);
+  const [selected, setSelected] = useState(CATEGORIES[0]);
 
   return (
     <Listbox value={selected} onChange={setSelected}>
@@ -76,23 +76,23 @@ export default function Example() {
               leaveTo="opacity-0"
             >
               <Listbox.Options className="absolute z-10 mt-1 max-h-56 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
-                {people.map((person) => (
+                {CATEGORIES.map((category) => (
                   <Listbox.Option
-                    key={person.id}
+                    key={category.id}
                     className={({ active }) =>
                       classNames(
                         active ? "bg-indigo-600 text-white" : "text-gray-900",
                         "relative cursor-default select-none py-2 pl-3 pr-9"
                       )
                     }
-                    value={person}
+                    value={category}
                   >
                     {({ selected, active }) => (
                       <>
                         <div className="flex items-center">
                           <div className="h-5 w-5 relative">
                             <Image
-                              src={person.avatar}
+                              src={category.avatar}
                               alt=""
                               className="flex-shrink-0 rounded-full"
                               fill={true}
@@ -104,7 +104,7 @@ export default function Example() {
                               "ml-3 block truncate"
                             )}
                           >
-                            {person.name}
+                            {category.name}
                           </span>
                         </div>
 
