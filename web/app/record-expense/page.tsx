@@ -1,5 +1,9 @@
+"use client";
+
 import { PhotoIcon } from "@heroicons/react/24/solid";
 import CategorySelect from "./CategorySelect";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 export default function RecordExpense() {
   return (
@@ -9,11 +13,21 @@ export default function RecordExpense() {
           <h2 className="text-base font-semibold leading-7 text-gray-900">
             Record Expense
           </h2>
-          <p className="mt-1 text-sm leading-6 text-gray-600">
-            Add your expense here!
-          </p>
-
           <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+            <div className="col-span-full">
+              <label
+                htmlFor="date"
+                className="block text-sm font-medium leading-6 text-gray-900"
+              >
+                Date
+              </label>
+              <DatePicker
+                selected={new Date()}
+                onChange={() => {}}
+                className="text-sm border-0 rounded-md px-3 shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md"
+              />
+            </div>
+
             <div className="col-span-full">
               <label
                 htmlFor="category"
