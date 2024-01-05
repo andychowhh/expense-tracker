@@ -1,13 +1,36 @@
 "use client";
 
-import { PhotoIcon } from "@heroicons/react/24/solid";
-import CategorySelect from "./CategorySelect";
 import DatePicker from "react-datepicker";
+import { Controller, SubmitHandler, useForm } from "react-hook-form";
+
+import { PhotoIcon } from "@heroicons/react/24/solid";
+
+import CategorySelect from "./CategorySelect";
+
 import "react-datepicker/dist/react-datepicker.css";
 
+interface Inputs {
+  date: Date;
+  category: string;
+  amount: number;
+  note: string;
+}
+
 export default function RecordExpense() {
+  const {
+    control,
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm<Inputs>();
+  const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data);
+
   return (
-    <form className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:my-4 lg:px-8 xl:border xl:border-gray-200">
+    <form
+      onSubmit={handleSubmit(onSubmit)}
+      className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:my-4 lg:px-8 xl:border xl:border-gray-200"
+    >
       <div className="space-y-12">
         <div className="border-b border-gray-900/10 pb-12">
           <h2 className="text-base font-semibold leading-7 text-gray-900">
@@ -21,10 +44,17 @@ export default function RecordExpense() {
               >
                 Date
               </label>
-              <DatePicker
-                selected={new Date()}
-                onChange={() => {}}
-                className="text-sm border-0 rounded-md px-3 shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md"
+
+              <Controller
+                control={control}
+                name="date"
+                render={({ field }) => (
+                  <DatePicker
+                    selected={field.value}
+                    onChange={(date) => field.onChange(date)}
+                    className="text-sm border-0 rounded-md px-3 shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md"
+                  />
+                )}
               />
             </div>
 
@@ -51,9 +81,9 @@ export default function RecordExpense() {
                 <div className="flex rounded-md px-3 shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
                   <input
                     type="number"
-                    name="amount"
                     id="amount"
                     className="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
+                    {...register("amount")}
                   />
                   <span className="flex select-none items-center pl-3 text-gray-500 sm:text-sm">
                     CAD
@@ -71,11 +101,10 @@ export default function RecordExpense() {
               </label>
               <div className="mt-2">
                 <textarea
-                  id="about"
-                  name="about"
                   rows={3}
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                   defaultValue={""}
+                  {...register("note")}
                 />
               </div>
             </div>
