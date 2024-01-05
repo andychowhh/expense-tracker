@@ -23,7 +23,11 @@ export default function RecordExpense() {
     handleSubmit,
     watch,
     formState: { errors },
-  } = useForm<Inputs>();
+  } = useForm<Inputs>({
+    defaultValues: {
+      date: new Date(),
+    },
+  });
   const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data);
 
   return (
@@ -52,6 +56,7 @@ export default function RecordExpense() {
                   <DatePicker
                     selected={field.value}
                     onChange={(date) => field.onChange(date)}
+                    dateFormat="d MMM yyyy"
                     className="text-sm border-0 rounded-md px-3 shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md"
                   />
                 )}
