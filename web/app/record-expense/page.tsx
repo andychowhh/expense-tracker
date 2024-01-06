@@ -7,6 +7,8 @@ import { PhotoIcon } from "@heroicons/react/24/solid";
 
 import CategorySelect, { Category } from "./CategorySelect";
 
+import { useModal } from "@/store";
+
 import "react-datepicker/dist/react-datepicker.css";
 
 interface Inputs {
@@ -28,7 +30,12 @@ export default function RecordExpense() {
       date: new Date(),
     },
   });
-  const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data);
+  const openModal = useModal((state) => state.openModal);
+
+  const onSubmit: SubmitHandler<Inputs> = (data) => {
+    console.log({ data });
+    openModal();
+  };
 
   return (
     <form
