@@ -34,7 +34,7 @@ export default function RecordExpense() {
 
   const onSubmit: SubmitHandler<Inputs> = (data) => {
     console.log({ data });
-    openModal();
+    openModal({ title: "Successful", description: 'You have successfully created the record!' });
   };
 
   return (

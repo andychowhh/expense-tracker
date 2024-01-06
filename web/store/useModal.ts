@@ -1,13 +1,20 @@
 import { create } from "zustand";
 
+interface ModalProp {
+  title: string;
+  description?: string;
+}
+
 interface ModalState {
-  isModalOpen: boolean;
-  openModal: () => void;
+  modalType: string | null;
+  modalProps: ModalProp | null;
+  openModal: (props: ModalProp) => void;
   closeModal: () => void;
 }
 
 export const useModal = create<ModalState>((set) => ({
-  isModalOpen: false,
-  openModal: () => set({ isModalOpen: true }),
-  closeModal: () => set({ isModalOpen: false }),
+  modalType: null,
+  modalProps: null,
+  openModal: (props: ModalProp) => set({ modalProps: props }),
+  closeModal: () => set({ modalProps: null }),
 }));
