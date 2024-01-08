@@ -1,6 +1,6 @@
 "use client";
 
-import { Fragment, useRef } from "react";
+import { Fragment, useRef, useEffect } from "react";
 import DatePicker from "react-datepicker";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { Dialog, Transition } from "@headlessui/react";
@@ -9,8 +9,6 @@ import { ExclamationTriangleIcon } from "@heroicons/react/24/outline";
 import { PhotoIcon } from "@heroicons/react/24/solid";
 
 import CategorySelect, { Category } from "./CategorySelect";
-
-import { useModal } from "@/store";
 
 import "react-datepicker/dist/react-datepicker.css";
 
@@ -39,14 +37,11 @@ const AddNewRecordModal = ({ isOpen, onClose }: AddNewRecordModalProp) => {
     },
   });
 
-  // const cancelButtonRef = useRef(null);
-
   return (
     <Transition.Root show={isOpen} as={Fragment}>
       <Dialog
         as="div"
         className="relative z-10 bg-red-100"
-        // initialFocus={cancelButtonRef}
         onClose={onClose}
       >
         <Transition.Child
@@ -104,9 +99,13 @@ const AddNewRecordModal = ({ isOpen, onClose }: AddNewRecordModalProp) => {
                           render={({ field }) => (
                             <DatePicker
                               selected={field.value}
-                              onChange={(date) => field.onChange(date)}
                               preventOpenOnFocus={true}
                               dateFormat="d MMM yyyy"
+                              maxDate={new Date()}
+                              onChange={(date) => field.onChange(date)}
+                              onKeyDown={(e) => {
+                                e.preventDefault();
+                              }}
                               className="text-sm border-0 rounded-md px-3 shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md"
                             />
                           )}
