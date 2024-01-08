@@ -23,9 +23,10 @@ interface Inputs {
 
 interface AddNewRecordModalProp {
   isOpen: boolean;
+  onClose: () => void;
 }
 
-const AddNewRecordModal = ({ isOpen }: AddNewRecordModalProp) => {
+const AddNewRecordModal = ({ isOpen, onClose }: AddNewRecordModalProp) => {
   const {
     control,
     register,
@@ -37,19 +38,16 @@ const AddNewRecordModal = ({ isOpen }: AddNewRecordModalProp) => {
       date: new Date(),
     },
   });
-  // prevent subscribing all events in useModal
-  const modalProps = useModal((state) => state.modalProps);
-  const closeModal = useModal((state) => state.closeModal);
 
-  const cancelButtonRef = useRef(null);
+  // const cancelButtonRef = useRef(null);
 
   return (
     <Transition.Root show={isOpen} as={Fragment}>
       <Dialog
         as="div"
-        className="relative z-10"
-        initialFocus={cancelButtonRef}
-        onClose={closeModal}
+        className="relative z-10 bg-red-100"
+        // initialFocus={cancelButtonRef}
+        onClose={onClose}
       >
         <Transition.Child
           as={Fragment}
@@ -64,7 +62,7 @@ const AddNewRecordModal = ({ isOpen }: AddNewRecordModalProp) => {
         </Transition.Child>
 
         <div className="fixed inset-0 z-10 w-screen overflow-y-auto">
-          <div className="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
+          <div className="sm:flex sm:justify-center sm:h-full">
             <Transition.Child
               as={Fragment}
               enter="ease-out duration-300"
@@ -74,7 +72,7 @@ const AddNewRecordModal = ({ isOpen }: AddNewRecordModalProp) => {
               leaveFrom="opacity-100 translate-y-0 sm:scale-100"
               leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
             >
-              <Dialog.Panel className="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg">
+              <Dialog.Panel className="h-screen relative transform overflow-hidden bg-white text-left shadow-xl transition-all sm:rounded-lg sm:h-auto sm:my-8 sm:w-full sm:max-w-lg">
                 <div className="bg-white px-4 pb-4 pt-5 sm:p-6 sm:pb-4">
                   <div className="sm:flex sm:flex-col sm:items-start">
                     <div className="mx-auto flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-red-100 sm:mx-0 sm:h-10 sm:w-10">
@@ -90,11 +88,6 @@ const AddNewRecordModal = ({ isOpen }: AddNewRecordModalProp) => {
                       >
                         Add New Record
                       </Dialog.Title>
-                      <div className="mt-2">
-                        <p className="text-sm text-gray-500">
-                          {modalProps?.description}
-                        </p>
-                      </div>
                     </div>
                     <div className="w-full mt-3 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
                       <div className="col-span-full">
@@ -112,6 +105,7 @@ const AddNewRecordModal = ({ isOpen }: AddNewRecordModalProp) => {
                             <DatePicker
                               selected={field.value}
                               onChange={(date) => field.onChange(date)}
+                              preventOpenOnFocus={true}
                               dateFormat="d MMM yyyy"
                               className="text-sm border-0 rounded-md px-3 shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md"
                             />
@@ -216,22 +210,14 @@ const AddNewRecordModal = ({ isOpen }: AddNewRecordModalProp) => {
                     </div>
                   </div>
                 </div>
-                <div className="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
-                  {/* <button
-                    type="button"
-                    className="inline-flex w-full justify-center rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500 sm:ml-3 sm:w-auto"
-                    onClick={() => closeModal()}
-                  >
-                    Deactivate
-                  </button>
+                <div className="px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
                   <button
                     type="button"
-                    className="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto"
-                    onClick={() => closeModal()}
-                    ref={cancelButtonRef}
+                    className="inline-flex w-full justify-center rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500 sm:ml-3 sm:w-auto"
+                    onClick={() => onClose()}
                   >
-                    Cancel
-                  </button> */}
+                    Add
+                  </button>
                 </div>
               </Dialog.Panel>
             </Transition.Child>
