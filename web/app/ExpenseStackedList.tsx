@@ -1,6 +1,14 @@
 import Image from "next/image";
+import { useState } from "react";
 import DatePicker from "react-datepicker";
+import { Controller, SubmitHandler, useForm } from "react-hook-form";
+import moment from "moment";
+
 import "react-datepicker/dist/react-datepicker.css";
+
+interface FormInput {
+  date: Date;
+}
 
 const people = [
   {
@@ -58,27 +66,46 @@ const people = [
 ];
 
 export default function ExpenseStackedList() {
+  const [currentDate, setCurrentDate] = useState<Date | null>(new Date());
+  const {
+    control,
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm<FormInput>({
+    defaultValues: {
+      date: new Date(),
+    },
+  });
+
   return (
     <div className="sm:border sm:border-1 sm:mt-4 sm:max-w-md sm:m-auto md:max-w-xl lg:max-w-3xl">
       <div className="flex justify-between items-center border-b py-2 sm:px-4">
         <div className="invisible">CA$0</div>
-
-        <DatePicker
-          //   selected={field.value}
-          preventOpenOnFocus={true}
-          withPortal={true}
-          dateFormat="d MMM yyyy"
-          maxDate={new Date()}
-          //   onChange={(date) => field.onChange(date)}
-          onChange={(date) => null}
-          onKeyDown={(e) => {
-            e.preventDefault();
-          }}
-          customInput={
-            <div className="cursor-pointer rounded-md bg-indigo-600 px-3.5 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
-              Today
-            </div>
-          }
+        <Controller
+          control={control}
+          name="date"
+          render={({ field }) => (
+            <DatePicker
+              selected={field.value}
+              preventOpenOnFocus={true}
+              withPortal={true}
+              dateFormat="d MMM yyyy"
+              maxDate={new Date()}
+              onChange={(date) => field.onChange(date)}
+              onKeyDown={(e) => {
+                e.preventDefault();
+              }}
+              customInput={
+                <div className="cursor-pointer rounded-md bg-indigo-600 px-3.5 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+                  {moment(field.value).isSame(moment(), "day")
+                    ? "Today"
+                    : moment(field.value).format("d MMM yyyy")}
+                </div>
+              }
+            />
+          )}
         />
         <div>CA$0</div>
       </div>
