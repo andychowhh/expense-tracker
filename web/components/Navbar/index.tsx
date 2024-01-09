@@ -6,8 +6,7 @@ import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import Image from "next/image";
 
 const navigation = [
-  { name: "Dashboard", href: "/", current: true },
-  { name: "Record Expense", href: "/record-expense", current: false },
+  { name: "Home", href: "/", current: true },
   { name: "Settings", href: "/settings", current: false },
 ];
 
