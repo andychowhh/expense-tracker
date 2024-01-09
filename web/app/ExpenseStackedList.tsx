@@ -1,4 +1,6 @@
 import Image from "next/image";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 const people = [
   {
@@ -57,31 +59,52 @@ const people = [
 
 export default function ExpenseStackedList() {
   return (
-    <ul
-      role="list"
-      className="divide-y divide-gray-100 sm:border sm:border-1 sm:px-4 sm:mt-4 sm:max-w-md sm:m-auto md:max-w-xl lg:max-w-3xl"
-    >
-      {people.map((person) => (
-        <li
-          key={person.email}
-          className="flex justify-between items-center gap-x-6 py-5"
-        >
-          <div className="flex items-center min-w-0 gap-x-4">
-            <div className="h-12 w-12 relative flex-none">
-              <Image
-                className="rounded-full bg-gray-50"
-                src={person.imageUrl}
-                alt=""
-                fill={true}
-              />
+    <div className="sm:border sm:border-1 sm:mt-4 sm:max-w-md sm:m-auto md:max-w-xl lg:max-w-3xl">
+      <div className="flex justify-between items-center border-b py-2 sm:px-4">
+        <div className="invisible">CA$0</div>
+
+        <DatePicker
+          //   selected={field.value}
+          preventOpenOnFocus={true}
+          withPortal={true}
+          dateFormat="d MMM yyyy"
+          maxDate={new Date()}
+          //   onChange={(date) => field.onChange(date)}
+          onChange={(date) => null}
+          onKeyDown={(e) => {
+            e.preventDefault();
+          }}
+          customInput={
+            <div className="cursor-pointer rounded-md bg-indigo-600 px-3.5 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+              Today
             </div>
-            <div className="min-w-0 flex-auto">123</div>
-          </div>
-          <div className="sm:flex sm:flex-col">
-            <p className="text-sm leading-6 text-gray-900">CA$1.62</p>
-          </div>
-        </li>
-      ))}
-    </ul>
+          }
+        />
+        <div>CA$0</div>
+      </div>
+      <ul role="list" className="divide-y divide-gray-100 sm:px-4">
+        {people.map((person) => (
+          <li
+            key={person.email}
+            className="flex justify-between items-center gap-x-6 py-5"
+          >
+            <div className="flex items-center min-w-0 gap-x-4">
+              <div className="h-12 w-12 relative flex-none">
+                <Image
+                  className="rounded-full bg-gray-50"
+                  src={person.imageUrl}
+                  alt=""
+                  fill={true}
+                />
+              </div>
+              <div className="min-w-0 flex-auto">123</div>
+            </div>
+            <div className="sm:flex sm:flex-col">
+              <p className="text-sm leading-6 text-gray-900">CA$1.62</p>
+            </div>
+          </li>
+        ))}
+      </ul>
+    </div>
   );
 }
