@@ -8,7 +8,7 @@ import { Dialog, Transition } from "@headlessui/react";
 import { ExclamationTriangleIcon } from "@heroicons/react/24/outline";
 import { PhotoIcon } from "@heroicons/react/24/solid";
 
-import CategorySelect, { Category } from "./CategorySelect";
+import CategorySelect, { Category } from "../../app/CategorySelect";
 
 import "react-datepicker/dist/react-datepicker.css";
 
@@ -39,11 +39,7 @@ const AddNewRecordModal = ({ isOpen, onClose }: AddNewRecordModalProp) => {
 
   return (
     <Transition.Root show={isOpen} as={Fragment}>
-      <Dialog
-        as="div"
-        className="relative z-10 bg-red-100"
-        onClose={onClose}
-      >
+      <Dialog as="div" className="relative z-10 bg-red-100" onClose={onClose}>
         <Transition.Child
           as={Fragment}
           enter="ease-out duration-300"
