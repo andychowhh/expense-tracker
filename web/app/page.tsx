@@ -1,9 +1,7 @@
-import Image from "next/image";
+"use client";
+
+import ExpenseStackedList from "./ExpenseStackedList";
 
 export default function Home() {
-  return (
-    <main className="min-h-screen">
-      Home Page
-    </main>
-  );
+  return <ExpenseStackedList />;
 }
