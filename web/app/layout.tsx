@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import { GoogleOAuthProvider, GoogleLogin } from "@react-oauth/google";
 import "./globals.css";
 import { Navbar, Modal } from "@/components";
 
@@ -16,12 +17,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body className={inter.className}>
-        <Modal />
-        <Navbar />
-        <main className="px-4">{children}</main>
-      </body>
-    </html>
+    <GoogleOAuthProvider clientId={process.env.GOOGLE_CLIENT_ID ?? ""}>
+      <html lang="en">
+        <body className={inter.className}>
+          <Modal />
+          <Navbar />
+          <main className="px-4">{children}</main>
+        </body>
+      </html>
+    </GoogleOAuthProvider>
   );
 }

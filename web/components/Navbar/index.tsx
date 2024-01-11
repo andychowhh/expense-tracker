@@ -2,6 +2,9 @@
 
 import { Fragment } from "react";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
+import { GoogleLogin } from "@react-oauth/google";
+import axios from "axios";
+
 import useToggle from "beautiful-react-hooks/useToggle";
 
 import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
@@ -80,6 +83,19 @@ export const Navbar = () => {
                     <span className="sr-only">View notifications</span>
                     <BellIcon className="h-6 w-6" aria-hidden="true" />
                   </button>
+
+                  <GoogleLogin
+                    onSuccess={async (credentialResponse) => {
+                      console.log(credentialResponse);
+                      const res = await axios.post(
+                        "http://localhost:3001/login",
+                        { token: credentialResponse.credential }
+                      );
+                    }}
+                    onError={() => {
+                      console.log("Login Failed");
+                    }}
+                  />
 
                   {/* Profile dropdown */}
                   <Menu as="div" className="relative ml-3">
