@@ -19,9 +19,6 @@ export class LoginService {
       console.log(e);
     }
 
-    // log the ticket payload in the console to see what we have
-
-    console.log({ token });
     return 'Loginnnned';
   }
 }
