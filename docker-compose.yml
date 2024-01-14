@@ -23,6 +23,9 @@ services:
     container_name: backend
     ports: 
       - '3001:3001'
+    volumes:
+      - ./backend:/app
+      - /app/node_modules
     depends_on:
       - database
 
