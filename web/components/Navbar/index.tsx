@@ -88,7 +88,7 @@ export const Navbar = () => {
                     onSuccess={async (credentialResponse) => {
                       console.log(credentialResponse);
                       const res = await axios.post(
-                        "http://localhost:3001/login",
+                        "http://localhost:3001/users/login",
                         { token: credentialResponse.credential }
                       );
                     }}
