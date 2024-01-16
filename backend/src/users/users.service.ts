@@ -3,7 +3,7 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { OAuth2Client } from 'google-auth-library';
 import { CreateUserDto } from './dto/create-user.dto';
-import { User } from './schemas/user.schema';
+import { User } from './interfaces/user.interface';
 
 const client = new OAuth2Client(
   process.env.GOOGLE_CLIENT_ID,
