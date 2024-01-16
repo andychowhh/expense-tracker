@@ -1,11 +1,11 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { LoginController } from './login/login.controller';
-import { LoginService } from './login/login.service';
+import { UserController } from './user/users.controller';
+import { UserService } from './user/users.service';
 import { ConfigModule } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
-import { UserSchema } from './login/schemas/user.schema';
+import { UserSchema } from './user/schemas/user.schema';
 
 @Module({
   imports: [
@@ -17,7 +17,7 @@ import { UserSchema } from './login/schemas/user.schema';
     MongooseModule.forRoot('mongodb://andychow:1234@database:27017'),
     MongooseModule.forFeature([{ name: 'User', schema: UserSchema }]),
   ],
-  controllers: [AppController, LoginController],
-  providers: [AppService, LoginService],
+  controllers: [AppController, UserController],
+  providers: [AppService, UserService],
 })
 export class AppModule {}

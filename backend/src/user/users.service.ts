@@ -11,7 +11,7 @@ const client = new OAuth2Client(
 );
 
 @Injectable()
-export class LoginService {
+export class UserService {
   constructor(@InjectModel('User') private userModel: Model<User>) {}
 
   async login(token: string) {
