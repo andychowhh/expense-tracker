@@ -88,7 +88,7 @@ export const Navbar = () => {
                     onSuccess={async (credentialResponse) => {
                       console.log(credentialResponse);
                       const res = await axios.post(
-                        "http://localhost:3001/users/login",
+                        "http://localhost:3001/auth/google-login",
                         { token: credentialResponse.credential }
                       );
                     }}
