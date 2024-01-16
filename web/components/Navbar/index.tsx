@@ -83,14 +83,22 @@ export const Navbar = () => {
                     <span className="sr-only">View notifications</span>
                     <BellIcon className="h-6 w-6" aria-hidden="true" />
                   </button>
-
+                  <button
+                    onClick={() => {
+                      window.location.href = "http://localhost:3001/users";
+                    }}
+                  >
+                    Google
+                  </button>
                   <GoogleLogin
                     onSuccess={async (credentialResponse) => {
                       console.log(credentialResponse);
-                      const res = await axios.post(
-                        "http://localhost:3001/users/login",
-                        { token: credentialResponse.credential }
-                      );
+                      window.location.href = "http://localhost:3001/users";
+                      // const res = await axios.get(
+                      //   // "http://localhost:3001/users/login",
+                      //   "http://localhost:3001/users",
+                      //   // { token: credentialResponse.credential }
+                      // );
                     }}
                     onError={() => {
                       console.log("Login Failed");
