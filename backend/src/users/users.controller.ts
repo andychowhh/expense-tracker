@@ -1,14 +1,14 @@
 import { Body, Controller, Post } from '@nestjs/common';
-import { UserService } from './users.service';
+import { UsersService } from './users.service';
 import { LoginDto } from './dto/login.dto';
 
 // Update the route here
 @Controller('users')
-export class UserController {
-  constructor(private readonly userService: UserService) {}
+export class UsersController {
+  constructor(private readonly usersService: UsersService) {}
 
   @Post('login')
   async login(@Body() loginDto: LoginDto) {
-    return this.userService.login(loginDto.token);
+    return this.usersService.login(loginDto.token);
   }
 }
