@@ -2,10 +2,14 @@
 
 import { Fragment } from "react";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
-import { GoogleLogin, googleLogout } from "@react-oauth/google";
+import {
+  CredentialResponse,
+  GoogleLogin,
+} from "@react-oauth/google";
 import axios from "axios";
 
 import useToggle from "beautiful-react-hooks/useToggle";
+import useSessionStorage from "beautiful-react-hooks/useSessionStorage";
 
 import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import Image from "next/image";
@@ -23,10 +27,22 @@ function classNames(...classes: any) {
 
 export const Navbar = () => {
   const [isAddNewRecordModalOpen, toggleAddNewRecordModal] = useToggle();
+  const [accessToken, setAccessToken] = useSessionStorage("accessToken", "");
+
+  const login = async (credentialResponse: CredentialResponse) => {
+    const loginRes = await axios.post(
+      "http://localhost:3001/auth/google-login",
+      {
+        token: credentialResponse.credential,
+      }
+    );
+    console.log(loginRes);
+    setAccessToken(JSON.stringify(loginRes.data.accessToken));
+  };
 
   const logout = (event: Event) => {
     event.preventDefault();
-    googleLogout();
+    setAccessToken("");
   };
 
   return (
@@ -74,7 +90,7 @@ export const Navbar = () => {
                   </div>
                 </div>
                 <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-                  {false ? (
+                  {accessToken ? (
                     <>
                       <button
                         onClick={toggleAddNewRecordModal}
@@ -164,13 +180,7 @@ export const Navbar = () => {
                     <GoogleLogin
                       text="signin"
                       size="large"
-                      onSuccess={async (credentialResponse) => {
-                        console.log(credentialResponse);
-                        const res = await axios.post(
-                          "http://localhost:3001/auth/google-login",
-                          { token: credentialResponse.credential }
-                        );
-                      }}
+                      onSuccess={login}
                       onError={() => {
                         console.log("Login Failed");
                       }}
