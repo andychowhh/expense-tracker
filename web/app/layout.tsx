@@ -3,6 +3,8 @@ import { Inter } from "next/font/google";
 import { GoogleOAuthProvider, GoogleLogin } from "@react-oauth/google";
 import "./globals.css";
 import { Navbar, Modal } from "@/components";
+import { Provider as ReduxProvider } from "react-redux";
+import ReduxStoreProvider from "../redux/reduxStoreProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -17,14 +19,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <GoogleOAuthProvider clientId={process.env.GOOGLE_CLIENT_ID ?? ""}>
-      <html lang="en">
-        <body className={inter.className}>
-          <Modal />
-          <Navbar />
-          <main className="px-4">{children}</main>
-        </body>
-      </html>
-    </GoogleOAuthProvider>
+    <ReduxStoreProvider>
+      <GoogleOAuthProvider clientId={process.env.GOOGLE_CLIENT_ID ?? ""}>
+        <html lang="en">
+          <body className={inter.className}>
+            <Modal />
+            <Navbar />
+            <main className="px-4">{children}</main>
+          </body>
+        </html>
+      </GoogleOAuthProvider>
+    </ReduxStoreProvider>
   );
 }

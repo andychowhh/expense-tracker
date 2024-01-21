@@ -1,20 +1,20 @@
 "use client";
 
-import { Fragment } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
-import {
-  CredentialResponse,
-  GoogleLogin,
-} from "@react-oauth/google";
+import { CredentialResponse, GoogleLogin } from "@react-oauth/google";
 import axios from "axios";
 
 import useToggle from "beautiful-react-hooks/useToggle";
-import useSessionStorage from "beautiful-react-hooks/useSessionStorage";
 
 import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import Image from "next/image";
 
 import AddNewRecordModal from "../AddNewRecordModal";
+
+import type { RootState } from "../../redux/store";
+import { useAppSelector, useAppDispatch } from "../../redux/hook";
+import { setUser } from "../../redux/slices/userSlice";
 
 const navigation = [
   { name: "Home", href: "/", current: true },
@@ -26,8 +26,16 @@ function classNames(...classes: any) {
 }
 
 export const Navbar = () => {
+  const [accessToken, setAccessToken] = useState<string>("");
   const [isAddNewRecordModalOpen, toggleAddNewRecordModal] = useToggle();
-  const [accessToken, setAccessToken] = useSessionStorage("accessToken", "");
+  const user = useAppSelector((state: RootState) => state.user);
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    if (sessionStorage.getItem("accessToken")) {
+      setAccessToken(sessionStorage.getItem("accessToken") ?? "");
+    }
+  }, []);
 
   const login = async (credentialResponse: CredentialResponse) => {
     const loginRes = await axios.post(
@@ -36,12 +44,15 @@ export const Navbar = () => {
         token: credentialResponse.credential,
       }
     );
-    console.log(loginRes);
+
+    sessionStorage.setItem("accessToken", loginRes.data.accessToken);
     setAccessToken(JSON.stringify(loginRes.data.accessToken));
+    dispatch(setUser(loginRes.data));
   };
 
   const logout = (event: Event) => {
     event.preventDefault();
+    dispatch(setUser(null));
     setAccessToken("");
   };
 
@@ -114,7 +125,7 @@ export const Navbar = () => {
                             <span className="sr-only">Open user menu</span>
                             <div className="h-8 w-8 rounded-full relative">
                               <Image
-                                src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                                src={user.picture ?? ""}
                                 alt=""
                                 fill={true}
                                 objectFit="cover"
