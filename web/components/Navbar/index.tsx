@@ -1,12 +1,11 @@
 "use client";
 
-import { Fragment } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { CredentialResponse, GoogleLogin } from "@react-oauth/google";
 import axios from "axios";
 
 import useToggle from "beautiful-react-hooks/useToggle";
-import useSessionStorage from "beautiful-react-hooks/useSessionStorage";
 
 import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import Image from "next/image";
@@ -27,10 +26,16 @@ function classNames(...classes: any) {
 }
 
 export const Navbar = () => {
+  const [accessToken, setAccessToken] = useState<string>("");
   const [isAddNewRecordModalOpen, toggleAddNewRecordModal] = useToggle();
-  const [accessToken, setAccessToken] = useSessionStorage("accessToken", "");
   const user = useAppSelector((state: RootState) => state.user);
   const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    if (sessionStorage.getItem("accessToken")) {
+      setAccessToken(sessionStorage.getItem("accessToken") ?? "");
+    }
+  }, []);
 
   const login = async (credentialResponse: CredentialResponse) => {
     const loginRes = await axios.post(
@@ -40,6 +45,7 @@ export const Navbar = () => {
       }
     );
 
+    sessionStorage.setItem("accessToken", loginRes.data.accessToken);
     setAccessToken(JSON.stringify(loginRes.data.accessToken));
     dispatch(setUser(loginRes.data));
   };
