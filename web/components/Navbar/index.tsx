@@ -3,7 +3,8 @@
 import { Fragment, useEffect, useState } from "react";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { CredentialResponse, GoogleLogin } from "@react-oauth/google";
-import axios from "axios";
+// import axios from "axios";
+import axios from '../../api/axios';
 
 import useToggle from "beautiful-react-hooks/useToggle";
 
@@ -38,16 +39,18 @@ export const Navbar = () => {
   }, []);
 
   const login = async (credentialResponse: CredentialResponse) => {
-    const loginRes = await axios.post(
-      "http://localhost:3001/auth/google-login",
-      {
-        token: credentialResponse.credential,
-      }
-    );
+    const getUser = await axios.get("/users");
+    console.log(getUser);
+    // const loginRes = await axios.post(
+    //   "http://localhost:3001/auth/google-login",
+    //   {
+    //     token: credentialResponse.credential,
+    //   }
+    // );
 
-    sessionStorage.setItem("accessToken", loginRes.data.accessToken);
-    setAccessToken(JSON.stringify(loginRes.data.accessToken));
-    dispatch(setUser(loginRes.data));
+    // sessionStorage.setItem("accessToken", loginRes.data.accessToken);
+    // setAccessToken(JSON.stringify(loginRes.data.accessToken));
+    // dispatch(setUser(loginRes.data));
   };
 
   const logout = (event: Event) => {
