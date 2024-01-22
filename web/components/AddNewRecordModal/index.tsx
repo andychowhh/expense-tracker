@@ -8,7 +8,8 @@ import { Dialog, Transition } from "@headlessui/react";
 import { ExclamationTriangleIcon } from "@heroicons/react/24/outline";
 import { PhotoIcon } from "@heroicons/react/24/solid";
 
-import CategorySelect, { Category } from "../../app/CategorySelect";
+import { CategorySelect } from "../../components";
+import { Category } from "../../types";
 
 import "react-datepicker/dist/react-datepicker.css";
 
@@ -24,7 +25,7 @@ interface AddNewRecordModalProp {
   onClose: () => void;
 }
 
-const AddNewRecordModal = ({ isOpen, onClose }: AddNewRecordModalProp) => {
+export function AddNewRecordModal({ isOpen, onClose }: AddNewRecordModalProp) {
   const {
     control,
     register,
@@ -221,6 +222,4 @@ const AddNewRecordModal = ({ isOpen, onClose }: AddNewRecordModalProp) => {
       </Dialog>
     </Transition.Root>
   );
-};
-
-export default AddNewRecordModal;
+}

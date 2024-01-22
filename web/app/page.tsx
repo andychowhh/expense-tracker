@@ -1,13 +1,12 @@
 "use client";
 
-import ExpenseStackedList from "./ExpenseStackedList";
-import axios from '../api/axios';
+import { ExpenseStackedList } from "../components";
+import axios from "../api/axios";
 
 export default function Home() {
   const getUser = async () => {
-    const getUserRes = await axios.get('/auth/me');
+    const getUserRes = await axios.get("/auth/me");
     console.log(getUserRes);
-    
   };
   return (
     <>

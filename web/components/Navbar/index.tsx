@@ -10,7 +10,7 @@ import useToggle from "beautiful-react-hooks/useToggle";
 import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import Image from "next/image";
 
-import AddNewRecordModal from "../AddNewRecordModal";
+import { AddNewRecordModal } from "../AddNewRecordModal";
 
 import type { RootState } from "../../redux/store";
 import { useAppSelector, useAppDispatch } from "../../redux/hook";

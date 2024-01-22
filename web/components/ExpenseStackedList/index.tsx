@@ -1,3 +1,5 @@
+"use client";
+
 import Image from "next/image";
 import { useState } from "react";
 import DatePicker from "react-datepicker";
@@ -65,7 +67,7 @@ const people = [
   },
 ];
 
-export default function ExpenseStackedList() {
+export function ExpenseStackedList() {
   const [currentDate, setCurrentDate] = useState<Date | null>(new Date());
   const {
     control,
