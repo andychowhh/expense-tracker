@@ -1,10 +1,9 @@
 "use client";
 
-import { Fragment, useEffect, useState } from "react";
+import { Fragment } from "react";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { CredentialResponse, GoogleLogin } from "@react-oauth/google";
-// import axios from "axios";
-import axios from '../../api/axios';
+import axios from "../../api/axios";
 
 import useToggle from "beautiful-react-hooks/useToggle";
 
@@ -27,36 +26,24 @@ function classNames(...classes: any) {
 }
 
 export const Navbar = () => {
-  const [accessToken, setAccessToken] = useState<string>("");
   const [isAddNewRecordModalOpen, toggleAddNewRecordModal] = useToggle();
   const user = useAppSelector((state: RootState) => state.user);
   const dispatch = useAppDispatch();
 
-  useEffect(() => {
-    if (sessionStorage.getItem("accessToken")) {
-      setAccessToken(sessionStorage.getItem("accessToken") ?? "");
-    }
-  }, []);
-
   const login = async (credentialResponse: CredentialResponse) => {
-    const getUser = await axios.get("/users");
-    console.log(getUser);
-    // const loginRes = await axios.post(
-    //   "http://localhost:3001/auth/google-login",
-    //   {
-    //     token: credentialResponse.credential,
-    //   }
-    // );
+    const loginRes = await axios.post(
+      "http://localhost:3001/auth/google-login",
+      {
+        token: credentialResponse.credential,
+      }
+    );
 
-    // sessionStorage.setItem("accessToken", loginRes.data.accessToken);
-    // setAccessToken(JSON.stringify(loginRes.data.accessToken));
-    // dispatch(setUser(loginRes.data));
+    dispatch(setUser(loginRes.data));
   };
 
   const logout = (event: Event) => {
     event.preventDefault();
     dispatch(setUser(null));
-    setAccessToken("");
   };
 
   return (
@@ -104,7 +91,7 @@ export const Navbar = () => {
                   </div>
                 </div>
                 <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-                  {accessToken ? (
+                  {user ? (
                     <>
                       <button
                         onClick={toggleAddNewRecordModal}
