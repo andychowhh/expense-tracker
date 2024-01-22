@@ -1,5 +1,8 @@
-import { Body, Response, Controller, Post } from '@nestjs/common';
-import { Response as ExpressResponse } from 'express';
+import { Body, Response, Controller, Post, Request, Get } from '@nestjs/common';
+import {
+  Request as ExpressRequest,
+  Response as ExpressResponse,
+} from 'express';
 import { AuthService } from './auth.service';
 import { LoginDto } from './dto/login.dto';
 import { Public } from './auth.guard';
@@ -20,5 +23,16 @@ export class AuthController {
     });
 
     return res.send(loginRes);
+  }
+
+  // @Public()
+  @Get('me')
+  async verifyToken(
+    @Request() req: ExpressRequest,
+    @Response() res: ExpressResponse,
+  ) {
+    // console.log(req.cookies['accessToken']);
+
+    return res.send(200);
   }
 }
