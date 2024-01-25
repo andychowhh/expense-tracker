@@ -11,7 +11,6 @@ export class UsersController {
   @Public()
   @Get()
   async getUser(@Request() request: ExpressRequest) {
-    console.log(request);
     return 'Hello';
   }
 }

@@ -1,22 +1,17 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useContext } from "react";
 import Image from "next/image";
-import { Disclosure, Menu, Transition } from "@headlessui/react";
+import { Menu, Transition } from "@headlessui/react";
 
-import type { RootState } from "../../../redux/store";
-import { useAppSelector, useAppDispatch } from "../../../redux/hook";
-import { setUser } from "../../../redux/slices/userSlice";
+import { UserContext } from "../../../context/UserContext";
 
 function classNames(...classes: any) {
   return classes.filter(Boolean).join(" ");
 }
 
 export function ProfileDropdown() {
-  const user = useAppSelector((state: RootState) => state.user);
-  const dispatch = useAppDispatch();
+  const user = useContext(UserContext);
 
-  const logout = () => {
-    dispatch(setUser(null));
-  };
+  const logout = () => {};
 
   return (
     <Menu as="div" className="relative ml-3">
@@ -26,7 +21,7 @@ export function ProfileDropdown() {
           <span className="sr-only">Open user menu</span>
           <div className="h-8 w-8 rounded-full relative">
             <Image
-              src={user.picture ?? ""}
+              src={user ? user.picture : ""}
               alt=""
               fill={true}
               objectFit="cover"

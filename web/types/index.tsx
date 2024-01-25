@@ -3,3 +3,8 @@ export interface Category {
   name: string;
   avatar: string;
 }
+
+export interface User {
+  email: string;
+  picture: string;
+}

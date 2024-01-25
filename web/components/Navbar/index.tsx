@@ -1,16 +1,16 @@
 "use client";
 
+import { useContext } from "react";
 import { Disclosure } from "@headlessui/react";
 
 import { AddNewRecordButton, LoginButton, MobileMenuButton } from "../Button";
 import { ProfileDropdown } from "../Dropdown";
 import { PageLinks, MobilePageLinks } from "../Link";
 
-import type { RootState } from "../../redux/store";
-import { useAppSelector } from "../../redux/hook";
+import { UserContext } from "../../context/UserContext";
 
 export const Navbar = () => {
-  const user = useAppSelector((state: RootState) => state.user);
+  const user = useContext(UserContext)
 
   return (
     <Disclosure as="nav" className="bg-gray-800">

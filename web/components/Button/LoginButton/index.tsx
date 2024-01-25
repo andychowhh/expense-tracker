@@ -3,7 +3,7 @@ import { CredentialResponse, GoogleLogin } from "@react-oauth/google";
 
 import axios from "../../../api/axios";
 
-import { useAppSelector, useAppDispatch } from "../../../redux/hook";
+import { useAppDispatch } from "../../../redux/hook";
 import { setUser } from "../../../redux/slices/userSlice";
 
 export function LoginButton() {

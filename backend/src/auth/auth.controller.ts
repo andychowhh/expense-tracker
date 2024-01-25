@@ -1,8 +1,5 @@
-import { Body, Response, Controller, Post, Request, Get } from '@nestjs/common';
-import {
-  Request as ExpressRequest,
-  Response as ExpressResponse,
-} from 'express';
+import { Body, Response, Controller, Post, Get, Query } from '@nestjs/common';
+import { Response as ExpressResponse } from 'express';
 import { AuthService } from './auth.service';
 import { LoginDto } from './dto/login.dto';
 import { Public } from './auth.guard';
@@ -25,14 +22,12 @@ export class AuthController {
     return res.send(loginRes);
   }
 
-  // @Public()
+  @Public()
   @Get('me')
   async verifyToken(
-    @Request() req: ExpressRequest,
     @Response() res: ExpressResponse,
+    @Query('jwtToken') jwtToken: string,
   ) {
-    // console.log(req.cookies['accessToken']);
-
-    return res.send(200);
+    return res.send(await this.authService.getUserByJwt(jwtToken));
   }
 }
