@@ -35,8 +35,9 @@ export class AuthService {
     }
   }
 
-  async getUserByJwt(token: string) {
+  async getUserByJwt(token: string | null) {
     try {
+      if (!token) return {};
       const user = await this.jwtService.verifyAsync(token);
       const dbUser = await this.usersService.findUser({
         email: user.email ?? '',

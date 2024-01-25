@@ -22,6 +22,13 @@ export class AuthController {
     return res.send(loginRes);
   }
 
+  @Post('logout')
+  async logout(@Response() res: ExpressResponse) {
+    res.cookie('accessToken', '', { expires: new Date() });
+
+    return res.send(201);
+  }
+
   @Public()
   @Get('me')
   async verifyToken(

@@ -2,6 +2,7 @@
 
 import { useContext } from "react";
 import { Disclosure } from "@headlessui/react";
+import { isEmpty } from "lodash";
 
 import { AddNewRecordButton, LoginButton, MobileMenuButton } from "../Button";
 import { ProfileDropdown } from "../Dropdown";
@@ -10,8 +11,8 @@ import { PageLinks, MobilePageLinks } from "../Link";
 import { UserContext } from "../../context/UserContext";
 
 export const Navbar = () => {
-  const user = useContext(UserContext)
-
+  const user = useContext(UserContext);
+  
   return (
     <Disclosure as="nav" className="bg-gray-800">
       {({ open }) => (
@@ -27,13 +28,13 @@ export const Navbar = () => {
                 </div>
               </div>
               <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-                {user ? (
+                {isEmpty(user) ? (
+                  <LoginButton />
+                ) : (
                   <>
                     <AddNewRecordButton />
                     <ProfileDropdown />
                   </>
-                ) : (
-                  <LoginButton />
                 )}
               </div>
             </div>

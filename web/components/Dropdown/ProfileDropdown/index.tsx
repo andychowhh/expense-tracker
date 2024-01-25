@@ -3,6 +3,7 @@ import Image from "next/image";
 import { Menu, Transition } from "@headlessui/react";
 
 import { UserContext } from "../../../context/UserContext";
+import axios from "../../../api/axios";
 
 function classNames(...classes: any) {
   return classes.filter(Boolean).join(" ");
@@ -11,7 +12,9 @@ function classNames(...classes: any) {
 export function ProfileDropdown() {
   const user = useContext(UserContext);
 
-  const logout = () => {};
+  const logout = async () => {
+    const logoutRes = await axios.post("http://localhost:3001/auth/logout");
+  };
 
   return (
     <Menu as="div" className="relative ml-3">
