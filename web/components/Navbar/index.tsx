@@ -11,8 +11,8 @@ import { PageLinks, MobilePageLinks } from "../Link";
 import { UserContext } from "../../context/UserContext";
 
 export const Navbar = () => {
-  const user = useContext(UserContext);
-  
+  const { user } = useContext(UserContext) ?? {};
+
   return (
     <Disclosure as="nav" className="bg-gray-800">
       {({ open }) => (

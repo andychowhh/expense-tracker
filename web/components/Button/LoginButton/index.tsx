@@ -1,13 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
 import { CredentialResponse, GoogleLogin } from "@react-oauth/google";
 
 import axios from "../../../api/axios";
 
-import { useAppDispatch } from "../../../redux/hook";
-import { setUser } from "../../../redux/slices/userSlice";
+import { UserContext } from "../../../context/UserContext";
 
 export function LoginButton() {
-  const dispatch = useAppDispatch();
+  const { setUser } = useContext(UserContext) ?? {};
 
   const login = async (credentialResponse: CredentialResponse) => {
     const loginRes = await axios.post(
@@ -17,7 +16,7 @@ export function LoginButton() {
       }
     );
 
-    dispatch(setUser(loginRes.data));
+    setUser(loginRes ? loginRes.data : {});
   };
 
   return (

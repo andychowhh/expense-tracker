@@ -10,10 +10,12 @@ function classNames(...classes: any) {
 }
 
 export function ProfileDropdown() {
-  const user = useContext(UserContext);
+  const { user, setUser } = useContext(UserContext) ?? {};
 
   const logout = async () => {
-    const logoutRes = await axios.post("http://localhost:3001/auth/logout");
+    // TODO extract function
+    await axios.post("http://localhost:3001/auth/logout");
+    setUser({});
   };
 
   return (
