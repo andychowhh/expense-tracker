@@ -1,7 +1,11 @@
 "use client";
 
-import ExpenseStackedList from "./ExpenseStackedList";
+import { ExpenseStackedList } from "../components";
 
 export default function Home() {
-  return <ExpenseStackedList />;
+  return (
+    <>
+      <ExpenseStackedList />
+    </>
+  );
 }

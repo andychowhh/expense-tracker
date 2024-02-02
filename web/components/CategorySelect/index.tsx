@@ -43,7 +43,7 @@ interface CategorySelectProp {
   onChange: (item: Category) => void;
 }
 
-export default function CategorySelect({
+export function CategorySelect({
   selected = CATEGORIES[0],
   onChange,
 }: CategorySelectProp) {

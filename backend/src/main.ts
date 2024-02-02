@@ -1,7 +1,9 @@
 import { NestFactory } from '@nestjs/core';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
-import { AppModule } from './app.module';
 import { ValidationPipe } from '@nestjs/common';
+import cookieParser from 'cookie-parser';
+
+import { AppModule } from './app.module';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -11,7 +13,11 @@ async function bootstrap() {
   // CORS
   app.enableCors({
     origin: 'http://localhost:3000',
+    credentials: true,
   });
+
+  // Cookies
+  app.use(cookieParser());
 
   const config = new DocumentBuilder()
     .setTitle('Swagger APIs')
