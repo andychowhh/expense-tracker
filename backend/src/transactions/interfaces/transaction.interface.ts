@@ -1,5 +1,5 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { now } from 'mongoose';
+import { now, Types, Schema as MongooseSchema } from 'mongoose';
 
 @Schema()
 export class Transaction {
@@ -20,6 +20,9 @@ export class Transaction {
 
   @Prop({ default: now() })
   updatedAt: Date;
+
+  @Prop({ type: MongooseSchema.Types.ObjectId, ref: 'User' })
+  user: Types.ObjectId;
 }
 
 export const TransactionSchema = SchemaFactory.createForClass(Transaction);
