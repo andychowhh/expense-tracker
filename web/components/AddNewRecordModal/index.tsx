@@ -5,6 +5,8 @@ import DatePicker from "react-datepicker";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { Dialog, Transition } from "@headlessui/react";
 
+import axios from "../../api/axios";
+
 import { ExclamationTriangleIcon } from "@heroicons/react/24/outline";
 import { PhotoIcon } from "@heroicons/react/24/solid";
 
@@ -37,6 +39,15 @@ export function AddNewRecordModal({ isOpen, onClose }: AddNewRecordModalProp) {
       date: new Date(),
     },
   });
+
+  const add = async () => {
+    await axios.post("http://localhost:3001/transactions", {
+      user: "65bdcb493d58a80ae9d14850",
+      amount: 99,
+      category: "cat",
+      date: "2019-02-10",
+    });
+  };
 
   return (
     <Transition.Root show={isOpen} as={Fragment}>
@@ -210,7 +221,8 @@ export function AddNewRecordModal({ isOpen, onClose }: AddNewRecordModalProp) {
                   <button
                     type="button"
                     className="inline-flex w-full justify-center rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500 sm:ml-3 sm:w-auto"
-                    onClick={() => onClose()}
+                    // onClick={() => onClose()}
+                    onClick={() => add()}
                   >
                     Add
                   </button>
