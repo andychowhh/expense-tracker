@@ -24,8 +24,7 @@ export default async function RootLayout({
   //     jwtToken: await getCookie("accessToken"),
   //   },
   // });
-
-  const userProfileRes = await fetch(`http://localhost:3000/api/auth/me?jwtToken=${await getCookie("accessToken")}`);
+  const userProfileRes = await fetch(`${process.env.WEB_URL}/api/auth/me?jwtToken=${await getCookie("accessToken")}`);
   const user = await userProfileRes.json();
   
   return (
