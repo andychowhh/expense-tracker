@@ -1,6 +1,6 @@
 export interface Category {
-  id: number;
-  name: string;
+  label: string;
+  value: string;
   avatar: string;
 }
 

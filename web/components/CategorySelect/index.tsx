@@ -6,30 +6,30 @@ import { CheckIcon, ChevronUpDownIcon } from "@heroicons/react/20/solid";
 import Image from "next/image";
 import { Category } from "@/types";
 
-const CATEGORIES: Category[] = [
+export const CATEGORIES: Category[] = [
   {
-    id: 1,
-    name: "Food",
+    label: "Food",
+    value: "food",
     avatar: "/images/food.png",
   },
   {
-    id: 2,
-    name: "Snack",
+    label: "Snack",
+    value: "snack",
     avatar: "/images/snack.png",
   },
   {
-    id: 3,
-    name: "Transportation",
+    label: "Transportation",
+    value: "transportation",
     avatar: "/images/transportation.png",
   },
   {
-    id: 4,
-    name: "Shopping",
+    label: "Shopping",
+    value: "shopping",
     avatar: "/images/shopping.png",
   },
   {
-    id: 5,
-    name: "Entertainment",
+    label: "Entertainment",
+    value: "entertainment",
     avatar: "/images/entertainment.png",
   },
 ];
@@ -40,7 +40,7 @@ function classNames(...classes) {
 
 interface CategorySelectProp {
   selected: Category;
-  onChange: (item: Category) => void;
+  onChange: (item: string) => void;
 }
 
 export function CategorySelect({
@@ -48,12 +48,9 @@ export function CategorySelect({
   onChange,
 }: CategorySelectProp) {
   return (
-    <Listbox value={selected} onChange={(item) => onChange(item)}>
+    <Listbox value={selected} onChange={(item) => onChange(item.value)}>
       {({ open }) => (
         <>
-          {/* <Listbox.Label className="block text-sm font-medium leading-6 text-gray-900">
-            Category
-          </Listbox.Label> */}
           <div className="relative mt-2 sm:max-w-sm">
             <Listbox.Button className="relative w-full cursor-default rounded-md bg-white py-1.5 pl-3 pr-10 text-left text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 sm:text-sm sm:leading-6">
               <span className="flex items-center">
@@ -65,7 +62,7 @@ export function CategorySelect({
                     fill={true}
                   />
                 </div>
-                <span className="ml-3 block truncate">{selected.name}</span>
+                <span className="ml-3 block truncate">{selected.label}</span>
               </span>
               <span className="pointer-events-none absolute inset-y-0 right-0 ml-3 flex items-center pr-2">
                 <ChevronUpDownIcon
@@ -85,7 +82,7 @@ export function CategorySelect({
               <Listbox.Options className="absolute z-10 mt-1 max-h-56 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
                 {CATEGORIES.map((category) => (
                   <Listbox.Option
-                    key={category.id}
+                    key={category.value}
                     className={({ active }) =>
                       classNames(
                         active ? "bg-indigo-600 text-white" : "text-gray-900",
@@ -111,7 +108,7 @@ export function CategorySelect({
                               "ml-3 block truncate"
                             )}
                           >
-                            {category.name}
+                            {category.label}
                           </span>
                         </div>
 
