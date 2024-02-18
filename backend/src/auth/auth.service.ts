@@ -22,11 +22,16 @@ export class AuthService {
         audience: process.env.GOOGLE_CLIENT_ID,
       });
       const { sub, email, picture, name } = ticket.getPayload() ?? {};
-      await this.usersService.createUser({
+      const user = await this.usersService.createUser({
         email: email ?? '',
         picture: picture ?? '',
       });
-      const userPayload = { sub: sub, username: name, email: email };
+      const userPayload = {
+        sub: sub,
+        username: name,
+        email: email,
+        _id: user._id,
+      };
       const accessToken = await this.jwtService.signAsync(userPayload);
 
       return { accessToken, picture };
