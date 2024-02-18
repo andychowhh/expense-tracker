@@ -1,6 +1,6 @@
 "use client";
 
-import { Fragment } from "react";
+import { Fragment, useContext } from "react";
 import DatePicker from "react-datepicker";
 import { Controller, useForm } from "react-hook-form";
 import { Dialog, Transition } from "@headlessui/react";
@@ -17,6 +17,7 @@ import { CategorySelect, CATEGORIES } from "../../components";
 import { Category } from "../../types";
 
 import "react-datepicker/dist/react-datepicker.css";
+import { UserContext } from "../../context/UserContext";
 
 interface FormData {
   date: Date;
@@ -40,6 +41,7 @@ const schema = yup
   .required();
 
 export function AddNewRecordModal({ isOpen, onClose }: AddNewRecordModalProp) {
+  const { user } = useContext(UserContext) ?? {};
   const {
     control,
     register,
@@ -55,9 +57,8 @@ export function AddNewRecordModal({ isOpen, onClose }: AddNewRecordModalProp) {
   });
 
   const addTransaction = async ({ amount, category, date, note }: FormData) => {
-    console.log({ amount, category, date, note });
     await axios.post("http://localhost:3001/transactions", {
-      user: "65bdcb493d58a80ae9d14850", // TODO update to use user id
+      user: user ? user._id : "",
       amount,
       category,
       date,

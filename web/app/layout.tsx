@@ -24,9 +24,13 @@ export default async function RootLayout({
   //     jwtToken: await getCookie("accessToken"),
   //   },
   // });
-  const userProfileRes = await fetch(`${process.env.WEB_URL}/api/auth/me?jwtToken=${await getCookie("accessToken")}`);
+  const userProfileRes = await fetch(
+    `${process.env.WEB_URL}/api/auth/me?jwtToken=${await getCookie(
+      "accessToken"
+    )}`
+  );
   const user = await userProfileRes.json();
-  
+
   return (
     <ReduxStoreProvider>
       <UserContextProvider value={user}>
