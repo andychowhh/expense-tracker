@@ -20,15 +20,13 @@ export class TransactionsService {
     const startOfDay = date.startOf('day').toDate();
     const endOfDay = date.endOf('day').toDate();
 
-    const transactions = await this.transactionModel.find({
+    return this.transactionModel.find({
       user: user._id,
       date: {
         $gte: startOfDay,
         $lte: endOfDay,
       },
     });
-    console.log({ transactions });
-    return 'getTransactionsByDate';
   }
 
   async createTransaction(createTransactionDto: CreateTransactionDto) {

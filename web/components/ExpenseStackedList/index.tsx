@@ -86,7 +86,7 @@ export function ExpenseStackedList() {
     async function fetchTransactions() {
       const res = await axios.get("http://localhost:3001/transactions", {
         params: {
-          date: "2024-02-18",
+          date: "2024-02-19",
         },
       });
       console.log({ res });
