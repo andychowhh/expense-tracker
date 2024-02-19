@@ -1,12 +1,13 @@
 "use client";
 
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import DatePicker from "react-datepicker";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import moment from "moment";
 
 import "react-datepicker/dist/react-datepicker.css";
+import axios from "../../api/axios";
 
 interface FormInput {
   date: Date;
@@ -80,6 +81,18 @@ export function ExpenseStackedList() {
       date: new Date(),
     },
   });
+
+  useEffect(() => {
+    async function fetchTransactions() {
+      const res = await axios.get("http://localhost:3001/transactions", {
+        params: {
+          date: "2024-02-19",
+        },
+      });
+      console.log({ res });
+    }
+    fetchTransactions();
+  }, []);
 
   return (
     <div className="sm:border sm:border-1 sm:mt-4 sm:max-w-md sm:m-auto md:max-w-xl lg:max-w-3xl">

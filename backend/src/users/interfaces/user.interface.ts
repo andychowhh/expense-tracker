@@ -1,10 +1,10 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
+import mongoose from 'mongoose';
 import { now } from 'mongoose';
 
 @Schema()
 export class User {
-  // @Prop({ required: true })
-  // name: string;
+  _id: mongoose.Types.ObjectId;
 
   @Prop({ required: true })
   email: string;
