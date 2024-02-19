@@ -18,6 +18,8 @@ import { Category } from "../../types";
 
 import "react-datepicker/dist/react-datepicker.css";
 import { UserContext } from "../../context/UserContext";
+import moment from "moment";
+import { DEFAULT_DATE_FORMAT } from "../../constants";
 
 interface FormData {
   date: Date;
@@ -61,7 +63,7 @@ export function AddNewRecordModal({ isOpen, onClose }: AddNewRecordModalProp) {
       user: user ? user._id : "",
       amount,
       category,
-      date,
+      date: moment(date).format(DEFAULT_DATE_FORMAT),
       note,
     });
   };
