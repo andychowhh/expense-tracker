@@ -1,6 +1,9 @@
 # environment
 .env
 
+# Docker Mongo Volume
+/data
+
 # compiled output
 /dist
 /node_modules
