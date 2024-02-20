@@ -9,3 +9,11 @@ export interface User {
   email: string;
   picture: string;
 }
+
+export interface Transaction {
+  _id: string;
+  amount: number;
+  category: string;
+  date: string;
+  note: string;
+}

@@ -1,15 +1,18 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import DatePicker from "react-datepicker";
 import { Controller, useForm } from "react-hook-form";
+import { isEmpty } from "lodash";
 import moment from "moment";
 
 import "react-datepicker/dist/react-datepicker.css";
 import axios from "../../api/axios";
 import { DEFAULT_DATE_FORMAT } from "../../constants";
 import { CATEGORIES } from "..";
+import { UserContext } from "../../context/UserContext";
+import { Transaction } from "../../types";
 
 interface FormInput {
   date: Date;
@@ -26,19 +29,22 @@ export function ExpenseStackedList() {
     },
   });
   const date = watch("date");
-  const [transactions, setTransaction] = useState([]);
+  const [transactions, setTransaction] = useState<Transaction[]>([]);
+  const { user } = useContext(UserContext) ?? {};
 
   useEffect(() => {
     async function fetchTransactions() {
-      const res = await axios.get("http://localhost:3001/transactions", {
-        params: {
-          date: moment(date).format(DEFAULT_DATE_FORMAT),
-        },
-      });
-      setTransaction(res.data);
+      if (!isEmpty(user)) {
+        const res = await axios.get("http://localhost:3001/transactions", {
+          params: {
+            date: moment(date).format(DEFAULT_DATE_FORMAT),
+          },
+        });
+        setTransaction(res.data);
+      }
     }
     fetchTransactions();
-  }, [date]);
+  }, [date, user]);
 
   return (
     <div className="sm:border sm:border-1 sm:mt-4 sm:max-w-md sm:m-auto md:max-w-xl lg:max-w-3xl">
@@ -71,34 +77,38 @@ export function ExpenseStackedList() {
         <div>CA$0</div>
       </div>
       <ul role="list" className="divide-y divide-gray-100 sm:px-4">
-        {transactions.map((transaction) => {
-          const category = CATEGORIES.find(
-            (c) => c.value === transaction.category
-          );
-          return (
-            <li
-              key={transaction._id}
-              className="flex justify-between items-center gap-x-6 py-5"
-            >
-              <div className="flex items-center min-w-0 gap-x-4">
-                <div className="h-12 w-12 relative flex-none">
-                  <Image
-                    className="rounded-full bg-gray-50"
-                    src={category?.avatar ?? ""}
-                    alt=""
-                    fill={true}
-                  />
+        {transactions.length > 0 ? (
+          transactions.map((transaction) => {
+            const category = CATEGORIES.find(
+              (c) => c.value === transaction.category
+            );
+            return (
+              <li
+                key={transaction._id}
+                className="flex justify-between items-center gap-x-6 py-5"
+              >
+                <div className="flex items-center min-w-0 gap-x-4">
+                  <div className="h-12 w-12 relative flex-none">
+                    <Image
+                      className="rounded-full bg-gray-50"
+                      src={category?.avatar ?? ""}
+                      alt=""
+                      fill={true}
+                    />
+                  </div>
+                  <div className="min-w-0 flex-auto">{category?.label}</div>
                 </div>
-                <div className="min-w-0 flex-auto">{category?.label}</div>
-              </div>
-              <div className="sm:flex sm:flex-col">
-                <p className="text-sm leading-6 text-gray-900">
-                  CA${transaction.amount}
-                </p>
-              </div>
-            </li>
-          );
-        })}
+                <div className="sm:flex sm:flex-col">
+                  <p className="text-sm leading-6 text-gray-900">
+                    CA${transaction.amount}
+                  </p>
+                </div>
+              </li>
+            );
+          })
+        ) : (
+          <div className="p-20 text-center">No expenses recorded today</div>
+        )}
       </ul>
     </div>
   );
