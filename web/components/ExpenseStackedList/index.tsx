@@ -13,6 +13,7 @@ import { DEFAULT_DATE_FORMAT } from "../../constants";
 import { CATEGORIES } from "..";
 import { UserContext } from "../../context/UserContext";
 import { Transaction } from "../../types";
+import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/solid";
 
 interface FormInput {
   date: Date;
@@ -22,6 +23,7 @@ export function ExpenseStackedList() {
   const {
     control,
     watch,
+    setValue,
     formState: { errors },
   } = useForm<FormInput>({
     defaultValues: {
@@ -50,30 +52,47 @@ export function ExpenseStackedList() {
     <div className="sm:border sm:border-1 sm:mt-4 sm:max-w-md sm:m-auto md:max-w-xl lg:max-w-3xl">
       <div className="flex justify-between items-center border-b py-2 sm:px-4">
         <div className="invisible">CA$0</div>
-        <Controller
-          control={control}
-          name="date"
-          render={({ field }) => (
-            <DatePicker
-              selected={field.value}
-              preventOpenOnFocus={true}
-              withPortal={true}
-              dateFormat="d MMM yyyy"
-              maxDate={new Date()}
-              onChange={(date) => field.onChange(date)}
-              onKeyDown={(e) => {
-                e.preventDefault();
-              }}
-              customInput={
-                <div className="cursor-pointer rounded-md bg-indigo-600 px-3.5 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
-                  {moment(field.value).isSame(moment(), "day")
-                    ? "Today"
-                    : moment(field.value).format(DEFAULT_DATE_FORMAT)}
-                </div>
-              }
-            />
-          )}
-        />
+        <div className="flex gap-5">
+          <button
+            onClick={() =>
+              setValue("date", moment(date).add(-1, "days").toDate())
+            }
+          >
+            <ChevronLeftIcon className="mx-auto h-6 w-6" />
+          </button>
+          <Controller
+            control={control}
+            name="date"
+            render={({ field }) => (
+              <DatePicker
+                selected={field.value}
+                preventOpenOnFocus={true}
+                withPortal={true}
+                dateFormat="d MMM yyyy"
+                maxDate={new Date()}
+                onChange={(date) => field.onChange(date)}
+                onKeyDown={(e) => {
+                  e.preventDefault();
+                }}
+                customInput={
+                  <div className="w-28 cursor-pointer rounded-md bg-indigo-600 px-3.5 py-2 text-sm text-center font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+                    {moment(field.value).isSame(moment(), "day")
+                      ? "Today"
+                      : moment(field.value).format(DEFAULT_DATE_FORMAT)}
+                  </div>
+                }
+              />
+            )}
+          />
+          <button
+            disabled={moment(date).isSame(moment(), "day")}
+            onClick={() =>
+              setValue("date", moment(date).add(1, "days").toDate())
+            }
+          >
+            <ChevronRightIcon className={`mx-auto h-6 w-6 ${moment(date).isSame(moment(), "day") && " text-gray-200"}`} />
+          </button>
+        </div>
         <div>CA$0</div>
       </div>
       <ul role="list" className="divide-y divide-gray-100 sm:px-4">
