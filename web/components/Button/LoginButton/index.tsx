@@ -1,24 +1,21 @@
 import React, { useContext } from "react";
 import { CredentialResponse, GoogleLogin } from "@react-oauth/google";
-
-import axios from "../../../api/axios";
-
 import { UserContext } from "../../../context/UserContext";
-import { User } from "../../../types";
-import { AxiosResponse } from "axios";
 
 export function LoginButton() {
   const { setUser } = useContext(UserContext) ?? {};
 
   const login = async (credentialResponse: CredentialResponse) => {
-    const loginRes: AxiosResponse<User> = await axios.post(
-      "http://localhost:3001/auth/google-login",
-      {
-        token: credentialResponse.credential,
-      }
-    );
+    const loginRes = await fetch("/api/auth/google-login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ token: credentialResponse.credential }),
+    });
+    const user = await loginRes.json();
     if (setUser) {
-      setUser(loginRes ? loginRes.data : {});
+      setUser(user ? user : {});
     }
   };
 
