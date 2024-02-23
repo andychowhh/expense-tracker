@@ -8,7 +8,6 @@ import { isEmpty } from "lodash";
 import moment from "moment";
 
 import "react-datepicker/dist/react-datepicker.css";
-import axios from "../../api/axios";
 import { DEFAULT_DATE_FORMAT } from "../../constants";
 import { CATEGORIES } from "..";
 import { UserContext } from "../../context/UserContext";
@@ -37,12 +36,11 @@ export function ExpenseStackedList() {
   useEffect(() => {
     async function fetchTransactions() {
       if (!isEmpty(user)) {
-        const res = await axios.get("http://localhost:3001/transactions", {
-          params: {
-            date: moment(date).format(DEFAULT_DATE_FORMAT),
-          },
-        });
-        setTransaction(res.data);
+        const raw = await fetch(
+          `/api/transactions?date=${moment(date).format(DEFAULT_DATE_FORMAT)}`
+        );
+        const transactions = await raw.json();
+        setTransaction(transactions);
       }
     }
     fetchTransactions();
@@ -75,7 +73,7 @@ export function ExpenseStackedList() {
                   e.preventDefault();
                 }}
                 customInput={
-                  <div className="w-28 cursor-pointer rounded-md bg-indigo-600 px-3.5 py-2 text-sm text-center font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+                  <div className="w-29 cursor-pointer rounded-md bg-indigo-600 px-3.5 py-2 text-sm text-center font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
                     {moment(field.value).isSame(moment(), "day")
                       ? "Today"
                       : moment(field.value).format(DEFAULT_DATE_FORMAT)}
@@ -90,7 +88,11 @@ export function ExpenseStackedList() {
               setValue("date", moment(date).add(1, "days").toDate())
             }
           >
-            <ChevronRightIcon className={`mx-auto h-6 w-6 ${moment(date).isSame(moment(), "day") && " text-gray-200"}`} />
+            <ChevronRightIcon
+              className={`mx-auto h-6 w-6 ${
+                moment(date).isSame(moment(), "day") && " text-gray-200"
+              }`}
+            />
           </button>
         </div>
         <div>CA$0</div>

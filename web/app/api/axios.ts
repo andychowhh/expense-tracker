@@ -1,4 +1,5 @@
 import axios from "axios";
+import { getCookie } from "../../utils";
 
 const defaultOptions = {
   baseURL: "http://localhost:3001",
@@ -12,10 +13,10 @@ const defaultOptions = {
 let instance = axios.create(defaultOptions);
 
 // Set the AUTH token for any request
-// instance.interceptors.request.use(function (config) {
-//   const accessToken = getCookie("accessToken");
-//   config.headers.Authorization = `Bearer ${accessToken}`;
-//   return config;
-// });
+instance.interceptors.request.use(async function (config) {
+  const accessToken = await getCookie("accessToken");
+  config.headers.Cookie = `accessToken=${accessToken}`;
+  return config;
+});
 
 export default instance;

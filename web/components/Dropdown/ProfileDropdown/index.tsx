@@ -13,8 +13,11 @@ export function ProfileDropdown() {
   const { user, setUser } = useContext(UserContext) ?? {};
 
   const logout = async () => {
-    // TODO extract function
-    await axios.post("http://localhost:3001/auth/logout");
+    await fetch("/api/auth/logout", {
+      method: "POST",
+    });
+    // // TODO extract function
+    // await axios.post("http://localhost:3001/auth/logout");
     setUser({});
   };
 
