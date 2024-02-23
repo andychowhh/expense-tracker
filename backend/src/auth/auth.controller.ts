@@ -22,6 +22,7 @@ export class AuthController {
     return res.send(loginRes);
   }
 
+  // TODO cleanup if no longer use
   @Post('logout')
   async logout(@Response() res: ExpressResponse) {
     res.cookie('accessToken', '', { expires: new Date() });

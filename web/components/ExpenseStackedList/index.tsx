@@ -73,7 +73,7 @@ export function ExpenseStackedList() {
                   e.preventDefault();
                 }}
                 customInput={
-                  <div className="w-28 cursor-pointer rounded-md bg-indigo-600 px-3.5 py-2 text-sm text-center font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+                  <div className="w-29 cursor-pointer rounded-md bg-indigo-600 px-3.5 py-2 text-sm text-center font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
                     {moment(field.value).isSame(moment(), "day")
                       ? "Today"
                       : moment(field.value).format(DEFAULT_DATE_FORMAT)}
