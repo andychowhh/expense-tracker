@@ -29,7 +29,9 @@ export default async function RootLayout({
       "accessToken"
     )}`
   );
-  const user = await userProfileRes.json();
+  // const user = await userProfileRes.json();
+  // TODO remove below test
+  const user = {_id: '123', email: 'hogo@gmail.com', picture: ''};
 
   return (
     <ReduxStoreProvider>

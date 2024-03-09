@@ -84,7 +84,7 @@ export function AddNewRecordModal({ isOpen, onClose }: AddNewRecordModalProp) {
         </Transition.Child>
 
         <div className="fixed inset-0 z-10 w-screen overflow-y-auto">
-          <div className="sm:flex sm:justify-center sm:h-full">
+          <div className="sm:flex sm:justify-center">
             <Transition.Child
               as={Fragment}
               enter="ease-out duration-300"
@@ -217,7 +217,8 @@ export function AddNewRecordModal({ isOpen, onClose }: AddNewRecordModalProp) {
                           </div>
                         </div>
 
-                        <div className="col-span-full">
+                        {/* Receipt */}
+                        {/* <div className="col-span-full">
                           <label
                             htmlFor="receipt"
                             className="block text-sm font-medium leading-6 text-gray-900"
@@ -250,11 +251,11 @@ export function AddNewRecordModal({ isOpen, onClose }: AddNewRecordModalProp) {
                               </p>
                             </div>
                           </div>
-                        </div>
+                        </div> */}
                       </div>
                     </div>
                   </div>
-                  <div className="px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
+                  <div className="px-4 py-5 sm:flex sm:flex-row-reverse sm:px-6">
                     <button
                       type="submit"
                       className="inline-flex w-full justify-center rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500 sm:ml-3 sm:w-auto"

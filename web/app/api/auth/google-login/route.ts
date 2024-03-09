@@ -17,7 +17,8 @@ export async function POST(request: NextRequest) {
   cookies().set("accessToken", loginRes.data.accessToken, {
     httpOnly: true,
     maxAge: 24 * 60 * 60,
+    // sameSite: "strict",
   });
-  
+
   return NextResponse.json(loginRes.data, { status: 201 });
 }
