@@ -2,7 +2,7 @@ steps:
   # Build the container image
   - name: 'gcr.io/cloud-builders/docker'
     args:
-      ['build', '-t', 'gcr.io/expense-tracker-410901/backend:$COMMIT_SHA', '.']
+      ['build', '-t', 'gcr.io/expense-tracker-410901/backend:$COMMIT_SHA', './backend']
   # Push the container image to Container Registry
   - name: 'gcr.io/cloud-builders/docker'
     args: ['push', 'gcr.io/expense-tracker-410901/backend:$COMMIT_SHA']
