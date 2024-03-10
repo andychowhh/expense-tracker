@@ -11,7 +11,7 @@ import moment from 'moment';
 export class TransactionsService {
   constructor(
     @InjectModel('Transaction') private transactionModel: Model<Transaction>,
-    @Inject(REQUEST) private request: Request,
+    @Inject(REQUEST) private request: Request & { user: any }, //TODO Typing for user
   ) {}
 
   async getTransactionsByDate() {

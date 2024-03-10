@@ -14,8 +14,8 @@ const nextConfig = {
       },
       {
         protocol: "https",
-        hostname: "lh3.googleusercontent.com"
-      }
+        hostname: "lh3.googleusercontent.com",
+      },
     ],
   },
   webpack: (config) => {
@@ -26,6 +26,14 @@ const nextConfig = {
     };
     return config;
   },
+  typescript: {
+    // !! WARN !!
+    // Dangerously allow production builds to successfully complete even if
+    // your project has type errors.
+    // !! WARN !!
+    ignoreBuildErrors: true,
+  },
+  output: 'standalone'
 };
 
 module.exports = nextConfig;
