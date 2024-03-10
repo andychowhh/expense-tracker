@@ -4,15 +4,17 @@ services:
   web:
     build:
       context: ./web
+      target: dev
       dockerfile: Dockerfile
     container_name: web
     ports:
       - '3000:3000'
     restart: always
+    command: npm run dev
     volumes:
       - ./web:/app
-      # - /app/node_modules
-      # - /app/.next
+      - /app/node_modules
+      - /app/.next
     depends_on:
       - backend
 

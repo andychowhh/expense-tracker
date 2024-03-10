@@ -14,7 +14,7 @@ export async function POST(request: NextRequest) {
     }
   );
   // TODO Type for login response
-  cookies().set("accessToken", loginRes.data.accessToken, {
+  cookies().set("accessToken", loginRes.data?.accessToken as any, {
     httpOnly: true,
     maxAge: 24 * 60 * 60,
     // sameSite: "strict",
