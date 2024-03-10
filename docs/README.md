@@ -14,3 +14,4 @@ This file contains the reference I use when creating new features
 ## Docker
 
 [Communicate between FE container and BE container](https://stackoverflow.com/a/77131601/10686620)
+[Best Next.js docker-compose hot-reload production-ready Docker setup](https://medium.com/@elifront/best-next-js-docker-compose-hot-reload-production-ready-docker-setup-28a9125ba1dc)
