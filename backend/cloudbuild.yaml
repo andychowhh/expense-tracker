@@ -9,7 +9,6 @@ steps:
         'gcr.io/expense-tracker-410901/backend:$COMMIT_SHA',
         './backend',
       ]
-    secretEnv: ['MONGODB_CONNECTION_STRING']
   # Push the container image to Container Registry
   - id: 'push-image-to-artifact-registry'
     name: 'gcr.io/cloud-builders/docker'
