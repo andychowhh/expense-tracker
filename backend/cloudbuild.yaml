@@ -1,13 +1,22 @@
 steps:
   # Build the container image
-  - name: 'gcr.io/cloud-builders/docker'
+  - id: 'build-container-image'
+    name: 'gcr.io/cloud-builders/docker'
     args:
-      ['build', '-t', 'gcr.io/expense-tracker-410901/backend:$COMMIT_SHA', './backend']
+      [
+        'build',
+        '-t',
+        'gcr.io/expense-tracker-410901/backend:$COMMIT_SHA',
+        './backend',
+      ]
+    secretEnv: ['MONGODB_CONNECTION_STRING']
   # Push the container image to Container Registry
-  - name: 'gcr.io/cloud-builders/docker'
+  - id: 'push-image-to-artifact-registry'
+    name: 'gcr.io/cloud-builders/docker'
     args: ['push', 'gcr.io/expense-tracker-410901/backend:$COMMIT_SHA']
   # Deploy container image to Cloud Run
-  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+  - id: 'deploy-image-to-cloud-run'
+    name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
     entrypoint: gcloud
     args:
       [
@@ -21,3 +30,7 @@ steps:
       ]
 images:
   - gcr.io/expense-tracker-410901/backend:$COMMIT_SHA
+availableSecrets:
+  secretManager:
+    - versionName: projects/expense-tracker-410901/secrets/MONGODB_CONNECTION_STRING/versions/1
+      env: 'MONGODB_CONNECTION_STRING'
