@@ -22,7 +22,7 @@ steps:
         'gcloud run deploy expense-tracker-backend 
         --image gcr.io/expense-tracker-410901/backend:$COMMIT_SHA
         --region us-central1
-        --update-secrets=MONGODB_CONNECTION_STRING=MONGODB_CONNECTION_STRING:1
+        --set-secrets=MONGODB_CONNECTION_STRING=MONGODB_CONNECTION_STRING:1
         ',
       ]
       #  --set-env-vars MONGODB_CONNECTION_STRING=$$SECRET_MONGODB_CONNECTION_STRING
