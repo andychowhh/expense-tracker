@@ -14,7 +14,7 @@ import { TransactionsModule } from './transactions/transactions.module';
       envFilePath: '.env',
     }),
     // Ref: https://stackoverflow.com/a/68118948/10686620
-    MongooseModule.forRoot('mongodb://andychow:1234@database:27017'),
+    MongooseModule.forRoot(process.env.MONGODB_CONNECTION_STRING as string),
     UsersModule,
     AuthModule,
     TransactionsModule,
