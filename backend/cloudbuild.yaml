@@ -25,9 +25,6 @@ steps:
         --set-secrets=MONGODB_CONNECTION_STRING=MONGODB_CONNECTION_STRING:1
         ',
       ]
-      #  --set-env-vars MONGODB_CONNECTION_STRING=$$SECRET_MONGODB_CONNECTION_STRING
-          
-    # secretEnv: ['SECRET_MONGODB_CONNECTION_STRING']
 images:
   - gcr.io/expense-tracker-410901/backend:$COMMIT_SHA
 # availableSecrets:
