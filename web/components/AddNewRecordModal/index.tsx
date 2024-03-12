@@ -7,9 +7,6 @@ import { Dialog, Transition } from "@headlessui/react";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { string, number, date } from "yup";
-
-import axios from "../../api/axios";
-
 import { ExclamationTriangleIcon } from "@heroicons/react/24/outline";
 import { PhotoIcon } from "@heroicons/react/24/solid";
 
@@ -18,10 +15,9 @@ import { Category } from "../../types";
 
 import "react-datepicker/dist/react-datepicker.css";
 import { UserContext } from "../../context/UserContext";
-import moment from "moment";
-import { DEFAULT_DATE_FORMAT } from "../../constants";
+import { createTransation } from "../../actions/transactions";
 
-interface FormData {
+interface TransactionFormData {
   date: Date;
   category: string;
   amount: number;
@@ -50,7 +46,7 @@ export function AddNewRecordModal({ isOpen, onClose }: AddNewRecordModalProp) {
     handleSubmit,
     watch,
     formState: { errors },
-  } = useForm<FormData>({
+  } = useForm<TransactionFormData>({
     resolver: yupResolver(schema),
     defaultValues: {
       date: new Date(),
@@ -58,16 +54,13 @@ export function AddNewRecordModal({ isOpen, onClose }: AddNewRecordModalProp) {
     },
   });
 
-  const addTransaction = async ({ amount, category, date, note }: FormData) => {
-    //TODO use fetch 
-    console.log(process.env.NEXT_PUBLIC_BACKEND_URL)
-    await axios.post(`${process.env.NEXT_PUBLIC_BACKEND_URL}/transactions`, {
-      user: user ? user._id : "",
-      amount,
-      category,
-      date: moment(date).format(DEFAULT_DATE_FORMAT),
-      note,
-    });
+  const addTransaction = async ({
+    amount,
+    category,
+    date,
+    note,
+  }: TransactionFormData) => {
+    createTransation({ amount, category, date, note, user });
   };
 
   return (
@@ -97,7 +90,7 @@ export function AddNewRecordModal({ isOpen, onClose }: AddNewRecordModalProp) {
               leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
             >
               <Dialog.Panel className="h-screen relative transform overflow-hidden bg-white text-left shadow-xl transition-all sm:rounded-lg sm:h-auto sm:my-8 sm:w-full sm:max-w-lg">
-                <form onSubmit={handleSubmit(addTransaction)}>
+                <form action={handleSubmit(addTransaction)}>
                   <div className="bg-white px-4 pb-4 pt-5 sm:p-6 sm:pb-4">
                     <div className="sm:flex sm:flex-col sm:items-start">
                       <div className="mx-auto flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-red-100 sm:mx-0 sm:h-10 sm:w-10">

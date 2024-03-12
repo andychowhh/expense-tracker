@@ -24,12 +24,13 @@ export default async function RootLayout({
   //     jwtToken: await getCookie("accessToken"),
   //   },
   // });
-  const userProfileRes = await fetch(
-    `${process.env.WEB_URL}/api/auth/me?jwtToken=${await getCookie(
-      "accessToken"
-    )}`
-  );
-  const user = await userProfileRes.json();
+  // const userProfileRes = await fetch(
+  //   `${process.env.WEB_URL}/api/auth/me?jwtToken=${await getCookie(
+  //     "accessToken"
+  //   )}`
+  // );
+  // const user = await userProfileRes.json();
+  const user = { _id: "123", email: "hogo@gmail.com", picture: "" };
 
   return (
     <ReduxStoreProvider>
