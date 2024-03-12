@@ -59,7 +59,9 @@ export function AddNewRecordModal({ isOpen, onClose }: AddNewRecordModalProp) {
   });
 
   const addTransaction = async ({ amount, category, date, note }: FormData) => {
-    await axios.post("http://localhost:3001/transactions", {
+    //TODO use fetch 
+    console.log(process.env.NEXT_PUBLIC_BACKEND_URL)
+    await axios.post(`${process.env.NEXT_PUBLIC_BACKEND_URL}/transactions`, {
       user: user ? user._id : "",
       amount,
       category,

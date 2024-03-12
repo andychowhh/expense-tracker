@@ -10,7 +10,7 @@ export async function GET(
   const date = url.searchParams.get("date");
 
   const transactionsRes: AxiosResponse<Transaction[]> = await axios.get(
-    "http://backend:3001/transactions",
+    `${process.env.NEXT_PUBLIC_BACKEND_URL}/transactions`,
     {
       params: {
         date,
