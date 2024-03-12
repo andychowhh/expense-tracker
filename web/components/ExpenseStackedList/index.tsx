@@ -37,7 +37,10 @@ export function ExpenseStackedList() {
     async function fetchTransactions() {
       if (!isEmpty(user)) {
         const raw = await fetch(
-          `/api/transactions?date=${moment(date).format(DEFAULT_DATE_FORMAT)}`
+          `/api/transactions?date=${moment(date).format(DEFAULT_DATE_FORMAT)}`,
+          {
+            next: { tags: ["transactions"] },
+          }
         );
         const transactions = await raw.json();
         setTransaction(transactions);

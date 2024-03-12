@@ -1,5 +1,6 @@
 "use server";
 
+import { revalidatePath, revalidateTag } from 'next/cache'
 import moment from "moment";
 import { DEFAULT_DATE_FORMAT } from "../../constants";
 import axios from "../../app/api/axios";
@@ -13,7 +14,6 @@ interface TransactionFormData {
   user: User;
 }
 
-// export async function createTransation(formData: FormData) {
 export async function createTransation({
   amount,
   category,
@@ -22,12 +22,12 @@ export async function createTransation({
   user,
 }: TransactionFormData) {
   await axios.post(`${process.env.NEXT_PUBLIC_BACKEND_URL}/transactions`, {
-    // TODO update below
-    // user: user ? user._id : "",
-    user: "65ed126874a3809517c88423",
+    user: user ? user._id : "",
+    // user: "65ed126874a3809517c88423",
     amount,
     category,
     date: moment(date).format(DEFAULT_DATE_FORMAT),
     note,
   });
+  revalidateTag('transactions')
 }
