@@ -19,6 +19,7 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  // TODO Remove
   // const user = await axios.get("http://backend:3001/auth/me", {
   //   params: {
   //     jwtToken: await getCookie("accessToken"),
@@ -29,9 +30,8 @@ export default async function RootLayout({
       "accessToken"
     )}`
   );
-  // const user = await userProfileRes.json();
-  // TODO remove below test
-  const user = {_id: '123', email: 'hogo@gmail.com', picture: ''};
+  const user = await userProfileRes.json();
+  // const user = { _id: "123", email: "hogo@gmail.com", picture: "" };
 
   return (
     <ReduxStoreProvider>

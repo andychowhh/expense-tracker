@@ -2,7 +2,7 @@ import axios from "axios";
 import { getCookie } from "../../utils";
 
 const defaultOptions = {
-  baseURL: "http://localhost:3001",
+  baseURL: process.env.NEXT_PUBLIC_BACKEND_URL,
   headers: {
     "Content-Type": "application/json",
   },
