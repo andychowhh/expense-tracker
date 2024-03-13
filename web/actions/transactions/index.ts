@@ -1,6 +1,6 @@
 "use server";
 
-import { revalidatePath, revalidateTag } from 'next/cache'
+import { revalidateTag } from "next/cache";
 import moment from "moment";
 import { DEFAULT_DATE_FORMAT } from "../../constants";
 import axios from "../../app/api/axios";
@@ -29,5 +29,5 @@ export async function createTransation({
     date: moment(date).format(DEFAULT_DATE_FORMAT),
     note,
   });
-  revalidateTag('transactions')
+  revalidateTag("transactions");
 }
