@@ -1,13 +1,9 @@
 import React from "react";
+import { navigation } from "../../../constants";
 
 function classNames(...classes: any) {
   return classes.filter(Boolean).join(" ");
 }
-
-const navigation = [
-  { name: "Home", href: "/", current: true },
-  { name: "Settings", href: "/settings", current: false },
-];
 
 export function PageLinks() {
   return (

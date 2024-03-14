@@ -1,16 +1,11 @@
 import React from "react";
 import { Disclosure } from "@headlessui/react";
+import { navigation } from "../../../constants";
 
 // TODO make it utils
 function classNames(...classes: any) {
   return classes.filter(Boolean).join(" ");
 }
-
-// TODO make it constant
-const navigation = [
-  { name: "Home", href: "/", current: true },
-  { name: "Settings", href: "/settings", current: false },
-];
 
 export function MobilePageLinks() {
   return (
