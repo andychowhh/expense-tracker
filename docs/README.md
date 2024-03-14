@@ -21,3 +21,5 @@ This file contains the reference I use when creating new features
 [How to write a NestJS Dockerfile optimized for production](https://www.tomray.dev/nestjs-docker-production)
 
 [The Last Dockerfile You Need for NestJS](https://dawchihliou.github.io/articles/the-last-dockerfile-you-need-for-nestjs)
+
+[Fixing ECONNREFUSED error in Rails and NextJS Docker Containers](https://jelaniharris.com/blog/fixing-econnrefused-error-in-rails-and-nextjs-docker-containers/)
