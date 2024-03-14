@@ -3,7 +3,6 @@ import Image from "next/image";
 import { Menu, Transition } from "@headlessui/react";
 
 import { UserContext } from "../../../context/UserContext";
-import axios from "../../../api/axios";
 
 function classNames(...classes: any) {
   return classes.filter(Boolean).join(" ");

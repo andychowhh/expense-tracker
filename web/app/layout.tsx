@@ -19,23 +19,11 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  // TODO Remove
-  // const user = await axios.get("http://backend:3001/auth/me", {
-  //   params: {
-  //     jwtToken: await getCookie("accessToken"),
-  //   },
-  // });
-  const userProfileRes = await fetch(
-    `${process.env.WEB_URL}/api/auth/me?jwtToken=${await getCookie(
-      "accessToken"
-    )}`
-  );
-  const user = await userProfileRes.json();
-  // const user = { _id: "123", email: "hogo@gmail.com", picture: "" };
+  const accessToken = await getCookie("accessToken");
 
   return (
     <ReduxStoreProvider>
-      <UserContextProvider value={user}>
+      <UserContextProvider accessToken={accessToken}>
         <GoogleOAuthProvider clientId={process.env.GOOGLE_CLIENT_ID ?? ""}>
           <html lang="en">
             <body className={inter.className}>
