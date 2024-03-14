@@ -33,7 +33,7 @@ export class AuthGuard implements CanActivate {
     const token = this.extractTokenFromCookie(request);
 
     if (!token) {
-      throw new UnauthorizedException();
+      throw new UnauthorizedException('Access Token is required!');
     }
     try {
       const payload = await this.jwtService.verifyAsync(token, {

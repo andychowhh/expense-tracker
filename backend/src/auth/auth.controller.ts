@@ -1,4 +1,4 @@
-import { Body, Response, Controller, Post, Get, Query } from '@nestjs/common';
+import { Body, Response, Controller, Post, Get, Req } from '@nestjs/common';
 import { Response as ExpressResponse } from 'express';
 import { AuthService } from './auth.service';
 import { LoginDto } from './dto/login.dto';
@@ -32,10 +32,13 @@ export class AuthController {
 
   @Public()
   @Get('me')
-  async verifyToken(
-    @Response() res: ExpressResponse,
-    @Query('jwtToken') jwtToken: string,
-  ) {
-    return res.send(await this.authService.getUserByJwt(jwtToken));
+  async verifyToken(@Req() request: Request, @Response() res: ExpressResponse) {
+    try {
+      // TODO fix type
+      const token = request.cookies['accessToken'];
+      return res.send(await this.authService.getUserByJwt(token));
+    } catch (err) {
+      console.log('Error on /auth/me: ', err);
+    }
   }
 }
