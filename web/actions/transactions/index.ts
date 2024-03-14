@@ -21,9 +21,8 @@ export async function createTransation({
   note,
   user,
 }: TransactionFormData) {
-  await axios.post(`${process.env.NEXT_PUBLIC_BACKEND_URL}/transactions`, {
+  await axios.post(`/transactions`, {
     user: user ? user._id : "",
-    // user: "65ed126874a3809517c88423",
     amount,
     category,
     date: moment(date).format(DEFAULT_DATE_FORMAT),

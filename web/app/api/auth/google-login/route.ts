@@ -7,12 +7,9 @@ import { cookies } from "next/headers";
 // To handle a GET request to /api
 export async function POST(request: NextRequest) {
   const { token } = await request.json();
-  const loginRes: AxiosResponse<User> = await axios.post(
-    `${process.env.NEXT_PUBLIC_BACKEND_URL}/auth/google-login`,
-    {
-      token: token,
-    }
-  );
+  const loginRes: AxiosResponse<User> = await axios.post(`/auth/google-login`, {
+    token: token,
+  });
   // TODO Type for login response
   cookies().set("accessToken", loginRes.data?.accessToken as any, {
     httpOnly: true,
