@@ -26,11 +26,13 @@ export function UserContextProvider({
 
   useEffect(() => {
     async function fetchUserProfile() {
-      const userProfileRaw = await fetch(
-        `${process.env.NEXT_PUBLIC_WEB_URL}/api/auth/me?jwtToken=${accessToken}`
-      );
-      const userRes = await userProfileRaw.json();
-      setUser(userRes);
+      try {
+        const userProfileRaw = await fetch(`/api/auth/me`);
+        const userRes = await userProfileRaw.json();
+        setUser(userRes);
+      } catch (err) {
+        console.log("Contexterr", err);
+      }
     }
     fetchUserProfile();
   }, [accessToken]);

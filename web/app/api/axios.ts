@@ -1,8 +1,13 @@
 import axios from "axios";
 import { getCookie } from "../../utils";
 
+const apiUrl =
+  process.env.NEXT_SERVER_API_URL || process.env.NEXT_PUBLIC_API_URL;
+
+console.log("apiUrl",apiUrl)
+
 const defaultOptions = {
-  baseURL: process.env.NEXT_PUBLIC_BACKEND_URL,
+  baseURL: apiUrl,
   headers: {
     "Content-Type": "application/json",
   },
