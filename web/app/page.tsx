@@ -6,7 +6,7 @@ import {
 
 export default function Home() {
   return (
-    <div className="flex flex-col pt-5">
+    <div className="flex flex-col gap-7 pt-5">
       <Overview />
       <RecentTransactions />
       <BudgetTracking />

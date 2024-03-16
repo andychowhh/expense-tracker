@@ -40,7 +40,7 @@ const OverviewItem = ({ label, value, type }: OverviewItemProp) => {
 
 export const Overview = () => {
   return (
-    <div className="px-4 py-5 bg-white rounded">
+    <div className="px-5 py-5 bg-white rounded">
       <span className="text-lg font-medium">Overview</span>
       <div className="flex gap-4 mt-4">
         <OverviewItem label="Total Balance" value="12,345.67" type="success" />
