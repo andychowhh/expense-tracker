@@ -1,5 +1,5 @@
 import { Body, Response, Controller, Post, Get, Req } from '@nestjs/common';
-import { Response as ExpressResponse } from 'express';
+import { Request, ExpressRequest, Response as ExpressResponse } from 'express';
 import { AuthService } from './auth.service';
 import { LoginDto } from './dto/login.dto';
 import { Public } from './auth.guard';
@@ -32,7 +32,10 @@ export class AuthController {
 
   @Public()
   @Get('me')
-  async verifyToken(@Req() request: Request, @Response() res: ExpressResponse) {
+  async verifyToken(
+    @Req() request: ExpressRequest,
+    @Response() res: ExpressResponse,
+  ) {
     try {
       // TODO fix type
       const token = request.cookies['accessToken'];
