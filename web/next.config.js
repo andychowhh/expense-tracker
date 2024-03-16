@@ -26,15 +26,15 @@ const nextConfig = {
     };
     return config;
   },
-  async redirects() {
-    return [
-      {
-        source: '/',
-        destination: '/transactions',
-        permanent: false,
-      },
-    ]
-  },
+  // async redirects() {
+  //   return [
+  //     {
+  //       source: '/',
+  //       destination: '/transactions',
+  //       permanent: false,
+  //     },
+  //   ]
+  // },
   typescript: {
     // !! WARN !!
     // Dangerously allow production builds to successfully complete even if
