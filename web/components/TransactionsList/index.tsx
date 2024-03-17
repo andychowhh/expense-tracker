@@ -4,9 +4,9 @@ import { getCookie } from "../../utils";
 import TransactionItem from "./TransactionItem";
 import { Transaction } from "../../types";
 
-export async function TransactionList({ date }: { date: string | undefined }) {
+export async function TransactionList() {
   const raw = await fetch(
-    `${process.env.NEXT_PUBLIC_WEB_URL}/api/transactions?date=${moment(date).format(
+    `${process.env.NEXT_PUBLIC_WEB_URL}/api/transactions?date=${moment().format(
       DEFAULT_DATE_FORMAT
     )}`,
     {

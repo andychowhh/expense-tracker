@@ -9,7 +9,7 @@ import moment from "moment";
 
 import "react-datepicker/dist/react-datepicker.css";
 import { DEFAULT_DATE_FORMAT } from "../../constants";
-import { CATEGORIES } from "..";
+import { CATEGORIES } from "@/constants";
 import { UserContext } from "../../context/UserContext";
 import { Transaction } from "../../types";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/solid";

@@ -13,6 +13,11 @@ const config: Config = {
         "gradient-conic":
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
+      colors: {
+        "success": "#C6F6D5",
+        "warning": "#FED7D7",
+        "info": "#BEE3F8",
+      },
     },
   },
   plugins: [require("@tailwindcss/forms")],

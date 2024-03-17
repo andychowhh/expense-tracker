@@ -5,36 +5,9 @@ import { Listbox, Transition } from "@headlessui/react";
 import { CheckIcon, ChevronUpDownIcon } from "@heroicons/react/20/solid";
 import Image from "next/image";
 import { Category } from "@/types";
+import { CATEGORIES } from "@/constants";
 
-export const CATEGORIES: Category[] = [
-  {
-    label: "Food",
-    value: "food",
-    avatar: "/images/food.png",
-  },
-  {
-    label: "Snack",
-    value: "snack",
-    avatar: "/images/snack.png",
-  },
-  {
-    label: "Transportation",
-    value: "transportation",
-    avatar: "/images/transportation.png",
-  },
-  {
-    label: "Shopping",
-    value: "shopping",
-    avatar: "/images/shopping.png",
-  },
-  {
-    label: "Entertainment",
-    value: "entertainment",
-    avatar: "/images/entertainment.png",
-  },
-];
-
-function classNames(...classes) {
+function classNames(...classes: unknown[]) {
   return classes.filter(Boolean).join(" ");
 }
 

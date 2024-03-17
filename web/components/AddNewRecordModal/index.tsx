@@ -10,7 +10,8 @@ import { string, number, date } from "yup";
 import { ExclamationTriangleIcon } from "@heroicons/react/24/outline";
 import { PhotoIcon } from "@heroicons/react/24/solid";
 
-import { CategorySelect, CATEGORIES } from "../../components";
+import { CategorySelect } from "@/components";
+import { CATEGORIES } from "@/constants";
 import { Category } from "../../types";
 
 import "react-datepicker/dist/react-datepicker.css";
