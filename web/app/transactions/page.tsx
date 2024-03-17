@@ -1,5 +1,5 @@
 import { TransactionList } from "../../components/TransactionsList";
-import { TransactionListHeader } from "../../components";
+import { TransactionListHeader, TransactionTable } from "../../components";
 import { SearchParams } from "../../types";
 
 export default function TransactionsPage({
@@ -8,9 +8,8 @@ export default function TransactionsPage({
   searchParams?: SearchParams;
 }) {
   return (
-    <div className="sm:border sm:border-1 sm:max-w-md sm:m-auto md:max-w-xl lg:max-w-3xl">
-      <TransactionListHeader />
-      <TransactionList/>
+    <div className="">
+      <TransactionTable />
     </div>
   );
 }
