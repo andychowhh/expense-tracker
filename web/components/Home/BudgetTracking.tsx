@@ -1,14 +1,20 @@
 import React from "react";
+import Image from "next/image";
+import { CATEGORIES } from "@/constants";
 
-const INITIAL_CATEGORIES = [
-  { id: 1, label: "Food & Dining" },
-  { id: 2, label: "Utilities" },
-];
-
-const CategoryItem = ({ label }: { label: string }) => {
+const CategoryItem = ({
+  label,
+  value,
+  imageUrl,
+}: {
+  label: string;
+  value: string;
+  imageUrl: string;
+}) => {
   return (
     <div className="flex justify-between items-center">
-      <span className="flex-1">{label}</span>
+      <Image src={imageUrl} alt={value} width={30} height={30} />
+      <span className="flex-1 ml-1">{label}</span>
       <div className="w-6/12 bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
         <div
           className="flex-2 bg-blue-600 h-2.5 rounded-full"
@@ -25,8 +31,8 @@ export const BudgetTracking = () => {
     <div className="px-5 py-5 bg-white rounded">
       <span className="text-lg font-medium">Budget Tracking</span>
       <div className="flex flex-col gap-3 mt-4">
-        {INITIAL_CATEGORIES.map(({ id, label }) => (
-          <CategoryItem key={id} label={label} />
+        {CATEGORIES.map(({ label, value, avatar }) => (
+          <CategoryItem key={value} label={label} imageUrl={avatar} />
         ))}
       </div>
     </div>
