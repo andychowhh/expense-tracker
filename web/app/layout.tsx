@@ -29,7 +29,7 @@ export default async function RootLayout({
             <body className={inter.className}>
               <Modal />
               <Navbar />
-              <main className="px-4 h-full bg-gray-100">{children}</main>
+              <main className="px-8 h-full bg-gray-100">{children}</main>
             </body>
           </html>
         </GoogleOAuthProvider>
