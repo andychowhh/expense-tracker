@@ -1,10 +1,18 @@
+import { HomeIcon, CurrencyYenIcon } from "@heroicons/react/24/solid";
+
 interface Navigation {
+  id: string;
   name: string;
   href: string;
-  current: boolean;
+  IconComponent: any; // TODO set Type
 }
 
 export const navigation: Navigation[] = [
-  // { name: "Home", href: "/", current: true },
-  // { name: "Settings", href: "/settings", current: false },
+  { id: "home", name: "Home", href: "/", IconComponent: HomeIcon },
+  {
+    id: "transactions",
+    name: "Transactions",
+    href: "/transactions",
+    IconComponent: CurrencyYenIcon,
+  },
 ];
