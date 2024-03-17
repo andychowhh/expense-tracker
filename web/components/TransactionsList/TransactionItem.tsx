@@ -2,7 +2,7 @@
 
 import React from "react";
 import Image from "next/image";
-import { CATEGORIES } from "..";
+import { CATEGORIES } from "@/constants";
 import { Transaction } from "../../types";
 
 function TransactionItem({

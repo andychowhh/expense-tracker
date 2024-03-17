@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { GoogleOAuthProvider } from "@react-oauth/google";
-import "./globals.css";
-import { Navbar, Modal } from "@/components";
+import { Navbar, Modal, SideBar } from "@/components";
 import ReduxStoreProvider from "../redux/reduxStoreProvider";
 import { UserContextProvider } from "../context/UserContext";
 import { getCookie } from ".././utils";
+import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -29,7 +29,10 @@ export default async function RootLayout({
             <body className={inter.className}>
               <Modal />
               <Navbar />
-              <main className="px-8 h-full bg-gray-100">{children}</main>
+              <div className="flex bg-gray-100">
+                <SideBar />
+                <main className="flex-1 px-8 h-full">{children}</main>
+              </div>
             </body>
           </html>
         </GoogleOAuthProvider>

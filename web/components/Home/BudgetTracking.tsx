@@ -32,7 +32,7 @@ export const BudgetTracking = () => {
       <span className="text-lg font-medium">Budget Tracking</span>
       <div className="flex flex-col gap-3 mt-4">
         {CATEGORIES.map(({ label, value, avatar }) => (
-          <CategoryItem key={value} label={label} imageUrl={avatar} />
+          <CategoryItem key={value} label={label} imageUrl={avatar} value={value} />
         ))}
       </div>
     </div>

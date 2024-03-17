@@ -5,3 +5,4 @@ export * from "./Modal";
 export * from "./Navbar";
 // export * from "./TransactionsList";
 export * from "./TransactionListHeader";
+export * from "./SideBar";
