@@ -10,7 +10,7 @@ export const SideBar = () => {
 
   return (
     <div className="flex bg-gray-100 text-gray-900">
-      <aside className="flex h-screen w-20 flex-col items-center border-r border-neutral-200 bg-white">
+      <aside className="flex h-screen px-7 flex-col items-center border-r border-neutral-200 bg-white">
         <nav className="flex flex-1 flex-col items-center gap-y-6 pt-10">
           {navigation.map(({ id, name, href, IconComponent }) => (
             <Link
@@ -21,7 +21,7 @@ export const SideBar = () => {
               key={id}
             >
               <IconComponent
-                className="block h-6 w-6"
+                className="block h-7 w-7"
                 aria-hidden="true"
                 fill={null}
               />
