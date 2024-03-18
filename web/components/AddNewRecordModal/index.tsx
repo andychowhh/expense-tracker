@@ -10,7 +10,7 @@ import { string, number, date } from "yup";
 import { ExclamationTriangleIcon } from "@heroicons/react/24/outline";
 import { PhotoIcon } from "@heroicons/react/24/solid";
 
-import { CategorySelect } from "@/components";
+import { CategorySelect, CategorySelectGrid } from "@/components";
 import { CATEGORIES } from "@/constants";
 import { Category } from "../../types";
 
@@ -92,7 +92,7 @@ export function AddNewRecordModal({ isOpen, onClose }: AddNewRecordModalProp) {
             >
               <Dialog.Panel className="h-screen relative transform overflow-hidden bg-white text-left shadow-xl transition-all sm:rounded-lg sm:h-auto sm:my-8 sm:w-full sm:max-w-lg">
                 <form action={handleSubmit(addTransaction)}>
-                  <div className="bg-white px-4 pb-4 pt-5 sm:p-6 sm:pb-4">
+                  <div className="bg-white">
                     <div className="sm:flex sm:flex-col sm:items-start">
                       <div className="mx-auto flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-red-100 sm:mx-0 sm:h-10 sm:w-10">
                         <ExclamationTriangleIcon
@@ -139,6 +139,10 @@ export function AddNewRecordModal({ isOpen, onClose }: AddNewRecordModalProp) {
                         </div>
 
                         <div className="col-span-full">
+                          <CategorySelectGrid />
+                        </div>
+
+                        <div className="col-span-full">
                           <label
                             htmlFor="category"
                             className="block text-sm font-medium leading-6 text-gray-900"
@@ -166,6 +170,7 @@ export function AddNewRecordModal({ isOpen, onClose }: AddNewRecordModalProp) {
                               {errors.category?.message}
                             </p>
                           </div>
+                          div
                         </div>
 
                         <div className="sm:col-span-4 sm:max-w-sm">

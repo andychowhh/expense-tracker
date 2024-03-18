@@ -1,5 +1,6 @@
 export * from "./AddNewRecordModal";
 export * from "./CategorySelect";
+export * from "./CategorySelectGrid";
 export * from "./ExpenseStackedList";
 export * from "./Modal";
 export * from "./Navbar";
