@@ -1,6 +1,7 @@
 "use client";
 
 import { Fragment, useContext } from "react";
+import { useFormState } from "react-dom";
 import DatePicker from "react-datepicker";
 import { Controller, useForm } from "react-hook-form";
 import { Dialog, Transition } from "@headlessui/react";
@@ -43,11 +44,15 @@ export function AddNewRecordModal({ isOpen, onClose }: AddNewRecordModalProp) {
   const { user } = useContext(UserContext) ?? {};
   const {
     control,
+    formState,
+    getValues,
     register,
+    trigger,
     handleSubmit,
     watch,
     formState: { errors },
   } = useForm<TransactionFormData>({
+    mode: "onSubmit",
     resolver: yupResolver(schema),
     defaultValues: {
       date: new Date(),
@@ -138,39 +143,18 @@ export function AddNewRecordModal({ isOpen, onClose }: AddNewRecordModalProp) {
                           <p className="text-red-600">{errors.date?.message}</p>
                         </div>
 
-                        <div className="col-span-full">
-                          <CategorySelectGrid />
-                        </div>
-
-                        <div className="col-span-full">
-                          <label
-                            htmlFor="category"
-                            className="block text-sm font-medium leading-6 text-gray-900"
-                          >
-                            Category
-                          </label>
-                          <div className="mt-2">
-                            <Controller
-                              control={control}
-                              name="category"
-                              rules={{ required: true }}
-                              render={({ field }) => (
-                                <CategorySelect
-                                  selected={
-                                    CATEGORIES.find(
-                                      (category) =>
-                                        category.value === field.value
-                                    ) as Category
-                                  }
-                                  onChange={(item) => field.onChange(item)}
-                                />
-                              )}
-                            />
-                            <p className="text-red-600">
-                              {errors.category?.message}
-                            </p>
-                          </div>
-                          div
+                        <div className="col-span-full mt-2">
+                          <Controller
+                            control={control}
+                            name="category"
+                            rules={{ required: true }}
+                            render={({ field }) => (
+                              <CategorySelectGrid
+                                selectedOption={field.value}
+                                onChange={(item) => field.onChange(item)}
+                              />
+                            )}
+                          />
                         </div>
 
                         <div className="sm:col-span-4 sm:max-w-sm">
