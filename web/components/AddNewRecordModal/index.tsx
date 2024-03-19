@@ -1,6 +1,6 @@
 "use client";
 
-import { Fragment, useContext } from "react";
+import { Fragment, useContext, useEffect } from "react";
 import { useFormState } from "react-dom";
 import DatePicker from "react-datepicker";
 import { Controller, useForm } from "react-hook-form";
@@ -9,15 +9,16 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { string, number, date } from "yup";
 import { ExclamationTriangleIcon } from "@heroicons/react/24/outline";
-import { PhotoIcon } from "@heroicons/react/24/solid";
+import { PhotoIcon, CurrencyDollarIcon } from "@heroicons/react/24/solid";
 
 import { CategorySelect, CategorySelectGrid } from "@/components";
-import { CATEGORIES } from "@/constants";
+import { CATEGORIES, DEFAULT_DATE_FORMAT } from "@/constants";
 import { Category } from "../../types";
 
 import "react-datepicker/dist/react-datepicker.css";
 import { UserContext } from "../../context/UserContext";
 import { createTransation } from "../../actions/transactions";
+import moment from "moment";
 
 interface TransactionFormData {
   date: Date;
@@ -70,7 +71,7 @@ export function AddNewRecordModal({ isOpen, onClose }: AddNewRecordModalProp) {
   };
 
   return (
-    <Transition.Root show={isOpen} as={Fragment}>
+    <Transition.Root show={true} as={Fragment}>
       <Dialog as="div" className="relative z-10 bg-red-100" onClose={onClose}>
         <Transition.Child
           as={Fragment}
@@ -98,112 +99,91 @@ export function AddNewRecordModal({ isOpen, onClose }: AddNewRecordModalProp) {
               <Dialog.Panel className="h-screen relative transform overflow-hidden bg-white text-left shadow-xl transition-all sm:rounded-lg sm:h-auto sm:my-8 sm:w-full sm:max-w-lg">
                 <form action={handleSubmit(addTransaction)}>
                   <div className="bg-white">
-                    <div className="sm:flex sm:flex-col sm:items-start">
-                      <div className="mx-auto flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-red-100 sm:mx-0 sm:h-10 sm:w-10">
-                        <ExclamationTriangleIcon
-                          className="h-6 w-6 text-red-600"
-                          aria-hidden="true"
+                    <div className="flex justify-center border-b py-2">
+                      <Dialog.Title
+                        as="h3"
+                        className="text-base leading-6 text-gray-900"
+                      >
+                        <Controller
+                          control={control}
+                          name="date"
+                          rules={{ required: true }}
+                          render={({ field }) => (
+                            <DatePicker
+                              selected={field.value}
+                              preventOpenOnFocus={true}
+                              dateFormat="d MMM yyyy"
+                              maxDate={new Date()}
+                              customInput={
+                                <span className="border rounded-3xl bg-gray-200 py-1 px-2 hover:cursor-pointer">
+                                  {moment(field.value).format(
+                                    DEFAULT_DATE_FORMAT
+                                  )}
+                                </span>
+                              }
+                              onChange={(date) => field.onChange(date)}
+                              onKeyDown={(e) => {
+                                e.preventDefault();
+                              }}
+                            />
+                          )}
+                        />
+                      </Dialog.Title>
+                    </div>
+
+                    <div className="flex justify-between mt-2 py-2 px-4">
+                      <div className="flex flex-col items-center">
+                        <div className="flex flex-1 justify-center bg-gray-100 px-3 w-14">
+                          <CurrencyDollarIcon />
+                        </div>
+                        <span>Cash</span>
+                      </div>
+                      <div className="flex items-center justify-end text-3xl ">
+                        <span className="">CA$</span>
+                        <input
+                          type="number"
+                          id="amount"
+                          autoFocus={true}
+                          className="border-0 text-3xl p-0 focus:ring-0"
+                          {...register("amount", { required: true })}
                         />
                       </div>
-                      <div className="mt-3 text-center sm:mt-0 sm:text-left">
-                        <Dialog.Title
-                          as="h3"
-                          className="text-base font-semibold leading-6 text-gray-900"
-                        >
-                          Add New Record
-                        </Dialog.Title>
+                    </div>
+
+                    <div className="col-span-full mt-2">
+                      <Controller
+                        control={control}
+                        name="category"
+                        rules={{ required: true }}
+                        render={({ field }) => (
+                          <CategorySelectGrid
+                            selectedOption={field.value}
+                            onChange={(item) => field.onChange(item)}
+                          />
+                        )}
+                      />
+                    </div>
+
+                    <div className="col-span-full mt-4 px-4">
+                      <label
+                        htmlFor="note"
+                        className="block text-sm font-medium leading-6 text-gray-900"
+                      >
+                        Note
+                      </label>
+                      <div className="mt-2">
+                        <textarea
+                          rows={3}
+                          className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                          defaultValue={""}
+                          {...register("note")}
+                        />
+                        <p className="text-red-600">{errors.note?.message}</p>
                       </div>
-                      <div className="w-full mt-3 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
-                        <div className="col-span-full">
-                          <label
-                            htmlFor="date"
-                            className="block text-sm font-medium leading-6 text-gray-900"
-                          >
-                            Date
-                          </label>
+                    </div>
 
-                          <Controller
-                            control={control}
-                            name="date"
-                            rules={{ required: true }}
-                            render={({ field }) => (
-                              <DatePicker
-                                selected={field.value}
-                                preventOpenOnFocus={true}
-                                dateFormat="d MMM yyyy"
-                                maxDate={new Date()}
-                                onChange={(date) => field.onChange(date)}
-                                onKeyDown={(e) => {
-                                  e.preventDefault();
-                                }}
-                                className="text-sm border-0 rounded-md px-3 shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md"
-                              />
-                            )}
-                          />
-                          <p className="text-red-600">{errors.date?.message}</p>
-                        </div>
-
-                        <div className="col-span-full mt-2">
-                          <Controller
-                            control={control}
-                            name="category"
-                            rules={{ required: true }}
-                            render={({ field }) => (
-                              <CategorySelectGrid
-                                selectedOption={field.value}
-                                onChange={(item) => field.onChange(item)}
-                              />
-                            )}
-                          />
-                        </div>
-
-                        <div className="sm:col-span-4 sm:max-w-sm">
-                          <label
-                            htmlFor="amount"
-                            className="block text-sm font-medium leading-6 text-gray-900"
-                          >
-                            Amount
-                          </label>
-                          <div className="mt-2">
-                            <div className="flex rounded-md px-3 shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
-                              <input
-                                type="number"
-                                id="amount"
-                                className="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
-                                {...register("amount", { required: true })}
-                              />
-                              <span className="flex select-none items-center pl-3 text-gray-500 sm:text-sm">
-                                CAD
-                              </span>
-                            </div>
-                            <p className="text-red-600">
-                              {errors.amount && "Amount is required"}
-                            </p>
-                          </div>
-                        </div>
-
-                        <div className="col-span-full">
-                          <label
-                            htmlFor="note"
-                            className="block text-sm font-medium leading-6 text-gray-900"
-                          >
-                            Note
-                          </label>
-                          <div className="mt-2">
-                            <textarea
-                              rows={3}
-                              className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                              defaultValue={""}
-                              {...register("note")}
-                            />
-                            <p className="text-red-600">
-                              {errors.note?.message}
-                            </p>
-                          </div>
-                        </div>
-
-                        {/* Receipt */}
-                        {/* <div className="col-span-full">
+                    {/* Receipt */}
+                    {/* <div className="col-span-full">
                           <label
                             htmlFor="receipt"
                             className="block text-sm font-medium leading-6 text-gray-900"
@@ -237,8 +217,6 @@ export function AddNewRecordModal({ isOpen, onClose }: AddNewRecordModalProp) {
                             </div>
                           </div>
                         </div> */}
-                      </div>
-                    </div>
                   </div>
                   <div className="px-4 py-5 sm:flex sm:flex-row-reverse sm:px-6">
                     <button

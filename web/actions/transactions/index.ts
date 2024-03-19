@@ -21,6 +21,7 @@ export async function createTransation({
   note,
   user,
 }: TransactionFormData) {
+  console.log({user, amount, category, date, note})
   await axios.post(`/transactions`, {
     user: user ? user._id : "",
     amount,
