@@ -8,12 +8,12 @@ import { Dialog, Transition } from "@headlessui/react";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { string, number, date } from "yup";
-import { PhotoIcon, CurrencyDollarIcon } from "@heroicons/react/24/solid";
+import { CurrencyDollarIcon, CreditCardIcon } from "@heroicons/react/24/solid";
 import AutosizeInput from "react-input-autosize";
 
 import { CategorySelect, CategorySelectGrid } from "@/components";
 import { CATEGORIES, DEFAULT_DATE_FORMAT } from "@/constants";
-import { Category } from "../../types";
+import { PAYMENT_METHOD } from "@/types";
 
 import "react-datepicker/dist/react-datepicker.css";
 import { UserContext } from "../../context/UserContext";
@@ -22,6 +22,7 @@ import moment from "moment";
 
 interface TransactionFormData {
   date: Date;
+  paymentMethod: PAYMENT_METHOD;
   category: string;
   amount: number;
   note: string;
@@ -32,17 +33,18 @@ interface AddNewRecordModalProp {
   onClose: () => void;
 }
 
-const schema = yup
-  .object({
-    date: date().required(),
-    category: string().required(),
-    amount: number().positive().required(),
-    note: string(),
-  })
-  .required();
+const schema = yup.object({
+  date: date().required(),
+  paymentMethod: string().oneOf([
+    PAYMENT_METHOD.CASH,
+    PAYMENT_METHOD.CREDIT_CARD,
+  ]),
+  category: string().required(),
+  amount: number().positive().required(),
+  note: string(),
+});
 
 export function AddNewRecordModal({ isOpen, onClose }: AddNewRecordModalProp) {
-  const [test, setTest] = useState("");
   const { user } = useContext(UserContext) ?? {};
   const {
     control,
@@ -133,12 +135,38 @@ export function AddNewRecordModal({ isOpen, onClose }: AddNewRecordModalProp) {
                     </div>
 
                     <div className="flex justify-between mt-2 py-2 px-4">
-                      <div className="flex flex-col items-center">
-                        <div className="flex flex-1 justify-center bg-gray-100 px-3 w-14">
-                          <CurrencyDollarIcon />
-                        </div>
-                        <span>Cash</span>
-                      </div>
+                      <Controller
+                        control={control}
+                        name="paymentMethod"
+                        rules={{ required: true }}
+                        render={({ field }) => (
+                          <button
+                            className="flex flex-col items-center bg-gray-100 cursor-pointer px-2 py-1 min-w-[95px]"
+                            onClick={(e) => {
+                              e.preventDefault();
+                              field.onChange(
+                                field.value === PAYMENT_METHOD.CASH
+                                  ? PAYMENT_METHOD.CREDIT_CARD
+                                  : PAYMENT_METHOD.CASH
+                              );
+                            }}
+                          >
+                            <div className="flex flex-1 justify-center px-3 w-14">
+                              {field.value === PAYMENT_METHOD.CASH ? (
+                                <CurrencyDollarIcon />
+                              ) : (
+                                <CreditCardIcon />
+                              )}
+                            </div>
+                            <span className="text-sm">
+                              {field.value === PAYMENT_METHOD.CASH
+                                ? "Cash"
+                                : "Credit Card"}
+                            </span>
+                          </button>
+                        )}
+                      />
+
                       <div className="flex items-center justify-end text-3xl">
                         <span className="">CA$</span>
                         <Controller
