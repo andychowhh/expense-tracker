@@ -5,7 +5,11 @@ import { DEFAULT_DATE_FORMAT, CATEGORIES } from "@/constants";
 import { getCookie } from "@/utils";
 import { Transaction } from "@/types";
 
-function TransactionTableItem({ amount, note, category }: Transaction) {
+function TransactionTableItem({
+  amount,
+  note,
+  category,
+}: Omit<Transaction, "_id">) {
   const categoryObj = CATEGORIES.find((c) => c.value === category);
   return (
     <tr className="hover:bg-gray-50">
