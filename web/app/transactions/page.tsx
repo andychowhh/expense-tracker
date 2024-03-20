@@ -1,6 +1,6 @@
 import { TransactionList } from "../../components/TransactionsList";
 import { TransactionListHeader } from "../../components";
-import { TransactionTable } from "@/components/TransactionTable";
+import { TransactionTable } from "@/components/Transaction";
 
 export default function TransactionsPage() {
   return (
