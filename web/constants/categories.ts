@@ -26,4 +26,30 @@ export const CATEGORIES: Category[] = [
     value: "entertainment",
     avatar: "/images/entertainment.png",
   },
+
+  {
+    label: "Medical",
+    value: "medical",
+    avatar: "/images/medical.png",
+  },
+  {
+    label: "Grocery",
+    value: "grocery",
+    avatar: "/images/grocery.png",
+  },
+  {
+    label: "Housing",
+    value: "housing",
+    avatar: "/images/housing.png",
+  },
+  {
+    label: "Electronics",
+    value: "electronics",
+    avatar: "/images/electronics.png",
+  },
+  {
+    label: "Income",
+    value: "income",
+    avatar: "/images/income.png",
+  },
 ];

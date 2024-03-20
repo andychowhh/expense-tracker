@@ -21,12 +21,17 @@ export async function createTransation({
   note,
   user,
 }: TransactionFormData) {
-  await axios.post(`/transactions`, {
-    user: user ? user._id : "",
-    amount,
-    category,
-    date: moment(date).format(DEFAULT_DATE_FORMAT),
-    note,
-  });
-  revalidateTag("transactions");
+  console.log({ user, amount, category, date, note });
+  try {
+    await axios.post(`/transactions`, {
+      user: user ? user._id : "",
+      amount,
+      category,
+      date: moment(date).format(DEFAULT_DATE_FORMAT),
+      note,
+    });
+    revalidateTag("transactions");
+  } catch (err) {
+    console.log("createTransation", err);
+  }
 }

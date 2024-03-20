@@ -36,3 +36,14 @@ input[type="number"] {
 .react-datepicker__navigation {
   top: 15px !important;
 }
+
+.autosize-input input {
+  font-size: 1.875rem /* 30px */;
+  line-height: 2.25rem /* 36px */;
+  padding-left: 0.5rem;
+  padding-right: 0;
+  border: none;
+  &:focus {
+    box-shadow: unset;
+  }
+}

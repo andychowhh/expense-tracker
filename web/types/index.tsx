@@ -23,3 +23,8 @@ export interface SearchParams {
   // [key: string]: string | string[] | undefined;
   [key: string]: string;
 }
+
+export enum PAYMENT_METHOD {
+  CASH = "CASH",
+  CREDIT_CARD = "CREDIT_CARD",
+}

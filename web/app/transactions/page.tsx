@@ -1,6 +1,5 @@
 import { TransactionList } from "../../components/TransactionsList";
 import { TransactionListHeader } from "../../components";
-import { SearchParams } from "../../types";
 
 export default function TransactionsPage() {
   return (
