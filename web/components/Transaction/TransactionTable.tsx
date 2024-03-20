@@ -19,7 +19,7 @@ function TransactionTableItem({ amount, note, category }: Transaction) {
         </div>
         <div className="text-sm">
           <div className="font-medium text-gray-700">{categoryObj?.label}</div>
-          <div className="text-gray-400">jobs@sailboatui.com</div>
+          <div className="text-gray-400">Ice-Cream</div>
         </div>
       </th>
       <td className="px-6 py-4">
@@ -70,11 +70,11 @@ function TransactionTableItem({ amount, note, category }: Transaction) {
   );
 }
 
-export const TransactionTable = async () => {
+export const TransactionTable = async ({ date }: { date: string }) => {
   const raw = await fetch(
-    `${process.env.NEXT_PUBLIC_WEB_URL}/api/transactions?date=${moment().format(
-      DEFAULT_DATE_FORMAT
-    )}`,
+    `${process.env.NEXT_PUBLIC_WEB_URL}/api/transactions?date=${
+      date ? date : moment().format(DEFAULT_DATE_FORMAT)
+    }`,
     {
       next: { tags: ["transactions"] },
       headers: {
@@ -83,7 +83,6 @@ export const TransactionTable = async () => {
     }
   );
   const transactions: Transaction[] = await raw.json();
-  console.log({ transactions });
 
   return (
     <div className="overflow-hidden rounded-lg border border-gray-200 shadow-md">
