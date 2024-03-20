@@ -1,7 +1,7 @@
 "use client";
 
-import { Fragment, useContext, useEffect, useState } from "react";
-import { useFormState } from "react-dom";
+import { Fragment, useContext } from "react";
+import { useFormStatus } from "react-dom";
 import DatePicker from "react-datepicker";
 import { Controller, useForm } from "react-hook-form";
 import { Dialog, Transition } from "@headlessui/react";
@@ -11,7 +11,7 @@ import { string, number, date } from "yup";
 import { CurrencyDollarIcon, CreditCardIcon } from "@heroicons/react/24/solid";
 import AutosizeInput from "react-input-autosize";
 
-import { CategorySelect, CategorySelectGrid } from "@/components";
+import { CategorySelectGrid } from "@/components";
 import { CATEGORIES, DEFAULT_DATE_FORMAT } from "@/constants";
 import { PAYMENT_METHOD } from "@/types";
 
@@ -44,22 +44,34 @@ const schema = yup.object({
   note: string(),
 });
 
+function SubmitButton() {
+  const { pending } = useFormStatus();
+
+  return (
+    <button
+      type="submit"
+      disabled={pending}
+      className="inline-flex w-full justify-center rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500 sm:ml-3 sm:w-auto"
+    >
+      {pending ? "Adding" : "Add"}
+    </button>
+  );
+}
+
 export function AddNewRecordModal({ isOpen, onClose }: AddNewRecordModalProp) {
   const { user } = useContext(UserContext) ?? {};
+
   const {
     control,
-    formState,
-    getValues,
     register,
-    trigger,
     handleSubmit,
-    watch,
     formState: { errors },
   } = useForm<TransactionFormData>({
     mode: "onSubmit",
     resolver: yupResolver(schema),
     defaultValues: {
       date: new Date(),
+      paymentMethod: PAYMENT_METHOD.CASH,
       category: CATEGORIES[0].value,
     },
   });
@@ -70,7 +82,12 @@ export function AddNewRecordModal({ isOpen, onClose }: AddNewRecordModalProp) {
     date,
     note,
   }: TransactionFormData) => {
-    createTransation({ amount, category, date, note, user });
+    try {
+      await createTransation({ amount, category, date, note, user });
+      onClose();
+    } catch (err) {
+      console.log("addTransaction Error", err);
+    }
   };
 
   return (
@@ -89,7 +106,7 @@ export function AddNewRecordModal({ isOpen, onClose }: AddNewRecordModalProp) {
         </Transition.Child>
 
         <div className="fixed inset-0 z-10 w-screen overflow-y-auto">
-          <div className="sm:flex sm:justify-center">
+          <div className="sm:flex sm:justify-center h-full items-center">
             <Transition.Child
               as={Fragment}
               enter="ease-out duration-300"
@@ -105,7 +122,7 @@ export function AddNewRecordModal({ isOpen, onClose }: AddNewRecordModalProp) {
                     <div className="flex justify-center border-b py-2">
                       <Dialog.Title
                         as="h3"
-                        className="text-base leading-6 text-gray-900"
+                        className="text-base leading-6 text-gray-900 py-1"
                       >
                         <Controller
                           control={control}
@@ -217,50 +234,9 @@ export function AddNewRecordModal({ isOpen, onClose }: AddNewRecordModalProp) {
                         <p className="text-red-600">{errors.note?.message}</p>
                       </div>
                     </div>
-
-                    {/* Receipt */}
-                    {/* <div className="col-span-full">
-                          <label
-                            htmlFor="receipt"
-                            className="block text-sm font-medium leading-6 text-gray-900"
-                          >
-                            Receipt
-                          </label>
-                          <div className="mt-2 flex justify-center rounded-lg border border-dashed border-gray-900/25 px-6 py-10">
-                            <div className="text-center">
-                              <PhotoIcon
-                                className="mx-auto h-12 w-12 text-gray-300"
-                                aria-hidden="true"
-                              />
-                              <div className="mt-4 flex text-sm leading-6 text-gray-600">
-                                <label
-                                  htmlFor="file-upload"
-                                  className="relative cursor-pointer rounded-md bg-white font-semibold text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-600 focus-within:ring-offset-2 hover:text-indigo-500"
-                                >
-                                  <span>Upload a file</span>
-                                  <input
-                                    id="file-upload"
-                                    name="file-upload"
-                                    type="file"
-                                    className="sr-only"
-                                  />
-                                </label>
-                                <p className="pl-1">or drag and drop</p>
-                              </div>
-                              <p className="text-xs leading-5 text-gray-600">
-                                PNG, JPG, GIF up to 10MB
-                              </p>
-                            </div>
-                          </div>
-                        </div> */}
                   </div>
                   <div className="px-4 py-5 sm:flex sm:flex-row-reverse sm:px-6">
-                    <button
-                      type="submit"
-                      className="inline-flex w-full justify-center rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500 sm:ml-3 sm:w-auto"
-                    >
-                      Add
-                    </button>
+                    <SubmitButton />
                   </div>
                 </form>
               </Dialog.Panel>
