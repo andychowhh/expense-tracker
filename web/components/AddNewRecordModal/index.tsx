@@ -1,6 +1,6 @@
 "use client";
 
-import { Fragment, useContext, useEffect } from "react";
+import { Fragment, useContext, useEffect, useState } from "react";
 import { useFormState } from "react-dom";
 import DatePicker from "react-datepicker";
 import { Controller, useForm } from "react-hook-form";
@@ -8,8 +8,8 @@ import { Dialog, Transition } from "@headlessui/react";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { string, number, date } from "yup";
-import { ExclamationTriangleIcon } from "@heroicons/react/24/outline";
 import { PhotoIcon, CurrencyDollarIcon } from "@heroicons/react/24/solid";
+import AutosizeInput from "react-input-autosize";
 
 import { CategorySelect, CategorySelectGrid } from "@/components";
 import { CATEGORIES, DEFAULT_DATE_FORMAT } from "@/constants";
@@ -42,6 +42,7 @@ const schema = yup
   .required();
 
 export function AddNewRecordModal({ isOpen, onClose }: AddNewRecordModalProp) {
+  const [test, setTest] = useState("");
   const { user } = useContext(UserContext) ?? {};
   const {
     control,
@@ -71,7 +72,7 @@ export function AddNewRecordModal({ isOpen, onClose }: AddNewRecordModalProp) {
   };
 
   return (
-    <Transition.Root show={true} as={Fragment}>
+    <Transition.Root show={isOpen} as={Fragment}>
       <Dialog as="div" className="relative z-10 bg-red-100" onClose={onClose}>
         <Transition.Child
           as={Fragment}
@@ -138,14 +139,21 @@ export function AddNewRecordModal({ isOpen, onClose }: AddNewRecordModalProp) {
                         </div>
                         <span>Cash</span>
                       </div>
-                      <div className="flex items-center justify-end text-3xl ">
+                      <div className="flex items-center justify-end text-3xl">
                         <span className="">CA$</span>
-                        <input
-                          type="number"
-                          id="amount"
-                          autoFocus={true}
-                          className="border-0 text-3xl p-0 focus:ring-0"
-                          {...register("amount", { required: true })}
+                        <Controller
+                          control={control}
+                          name="amount"
+                          rules={{ required: true }}
+                          render={({ field }) => (
+                            <AutosizeInput
+                              type="number"
+                              className="autosize-input"
+                              autoFocus
+                              value={field.value}
+                              onChange={(item: number) => field.onChange(item)}
+                            />
+                          )}
                         />
                       </div>
                     </div>
