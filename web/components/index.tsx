@@ -5,3 +5,4 @@ export * from "./ExpenseStackedList";
 export * from "./Navbar";
 export * from "./TransactionListHeader";
 export * from "./SideBar";
+// export * from "./TransactionTable";
