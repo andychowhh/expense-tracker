@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { GoogleOAuthProvider } from "@react-oauth/google";
-import { Navbar, Modal, SideBar } from "@/components";
-import ReduxStoreProvider from "../redux/reduxStoreProvider";
+import { Navbar, SideBar } from "@/components";
 import { UserContextProvider } from "../context/UserContext";
 import { getCookie } from ".././utils";
 import "./globals.css";
@@ -22,21 +21,18 @@ export default async function RootLayout({
   const accessToken = await getCookie("accessToken");
 
   return (
-    <ReduxStoreProvider>
-      <UserContextProvider accessToken={accessToken}>
-        <GoogleOAuthProvider clientId={process.env.GOOGLE_CLIENT_ID ?? ""}>
-          <html lang="en">
-            <body className={inter.className}>
-              <Modal />
-              <Navbar />
-              <div className="flex bg-gray-100">
-                <SideBar />
-                <main className="flex-1 px-8 h-full">{children}</main>
-              </div>
-            </body>
-          </html>
-        </GoogleOAuthProvider>
-      </UserContextProvider>
-    </ReduxStoreProvider>
+    <UserContextProvider accessToken={accessToken}>
+      <GoogleOAuthProvider clientId={process.env.GOOGLE_CLIENT_ID ?? ""}>
+        <html lang="en">
+          <body className={inter.className}>
+            <Navbar />
+            <div className="flex bg-gray-100">
+              <SideBar />
+              <main className="flex-1 px-8 h-full">{children}</main>
+            </div>
+          </body>
+        </html>
+      </GoogleOAuthProvider>
+    </UserContextProvider>
   );
 }
