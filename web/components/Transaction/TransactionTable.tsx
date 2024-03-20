@@ -86,7 +86,7 @@ export const TransactionTable = async () => {
   console.log({ transactions });
 
   return (
-    <div className="overflow-hidden rounded-lg border border-gray-200 shadow-md m-5">
+    <div className="overflow-hidden rounded-lg border border-gray-200 shadow-md">
       <table className="w-full border-collapse bg-white text-left text-sm text-gray-500">
         <thead className="bg-gray-50">
           <tr>

@@ -32,7 +32,7 @@ export const TransactionListHeader = () => {
   };
 
   return (
-    <div className="flex justify-between items-center border-b py-3 sm:px-4">
+    <div className="flex justify-between items-center py-3 px-5">
       <div className="invisible">CA$0</div>
       <div className="flex gap-5">
         <button

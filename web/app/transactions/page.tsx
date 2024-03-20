@@ -8,7 +8,8 @@ export default function TransactionsPage() {
     //   <TransactionListHeader />
     //   <TransactionList />
     // </div>
-    <div>
+    <div className="m-3 mt-0">
+      <TransactionListHeader />
       <TransactionTable />
     </div>
   );
