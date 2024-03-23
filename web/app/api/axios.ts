@@ -4,8 +4,6 @@ import { getCookie } from "../../utils";
 const apiUrl =
   process.env.NEXT_SERVER_API_URL || process.env.NEXT_PUBLIC_API_URL;
 
-console.log("apiUrl",apiUrl)
-
 const defaultOptions = {
   baseURL: apiUrl,
   headers: {
