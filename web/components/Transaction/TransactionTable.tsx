@@ -1,9 +1,11 @@
 import React from "react";
+import { NextRequest, NextResponse } from "next/server";
 import Image from "next/image";
 import moment from "moment";
 import { DEFAULT_DATE_FORMAT, CATEGORIES } from "@/constants";
 import { getCookie } from "@/utils";
 import { Transaction } from "@/types";
+import { AxiosResponse } from "axios";
 
 function TransactionTableItem({
   amount,
@@ -86,7 +88,11 @@ export const TransactionTable = async ({ date }: { date: string }) => {
       },
     }
   );
-  const transactions: Transaction[] = await raw.json();
+  const transactionsRes = await raw.json();
+  if (raw.status >= 400) {
+    throw new Error(transactionsRes.message);
+  }
+  const transactions: Transaction[] = transactionsRes.data;
 
   return (
     <div className="overflow-hidden rounded-lg border border-gray-200 shadow-md">

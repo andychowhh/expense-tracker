@@ -1,19 +1,32 @@
 import { NextRequest, NextResponse } from "next/server";
+import { AxiosError } from "axios";
 import axios from "../axios";
 import { AxiosResponse } from "axios";
 import { Transaction } from "../../../types";
 
+interface Error {
+  message: string[];
+  statusCode: number;
+}
+
 export async function GET(request: NextRequest) {
   const url = new URL(request.url);
   const date = url.searchParams.get("date");
-  const transactionsRes: AxiosResponse<Transaction[]> = await axios.get(
-    `/transactions`,
-    {
-      params: {
-        date,
-      },
-    }
-  );
 
-  return NextResponse.json(transactionsRes.data);
+  try {
+    const transactionsRes: AxiosResponse<Transaction[]> = await axios.get(
+      `/transactions`,
+      {
+        params: {
+          date,
+        },
+      }
+    );
+
+    return NextResponse.json({ data: transactionsRes.data }, { status: 200 });
+  } catch (error) {
+    const axiosError = error as AxiosError<Error>;
+    const { message, statusCode } = axiosError?.response?.data ?? {};
+    return NextResponse.json({ message: message }, { status: statusCode });
+  }
 }
