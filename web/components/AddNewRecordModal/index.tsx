@@ -157,7 +157,8 @@ export function AddNewRecordModal({ isOpen, onClose }: AddNewRecordModalProp) {
                         name="paymentMethod"
                         rules={{ required: true }}
                         render={({ field }) => (
-                          <button
+                          // TODO - autofocus won't work for amount input if using button tag here
+                          <div
                             className="flex flex-col items-center bg-gray-100 cursor-pointer px-2 py-1 min-w-[95px]"
                             onClick={(e) => {
                               e.preventDefault();
@@ -180,7 +181,7 @@ export function AddNewRecordModal({ isOpen, onClose }: AddNewRecordModalProp) {
                                 ? "Cash"
                                 : "Credit Card"}
                             </span>
-                          </button>
+                          </div>
                         )}
                       />
 
