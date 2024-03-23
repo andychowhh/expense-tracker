@@ -1,8 +1,8 @@
 import React, { Fragment, useContext } from "react";
 import Image from "next/image";
 import { Menu, Transition } from "@headlessui/react";
-
 import { UserContext } from "../../../context/UserContext";
+import { useRouter } from "next/navigation";
 
 function classNames(...classes: any) {
   return classes.filter(Boolean).join(" ");
@@ -10,6 +10,7 @@ function classNames(...classes: any) {
 
 export function ProfileDropdown() {
   const { user, setUser } = useContext(UserContext) ?? {};
+  const router = useRouter();
 
   const logout = async () => {
     await fetch("/api/auth/logout", {
@@ -18,6 +19,7 @@ export function ProfileDropdown() {
     // // TODO extract function
     // await axios.post("http://localhost:3001/auth/logout");
     setUser({});
+    router.refresh();
   };
 
   return (

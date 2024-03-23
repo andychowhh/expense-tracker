@@ -5,6 +5,7 @@ import { Navbar, SideBar } from "@/components";
 import { UserContextProvider } from "../context/UserContext";
 import { getCookie } from ".././utils";
 import "./globals.css";
+import { GuestAlert } from "@/components/GuestAlert";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -25,6 +26,7 @@ export default async function RootLayout({
       <GoogleOAuthProvider clientId={process.env.GOOGLE_CLIENT_ID ?? ""}>
         <html lang="en">
           <body className={inter.className}>
+            {!Boolean(accessToken) && <GuestAlert />}
             <Navbar />
             <div className="flex bg-gray-100">
               <SideBar />

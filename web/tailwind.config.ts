@@ -15,7 +15,8 @@ const config: Config = {
       },
       colors: {
         "success": "#C6F6D5",
-        "warning": "#FED7D7",
+        "error": "#FED7D7",
+        "warning": "#FEEBC8",
         "info": "#BEE3F8",
       },
     },

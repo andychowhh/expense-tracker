@@ -20,8 +20,8 @@ const ITEM_COLORS: Record<
     labelColor: "text-blue-600", // 50
     valueColor: "text-blue-800", // 800
   },
-  warning: {
-    backgroundColor: "bg-warning",
+  error: {
+    backgroundColor: "bg-error",
     labelColor: "text-red-600", // 100
     valueColor: "text-red-800", // 800
   },
@@ -45,7 +45,7 @@ export const Overview = () => {
       <div className="flex gap-4 mt-4">
         <OverviewItem label="Total Balance" value="12,345.67" type="info" />
         <OverviewItem label="Income" value="6,780.00" type="success" />
-        <OverviewItem label="Expenses" value="4,567.89" type="warning" />
+        <OverviewItem label="Expenses" value="4,567.89" type="error" />
       </div>
     </div>
   );
