@@ -23,7 +23,7 @@ const AddRecordButton = () => {
         <PlusCircleIcon
           className="block h-7 w-7"
           aria-hidden="true"
-          fill={null}
+          fill={''}
         />
         <div className="absolute inset-y-0 left-12 hidden items-center group-hover:flex">
           <div className="relative whitespace-nowrap rounded-md bg-white px-4 py-2 text-sm font-semibold text-gray-900 drop-shadow-lg">
