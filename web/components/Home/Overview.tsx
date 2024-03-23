@@ -43,8 +43,8 @@ export const Overview = () => {
     <div className="px-5 py-5 bg-white rounded">
       <span className="text-lg font-medium">Overview</span>
       <div className="flex gap-4 mt-4">
-        <OverviewItem label="Total Balance" value="12,345.67" type="success" />
-        <OverviewItem label="Income" value="6,780.00" type="info" />
+        <OverviewItem label="Total Balance" value="12,345.67" type="info" />
+        <OverviewItem label="Income" value="6,780.00" type="success" />
         <OverviewItem label="Expenses" value="4,567.89" type="warning" />
       </div>
     </div>
