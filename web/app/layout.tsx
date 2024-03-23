@@ -26,7 +26,7 @@ export default async function RootLayout({
       <GoogleOAuthProvider clientId={process.env.GOOGLE_CLIENT_ID ?? ""}>
         <html lang="en">
           <body className={inter.className}>
-            <GuestAlert />
+            {!Boolean(accessToken) && <GuestAlert />}
             <Navbar />
             <div className="flex bg-gray-100">
               <SideBar />
