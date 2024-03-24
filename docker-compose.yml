@@ -30,17 +30,17 @@ services:
       - ./backend://usr/src/app
       - /usr/src/app/node_modules
     command: npm run dev
-    # depends_on:
-    #   - database
+    depends_on:
+      - database
 
-  # database:
-  #   container_name: mongodb
-  #   image: mongo:6.0
-  #   restart: always
-  #   ports:
-  #     - '27017:27017'
-  #   volumes:
-  #     - './backend/data:/data/db'
-  #   environment:
-  #     MONGO_INITDB_ROOT_USERNAME: 'andychow'
-  #     MONGO_INITDB_ROOT_PASSWORD: '1234'
+  database:
+    container_name: mongodb
+    image: mongo:6.0
+    restart: always
+    ports:
+      - '27017:27017'
+    volumes:
+      - './backend/data:/data/db'
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: 'andychow'
+      MONGO_INITDB_ROOT_PASSWORD: '1234'
