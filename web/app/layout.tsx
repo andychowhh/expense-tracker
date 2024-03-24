@@ -25,9 +25,9 @@ export default async function RootLayout({
     <UserContextProvider accessToken={accessToken}>
       <GoogleOAuthProvider clientId={process.env.GOOGLE_CLIENT_ID ?? ""}>
         <html lang="en">
-          <head>
+          {/* <head>
             <meta name="referrer" content="origin" />
-          </head>
+          </head> */}
           <body className={inter.className}>
             {!Boolean(accessToken) && <GuestAlert />}
             <Navbar />
