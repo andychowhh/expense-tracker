@@ -114,17 +114,37 @@ export const TransactionTable = async ({ date }: { date: string }) => {
             ></th>
           </tr>
         </thead>
-        <tbody className="divide-y divide-gray-100 border-t border-gray-100">
-          {transactions.map(({ _id, amount, category, note, date }) => (
-            <TransactionTableItem
-              key={_id}
-              amount={amount}
-              category={category}
-              note={note}
-              date={date}
-            />
-          ))}
-        </tbody>
+        {transactions.length > 0 ? (
+          <tbody className="divide-y divide-gray-100 border-t border-gray-100">
+            {transactions.map(({ _id, amount, category, note, date }) => (
+              <TransactionTableItem
+                key={_id}
+                amount={amount}
+                category={category}
+                note={note}
+                date={date}
+              />
+            ))}
+          </tbody>
+        ) : (
+          <tbody className="divide-y divide-gray-100 border-t border-gray-100">
+            <tr>
+              <td colSpan={4}>
+                <div className="no-data inset-0 flex flex-col items-center justify-center py-28">
+                  <div className="">
+                    <Image
+                      src="/images/no-data-icon.svg"
+                      alt="no-data-icon"
+                      height={70}
+                      width={70}
+                    />
+                  </div>
+                  <div>No data</div>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        )}
       </table>
     </div>
   );
