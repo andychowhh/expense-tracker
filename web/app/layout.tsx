@@ -6,6 +6,7 @@ import { UserContextProvider } from "../context/UserContext";
 import { getCookie } from ".././utils";
 import "./globals.css";
 import { GuestAlert } from "@/components/GuestAlert";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -25,9 +26,6 @@ export default async function RootLayout({
     <UserContextProvider accessToken={accessToken}>
       <GoogleOAuthProvider clientId={process.env.GOOGLE_CLIENT_ID ?? ""}>
         <html lang="en">
-          {/* <head>
-            <meta name="referrer" content="origin" />
-          </head> */}
           <body className={inter.className}>
             {!Boolean(accessToken) && <GuestAlert />}
             <Navbar />
@@ -35,6 +33,7 @@ export default async function RootLayout({
               <SideBar />
               <main className="flex-1 px-8 h-full">{children}</main>
             </div>
+            <SpeedInsights />
           </body>
         </html>
       </GoogleOAuthProvider>

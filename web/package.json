@@ -14,6 +14,7 @@
     "@hookform/resolvers": "^3.3.4",
     "@react-oauth/google": "^0.12.1",
     "@tailwindcss/forms": "^0.5.7",
+    "@vercel/speed-insights": "^1.0.10",
     "axios": "^1.6.5",
     "beautiful-react-hooks": "^5.0.1",
     "lodash": "^4.17.21",
