@@ -15,12 +15,12 @@ export interface Transaction {
   _id: string;
   amount: number;
   category: string;
+  paymentMethod: PAYMENT_METHOD;
   date: string;
   note: string;
 }
 
 export interface SearchParams {
-  // [key: string]: string | string[] | undefined;
   [key: string]: string;
 }
 

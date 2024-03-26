@@ -1,16 +1,15 @@
 import React from "react";
-import { NextRequest, NextResponse } from "next/server";
 import Image from "next/image";
 import moment from "moment";
 import { DEFAULT_DATE_FORMAT, CATEGORIES } from "@/constants";
 import { getCookie } from "@/utils";
-import { Transaction } from "@/types";
-import { AxiosResponse } from "axios";
+import { PAYMENT_METHOD, Transaction } from "@/types";
 
 function TransactionTableItem({
   amount,
   note,
   category,
+  paymentMethod,
 }: Omit<Transaction, "_id">) {
   const categoryObj = CATEGORIES.find((c) => c.value === category);
   return (
@@ -25,12 +24,18 @@ function TransactionTableItem({
         </div>
         <div className="text-sm">
           <div className="font-medium text-gray-700">{categoryObj?.label}</div>
-          <div className="text-gray-400">Ice-Cream</div>
+          <div className="text-gray-400">{note}</div>
         </div>
       </th>
       <td className="px-6 py-4">
-        <span className="inline-flex items-center gap-1 rounded-full bg-green-50 px-2 py-1 text-xs font-semibold text-green-600">
-          Cash
+        <span
+          className={`inline-flex items-center gap-1 rounded-full px-2 py-1 text-xs font-semibold ${
+            paymentMethod === PAYMENT_METHOD.CASH
+              ? "bg-green-50 text-green-600"
+              : "bg-blue-50 text-blue-600"
+          }`}
+        >
+          {paymentMethod}
         </span>
       </td>
       <td className="px-6 py-4">CA${amount}</td>
@@ -95,7 +100,7 @@ export const TransactionTable = async ({ date }: { date: string }) => {
   const transactions: Transaction[] = transactionsRes.data;
 
   return (
-    <div className="overflow-hidden rounded-lg border border-gray-200 shadow-md">
+    <div className="overflow-scroll max-h-[635px] rounded-lg border border-gray-200 shadow-md">
       <table className="w-full border-collapse bg-white text-left text-sm text-gray-500">
         <thead className="bg-gray-50">
           <tr>
@@ -116,15 +121,18 @@ export const TransactionTable = async ({ date }: { date: string }) => {
         </thead>
         {transactions.length > 0 ? (
           <tbody className="divide-y divide-gray-100 border-t border-gray-100">
-            {transactions.map(({ _id, amount, category, note, date }) => (
-              <TransactionTableItem
-                key={_id}
-                amount={amount}
-                category={category}
-                note={note}
-                date={date}
-              />
-            ))}
+            {transactions.map(
+              ({ _id, amount, category, paymentMethod, note, date }) => (
+                <TransactionTableItem
+                  key={_id}
+                  amount={amount}
+                  category={category}
+                  paymentMethod={paymentMethod}
+                  note={note}
+                  date={date}
+                />
+              )
+            )}
           </tbody>
         ) : (
           <tbody className="divide-y divide-gray-100 border-t border-gray-100">

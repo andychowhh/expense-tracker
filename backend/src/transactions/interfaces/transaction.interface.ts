@@ -9,6 +9,9 @@ export class Transaction {
   @Prop({ required: true })
   category: string;
 
+  @Prop({ required: true })
+  paymentMethod: string;
+
   @Prop()
   note: string;
 
