@@ -18,6 +18,10 @@ export class CreateTransactionDto {
   @IsNotEmpty()
   category: string;
 
+  @IsString()
+  @IsNotEmpty()
+  paymentMethod: string;
+
   @IsDateString()
   date: string;
 

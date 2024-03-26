@@ -66,6 +66,7 @@ export function AddNewRecordModal({ isOpen, onClose }: AddNewRecordModalProp) {
     control,
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm<TransactionFormData>({
     mode: "onSubmit",
@@ -80,11 +81,20 @@ export function AddNewRecordModal({ isOpen, onClose }: AddNewRecordModalProp) {
   const addTransaction = async ({
     amount,
     category,
+    paymentMethod,
     date,
     note,
   }: TransactionFormData) => {
     try {
-      await createTransation({ amount, category, date, note, user });
+      await createTransation({
+        amount,
+        category,
+        paymentMethod,
+        date,
+        note,
+        user,
+      });
+      reset(undefined, { keepDefaultValues: true });
       onClose();
     } catch (err) {
       console.log("addTransaction Error", err);
