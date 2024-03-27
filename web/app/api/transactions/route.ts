@@ -29,7 +29,7 @@ export async function GET(request: NextRequest) {
       }
     );
 
-    return NextResponse.json({ data: transactionsRes.data }, { status: 200 });
+    return NextResponse.json({ data: transactionsRes.data }, { status: 201 });
   } catch (error) {
     const axiosError = error as AxiosError<Error>;
     const { message, statusCode } = axiosError?.response?.data ?? {};

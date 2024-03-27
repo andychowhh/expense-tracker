@@ -5,6 +5,7 @@ import moment from "moment";
 import { DEFAULT_DATE_FORMAT } from "../../constants";
 import axios from "../../app/api/axios";
 import { PAYMENT_METHOD, User } from "@/types";
+import { getErrorMessage } from "@/utils";
 
 interface TransactionFormData {
   date: Date;
@@ -36,6 +37,8 @@ export async function createTransation({
     });
     revalidateTag("transactions");
   } catch (err) {
-    console.log("createTransation", err);
+    return {
+      message: getErrorMessage(err),
+    };
   }
 }
