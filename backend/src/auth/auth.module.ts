@@ -13,7 +13,7 @@ import { jwtConstants } from './constants';
     UsersModule,
     JwtModule.register({
       global: true,
-      secret: jwtConstants.secret,
+      secret: jwtConstants.secret, // TODO Make this secret to be Env variable
       signOptions: { expiresIn: '1h' },
     }),
   ],

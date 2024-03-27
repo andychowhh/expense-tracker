@@ -14,7 +14,11 @@ export async function POST(request: NextRequest) {
   cookies().set("accessToken", loginRes.data?.accessToken as any, {
     httpOnly: true,
     maxAge: 24 * 60 * 60,
-    // sameSite: "strict",
+  });
+
+  cookies().set("refreshToken", loginRes.data?.refreshToken as any, {
+    httpOnly: true,
+    maxAge: 7 * 24 * 60 * 60, // 7 days in seconds
   });
 
   return NextResponse.json(loginRes.data, { status: 201 });

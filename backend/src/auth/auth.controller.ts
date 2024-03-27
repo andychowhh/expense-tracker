@@ -1,4 +1,12 @@
-import { Body, Response, Controller, Post, Get, Req } from '@nestjs/common';
+import {
+  Body,
+  Response,
+  Controller,
+  Post,
+  Get,
+  Req,
+  UseGuards,
+} from '@nestjs/common';
 import {
   Request as ExpressRequest,
   Response as ExpressResponse,
@@ -6,6 +14,7 @@ import {
 import { AuthService } from './auth.service';
 import { LoginDto } from './dto/login.dto';
 import { Public } from './auth.guard';
+import { RefreshJwtGuard } from './refresh.guard';
 
 @Controller('auth')
 export class AuthController {
@@ -33,7 +42,6 @@ export class AuthController {
     return res.send(201);
   }
 
-  @Public()
   @Get('me')
   async verifyToken(
     @Req() request: ExpressRequest,
@@ -46,5 +54,12 @@ export class AuthController {
     } catch (err) {
       console.log('Error on /auth/me: ', err);
     }
+  }
+
+  @Public() // Remove the accessToken check
+  @UseGuards(RefreshJwtGuard)
+  @Get('refresh')
+  async refreshToken(@Req() request: ExpressRequest) {
+    return await this.authService.refreshToken(request?.user as any); // TODO type
   }
 }

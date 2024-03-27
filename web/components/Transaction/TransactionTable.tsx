@@ -89,7 +89,9 @@ export const TransactionTable = async ({ date }: { date: string }) => {
     {
       next: { tags: ["transactions"] },
       headers: {
-        Cookie: `accessToken=${await getCookie("accessToken")}`,
+        Cookie: `accessToken=${await getCookie(
+          "accessToken"
+        )};refreshToken=${await getCookie("refreshToken")}`,
       },
     }
   );

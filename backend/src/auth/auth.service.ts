@@ -32,9 +32,15 @@ export class AuthService {
         email: email,
         _id: user._id,
       };
-      const accessToken = await this.jwtService.signAsync(userPayload);
 
-      return { accessToken, picture };
+      const [accessToken, refreshToken] = await Promise.all([
+        await this.jwtService.signAsync(userPayload),
+        await this.jwtService.signAsync(userPayload, {
+          expiresIn: '7d',
+        }),
+      ]);
+
+      return { accessToken, refreshToken, picture };
     } catch (e) {
       console.log(e);
     }
@@ -50,6 +56,25 @@ export class AuthService {
       return dbUser;
     } catch (e) {
       throw e;
+    }
+  }
+
+  async refreshToken(user: any) {
+    try {
+      const { sub, username, email, _id } = user;
+
+      const payload = { sub, username, email, _id };
+      const [accessToken, refreshToken] = await Promise.all([
+        await this.jwtService.signAsync(payload),
+        // Return the original Refresh Token
+        await this.jwtService.signAsync(payload, {
+          expiresIn: '7d',
+        }),
+      ]);
+
+      return { accessToken, refreshToken };
+    } catch (err) {
+      console.log('auth.service.ts refreshToken error', err);
     }
   }
 }
