@@ -1,6 +1,9 @@
 # Expense Tracker
 
-It's used to track your expenses and income. Functionality includes Google Authentication, adding transactions, and viewing transactions, etc.
+## Motivation
+
+I am currently using a personal finance application called Fortune City. I like its functionality and UI, but the startup time is slow.
+![](github/motivation.gif)
 
 ## Demo
 
@@ -30,6 +33,7 @@ Clone the repository and perform below actions:
 Please note that the web url and backend url would be http://localhost:3000 and http://localhost:3001
 
 ### To Build:
+
 Run `npm run build` for both web and backend repository
 
 ## Tech Stacks
