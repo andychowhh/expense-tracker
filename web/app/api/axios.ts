@@ -2,6 +2,8 @@ import axios from "axios";
 import { getCookie } from "../../utils";
 import { cookies } from "next/headers";
 
+const NO_RETRY_HEADER = "x-no-retry";
+
 const apiUrl =
   process.env.NEXT_SERVER_API_URL || process.env.NEXT_PUBLIC_API_URL;
 
@@ -29,10 +31,15 @@ instance.interceptors.response.use(
   (response) => response,
   async (error) => {
     const originalRequest = error.config;
-    // If the error status is 401 and there is no originalRequest._retry flag,
+    // If the error status is 401 and there is no NO_RETRY_HEADER flag,
     // it means the token has expired and we need to refresh it
-    if (error?.response?.status === 401 && !originalRequest._retry) {
-      originalRequest._retry = true;
+    if (error?.response?.status === 401) {
+      if (error.config.headers && error.config.headers[NO_RETRY_HEADER]) {
+        return Promise.reject(error);
+      }
+
+      originalRequest.headers ||= {};
+      originalRequest.headers[NO_RETRY_HEADER] = "true"; // string val only
 
       try {
         const response = await instance.get("/auth/refresh");
@@ -43,6 +50,7 @@ instance.interceptors.response.use(
 
         // Retry the original request with the new token
         originalRequest.headers.Cookie = `accessToken=${accessToken}`;
+        console.log("Update accessToken successfully");
         return axios(originalRequest);
       } catch (error) {
         console.log("Axios Interceptor response error", error);

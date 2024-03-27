@@ -1,4 +1,5 @@
 import {
+  BadRequestException,
   CanActivate,
   ExecutionContext,
   Injectable,
@@ -21,25 +22,18 @@ export class RefreshJwtGuard implements CanActivate {
   ) {}
 
   async canActivate(context: ExecutionContext): Promise<boolean> {
-    // const isPublic = this.reflector.getAllAndOverride<boolean>(IS_PUBLIC_KEY, [
-    //   context.getHandler(),
-    //   context.getClass(),
-    // ]);
-    // if (isPublic) {
-    //   return true;
-    // }
-
     const request = context.switchToHttp().getRequest();
     const token = this.extractTokenFromCookie(request);
-    console.log("Refresh Token", token)
+
     if (!token) {
-      throw new UnauthorizedException('Refresh Token is required!');
+      throw new BadRequestException('Refresh Token is required!');
     }
+
     try {
       const payload = await this.jwtService.verifyAsync(token, {
         secret: jwtConstants.secret, // TODO update it to env var for refresh token
       });
-      console.log('refresh payload', payload);
+
       // 💡 We're assigning the payload to the request object here
       // so that we can access it in our route handlers
       request['user'] = payload;
@@ -51,10 +45,6 @@ export class RefreshJwtGuard implements CanActivate {
   }
 
   private extractTokenFromCookie(request: Request): string | undefined {
-    // For Authorization header
-    // const [type, token] = request.headers.authorization?.split(' ') ?? [];
-    // return type === 'Bearer' ? token : undefined;
-
     return request.cookies['refreshToken'];
   }
 }

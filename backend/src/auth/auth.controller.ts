@@ -15,6 +15,8 @@ import { AuthService } from './auth.service';
 import { LoginDto } from './dto/login.dto';
 import { Public } from './auth.guard';
 import { RefreshJwtGuard } from './refresh.guard';
+import { User } from '../users/decorator/user.decorator';
+import { UserPayload } from '../users/interfaces/user.interface';
 
 @Controller('auth')
 export class AuthController {
@@ -24,13 +26,6 @@ export class AuthController {
   @Post('google-login')
   async login(@Body() loginDto: LoginDto, @Response() res: ExpressResponse) {
     const loginRes = await this.authService.goolgeLoginIn(loginDto.token);
-
-    res.cookie('accessToken', loginRes?.accessToken, {
-      expires: new Date(new Date().getTime() + 1 * 60 * 60 * 1000), // 1 hr
-      sameSite: 'strict',
-      httpOnly: true,
-    });
-
     return res.send(loginRes);
   }
 
@@ -48,8 +43,7 @@ export class AuthController {
     @Response() res: ExpressResponse,
   ) {
     try {
-      // TODO fix type
-      const token = request.cookies['accessToken'];
+      const token: string = request.cookies['accessToken'];
       return res.send(await this.authService.getUserByJwt(token));
     } catch (err) {
       console.log('Error on /auth/me: ', err);
@@ -59,7 +53,8 @@ export class AuthController {
   @Public() // Remove the accessToken check
   @UseGuards(RefreshJwtGuard)
   @Get('refresh')
-  async refreshToken(@Req() request: ExpressRequest) {
-    return await this.authService.refreshToken(request?.user as any); // TODO type
+  async refreshToken(@User() user: UserPayload) {
+    console.log('refreshing jwt Token');
+    return await this.authService.refreshToken(user);
   }
 }
