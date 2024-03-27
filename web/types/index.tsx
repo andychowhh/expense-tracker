@@ -29,3 +29,9 @@ export enum PAYMENT_METHOD {
   CASH = "CASH",
   CREDIT_CARD = "CREDIT_CARD",
 }
+
+export interface DefaultResponse<T> {
+  success: boolean;
+  message?: string;
+  data?: T;
+}

@@ -17,30 +17,26 @@ export function UserContextProvider({
   accessToken: string;
   children: ReactNode;
 }) {
-  // TODO Remove
-  // const user = await axios.get("http://backend:3001/auth/me", {
-  //   params: {
-  //     jwtToken: await getCookie("accessToken"),
-  //   },
-  // });
-
   useEffect(() => {
     async function fetchUserProfile() {
       try {
         const userProfileRaw = await fetch(`/api/auth/me`);
         const userRes = await userProfileRaw.json();
-        setUser(userRes);
+        if (!userRes.success) {
+          return;
+        }
+        setUser(userRes.data);
       } catch (err) {
-        console.log("Contexterr", err);
+        console.log("fetchUserProfile error", err);
       }
     }
     fetchUserProfile();
   }, [accessToken]);
 
-  const [user, setUser] = useState<User>({});
+  const [user, setUser] = useState<User>();
 
   return (
-    <UserContext.Provider value={{ user, setUser }}>
+    <UserContext.Provider value={{ user: user as User, setUser }}>
       {children}
     </UserContext.Provider>
   );
