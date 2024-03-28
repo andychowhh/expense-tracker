@@ -6,12 +6,13 @@ import { Model } from 'mongoose';
 import { Transaction } from './interfaces/transaction.interface';
 import { CreateTransactionDto } from './dto/create-transaction.dto';
 import moment from 'moment';
+import { UserPayload } from '../users/interfaces/user.interface';
 
 @Injectable({ scope: Scope.REQUEST })
 export class TransactionsService {
   constructor(
     @InjectModel('Transaction') private transactionModel: Model<Transaction>,
-    @Inject(REQUEST) private request: Request & { user: any }, //TODO Typing for user
+    @Inject(REQUEST) private request: Request & { user: UserPayload },
   ) {}
 
   async getTransactionsByDate() {
@@ -30,7 +31,10 @@ export class TransactionsService {
   }
 
   async createTransaction(createTransactionDto: CreateTransactionDto) {
-    const createTransaction = new this.transactionModel(createTransactionDto);
+    const createTransaction = new this.transactionModel({
+      ...createTransactionDto,
+      user: this.request.user,
+    });
     return createTransaction.save();
   }
 }
