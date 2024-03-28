@@ -3,7 +3,8 @@
 ## Motivation
 
 I am currently using a personal finance application called Fortune City. I like its functionality and UI, but the startup time is slow.
-![](github/motivation.gif)
+
+<img src="github/motivation.gif" width="200" height="320">
 
 ## Demo
 
@@ -11,10 +12,10 @@ I am currently using a personal finance application called Fortune City. I like 
 
 ## Functionalities
 
-| Functionality    | To Do | In Progress|Completed|
-| --------- | ------- | --------- | ------- |
-| Google Login/Logout     | | | &check;|
-| Add/View Transactions     | | | &check;|
+|     Functionality     | To Do | In Progress | Completed |
+| :-------------------: | :---: | :---------: | :-------: |
+|  Google Login/Logout  |       |             |     ✓     |
+| Add/View Transactions |       |             |     ✓     |
 
 ## Architecture
 
