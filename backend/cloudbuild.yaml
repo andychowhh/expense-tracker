@@ -23,11 +23,8 @@ steps:
         --image gcr.io/expense-tracker-410901/backend:$COMMIT_SHA
         --region us-central1
         --set-secrets=MONGODB_CONNECTION_STRING=MONGODB_CONNECTION_STRING:1
+        --set-secrets=JWT_SECRET=JWT_SECRET:1
         ',
       ]
 images:
   - gcr.io/expense-tracker-410901/backend:$COMMIT_SHA
-# availableSecrets:
-#   secretManager:
-#     - versionName: projects/expense-tracker-410901/secrets/MONGODB_CONNECTION_STRING/versions/1
-#       env: 'SECRET_MONGODB_CONNECTION_STRING'
