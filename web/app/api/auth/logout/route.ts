@@ -8,6 +8,7 @@ export async function POST(request: NextRequest) {
   // await axios.post("http://backend:3001/auth/logout");
 
   cookies().delete("accessToken");
+  cookies().delete("refreshToken");
 
   return NextResponse.json({ status: 201 });
 }

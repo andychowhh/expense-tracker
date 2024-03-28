@@ -9,6 +9,7 @@ export interface User {
   email: string;
   picture: string;
   accessToken?: string;
+  refreshToken?: string;
 }
 
 export interface Transaction {
@@ -27,4 +28,10 @@ export interface SearchParams {
 export enum PAYMENT_METHOD {
   CASH = "CASH",
   CREDIT_CARD = "CREDIT_CARD",
+}
+
+export interface DefaultResponse<T> {
+  success: boolean;
+  message?: string;
+  data?: T;
 }

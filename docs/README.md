@@ -8,6 +8,8 @@ This file contains the reference I use when creating new features
 
 [HTTP-Only Cookie for NextJS Route](https://medium.com/@adimuhamadfirmansyah/next-js-x-express-using-http-only-cookie-jwt-and-refresh-token-for-api-secure-authentication-and-b7ee46ac4da3)
 
+[Handling JWT Access and Refresh Token using Axios in React App](https://blog.theashishmaurya.me/handling-jwt-access-and-refresh-token-using-axios-in-react-app)
+
 ## NestJS
 
 [Nest.js cookie based JWT authentication](https://tigran.tech/nestjs-cookie-based-jwt-authentication/)

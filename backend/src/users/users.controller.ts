@@ -1,6 +1,6 @@
 import { Request, Controller, Get } from '@nestjs/common';
 import { UsersService } from './users.service';
-import { Public } from '../auth/auth.guard';
+import { Public } from '../auth/guards/auth.guard';
 import { Request as ExpressRequest } from 'express';
 
 // Update the route here

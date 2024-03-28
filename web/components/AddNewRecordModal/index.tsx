@@ -86,7 +86,7 @@ export function AddNewRecordModal({ isOpen, onClose }: AddNewRecordModalProp) {
     note,
   }: TransactionFormData) => {
     try {
-      await createTransation({
+      const res = await createTransation({
         amount,
         category,
         paymentMethod,
@@ -94,6 +94,11 @@ export function AddNewRecordModal({ isOpen, onClose }: AddNewRecordModalProp) {
         note,
         user,
       });
+      if (res?.message) {
+        // Show Toast
+        console.log(res?.message);
+        return;
+      }
       reset(undefined, { keepDefaultValues: true });
       onClose();
     } catch (err) {

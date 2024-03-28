@@ -20,3 +20,10 @@ export class User {
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);
+
+export interface UserPayload {
+  _id: string;
+  sub: string;
+  username: string;
+  email: string;
+}

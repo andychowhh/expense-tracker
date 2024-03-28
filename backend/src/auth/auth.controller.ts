@@ -1,11 +1,22 @@
-import { Body, Response, Controller, Post, Get, Req } from '@nestjs/common';
+import {
+  Body,
+  Response,
+  Controller,
+  Post,
+  Get,
+  Req,
+  UseGuards,
+} from '@nestjs/common';
 import {
   Request as ExpressRequest,
   Response as ExpressResponse,
 } from 'express';
 import { AuthService } from './auth.service';
 import { LoginDto } from './dto/login.dto';
-import { Public } from './auth.guard';
+import { Public } from './guards/auth.guard';
+import { RefreshJwtGuard } from './guards/refresh.guard';
+import { User } from '../users/decorator/user.decorator';
+import { UserPayload } from '../users/interfaces/user.interface';
 
 @Controller('auth')
 export class AuthController {
@@ -15,13 +26,6 @@ export class AuthController {
   @Post('google-login')
   async login(@Body() loginDto: LoginDto, @Response() res: ExpressResponse) {
     const loginRes = await this.authService.goolgeLoginIn(loginDto.token);
-
-    res.cookie('accessToken', loginRes?.accessToken, {
-      expires: new Date(new Date().getTime() + 1 * 60 * 60 * 1000), // 1 hr
-      sameSite: 'strict',
-      httpOnly: true,
-    });
-
     return res.send(loginRes);
   }
 
@@ -33,18 +37,24 @@ export class AuthController {
     return res.send(201);
   }
 
-  @Public()
   @Get('me')
   async verifyToken(
     @Req() request: ExpressRequest,
     @Response() res: ExpressResponse,
   ) {
     try {
-      // TODO fix type
-      const token = request.cookies['accessToken'];
+      const token: string = request.cookies['accessToken'];
       return res.send(await this.authService.getUserByJwt(token));
     } catch (err) {
       console.log('Error on /auth/me: ', err);
     }
+  }
+
+  @Public() // Remove the accessToken check
+  @UseGuards(RefreshJwtGuard)
+  @Get('refresh')
+  async refreshToken(@User() user: UserPayload) {
+    console.log('refreshing jwt Token');
+    return await this.authService.refreshToken(user);
   }
 }
