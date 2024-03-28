@@ -13,8 +13,8 @@ import {
 } from 'express';
 import { AuthService } from './auth.service';
 import { LoginDto } from './dto/login.dto';
-import { Public } from './auth.guard';
-import { RefreshJwtGuard } from './refresh.guard';
+import { Public } from './guards/auth.guard';
+import { RefreshJwtGuard } from './guards/refresh.guard';
 import { User } from '../users/decorator/user.decorator';
 import { UserPayload } from '../users/interfaces/user.interface';
 

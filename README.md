@@ -9,6 +9,13 @@ I am currently using a personal finance application called Fortune City. I like 
 
 [**Try out the demo!**](https://expense-tracker-six-blush.vercel.app/)
 
+## Functionalities
+
+| Functionality    | To Do | In Progress|Completed|
+| --------- | ------- | --------- | ------- |
+| Google Login/Logout     | | | &check;|
+| Add/View Transactions     | | | &check;|
+
 ## Architecture
 
 ### Local
@@ -38,13 +45,30 @@ Run `npm run build` for both web and backend repository
 
 ## Tech Stacks
 
-### Framework and Language
+### Frontend
 
 - NextJS
-- NestJS
-- Typescript
-
-### Component/CSS Libraries
-
 - Tailwind CSS
 - Headless UI
+
+### Backend
+
+- NestJS
+
+### Database
+
+- MongoDB
+- Mongoose
+
+### Containerization
+
+- Docker
+
+### Cloud
+
+GCP is used in this project, services including
+
+- Cloud Build
+- Cloud Run
+- Artifact Registry
+- Secret Manager
