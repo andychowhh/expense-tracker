@@ -5,16 +5,8 @@ import {
   IsDateString,
   IsOptional,
 } from 'class-validator';
-import { Types } from 'mongoose';
 
 export class CreateTransactionDto {
-  @ApiProperty({
-    description: 'User ID',
-  })
-  @IsString()
-  @IsNotEmpty()
-  user: Types.ObjectId;
-
   @ApiProperty({
     type: Number,
     description: 'Amount',

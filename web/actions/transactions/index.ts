@@ -13,7 +13,6 @@ interface TransactionFormData {
   paymentMethod: PAYMENT_METHOD;
   amount: number;
   note: string;
-  user: User | undefined;
 }
 
 export async function createTransation({
@@ -22,13 +21,10 @@ export async function createTransation({
   paymentMethod,
   date,
   note,
-  user,
 }: TransactionFormData) {
-  if (!user) return;
-  console.log({ user, amount, category, paymentMethod, date, note });
+  console.log({ amount, category, paymentMethod, date, note });
   try {
     await axios.post(`/transactions`, {
-      user: user ? user._id : "",
       amount,
       category,
       paymentMethod,

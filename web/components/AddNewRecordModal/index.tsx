@@ -92,7 +92,6 @@ export function AddNewRecordModal({ isOpen, onClose }: AddNewRecordModalProp) {
         paymentMethod,
         date,
         note,
-        user,
       });
       if (res?.message) {
         // Show Toast
