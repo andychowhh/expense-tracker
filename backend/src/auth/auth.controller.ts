@@ -17,13 +17,15 @@ import { Public } from './guards/auth.guard';
 import { RefreshJwtGuard } from './guards/refresh.guard';
 import { User } from '../users/decorator/user.decorator';
 import { UserPayload } from '../users/interfaces/user.interface';
+import { ApiBody } from '@nestjs/swagger';
 
 @Controller('auth')
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
-  @Public()
   @Post('google-login')
+  @Public()
+  @ApiBody({ type: LoginDto })
   async login(@Body() loginDto: LoginDto, @Response() res: ExpressResponse) {
     const loginRes = await this.authService.goolgeLoginIn(loginDto.token);
     return res.send(loginRes);
@@ -50,9 +52,9 @@ export class AuthController {
     }
   }
 
+  @Get('refresh')
   @Public() // Remove the accessToken check
   @UseGuards(RefreshJwtGuard)
-  @Get('refresh')
   async refreshToken(@User() user: UserPayload) {
     console.log('refreshing jwt Token');
     return await this.authService.refreshToken(user);

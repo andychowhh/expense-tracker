@@ -24,6 +24,7 @@ async function bootstrap() {
     .setTitle('Swagger APIs')
     .setDescription('All apis for expense trackers are listed below')
     .setVersion('1.0')
+    .addCookieAuth()
     .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, document);

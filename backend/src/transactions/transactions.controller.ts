@@ -1,6 +1,7 @@
 import { Controller, Post, Body, Get } from '@nestjs/common';
 import { CreateTransactionDto } from './dto/create-transaction.dto';
 import { TransactionsService } from './transactions.service';
+import { ApiBody } from '@nestjs/swagger';
 
 @Controller('transactions')
 export class TransactionsController {
@@ -12,6 +13,7 @@ export class TransactionsController {
   }
 
   @Post()
+  @ApiBody({ type: CreateTransactionDto })
   async createTransaction(@Body() body: CreateTransactionDto) {
     return this.transactionService.createTransaction(body);
   }

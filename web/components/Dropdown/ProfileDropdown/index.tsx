@@ -31,8 +31,9 @@ export function ProfileDropdown() {
           <div className="h-8 w-8 rounded-full relative">
             <Image
               src={user ? user.picture : ""}
-              alt=""
-              fill={true}
+              alt="user icon"
+              height={32}
+              width={32}
               objectFit="cover"
               className="rounded-full"
             />
