@@ -37,4 +37,8 @@ export class TransactionsService {
     });
     return createTransaction.save();
   }
+
+  async deleteTransaction(id: string) {
+    return this.transactionModel.findByIdAndDelete(id);
+  }
 }
