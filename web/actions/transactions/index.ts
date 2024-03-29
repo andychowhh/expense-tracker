@@ -38,3 +38,14 @@ export async function createTransation({
     };
   }
 }
+
+export async function deleteTransation(id: string) {
+  try {
+    await axios.delete(`/transactions/${id}`);
+    revalidateTag("transactions");
+  } catch (err) {
+    return {
+      message: getErrorMessage(err),
+    };
+  }
+}
