@@ -4,16 +4,8 @@ import { revalidateTag } from "next/cache";
 import moment from "moment";
 import { DEFAULT_DATE_FORMAT } from "../../constants";
 import axios from "../../app/api/axios";
-import { PAYMENT_METHOD, User } from "@/types";
+import { Transaction } from "@/types";
 import { getErrorMessage } from "@/utils";
-
-interface TransactionFormData {
-  date: Date;
-  category: string;
-  paymentMethod: PAYMENT_METHOD;
-  amount: number;
-  note: string;
-}
 
 export async function createTransation({
   amount,
@@ -21,7 +13,7 @@ export async function createTransation({
   paymentMethod,
   date,
   note,
-}: TransactionFormData) {
+}: Omit<Transaction, "_id">) {
   console.log({ amount, category, paymentMethod, date, note });
   try {
     await axios.post(`/transactions`, {
@@ -34,6 +26,7 @@ export async function createTransation({
     revalidateTag("transactions");
   } catch (err) {
     return {
+      success: false,
       message: getErrorMessage(err),
     };
   }

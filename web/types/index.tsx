@@ -21,6 +21,11 @@ export interface Transaction {
   note: string;
 }
 
+export enum TRANSACTION_MODAL_ACTION {
+  "ADD_TRANSACTION" = "ADD_TRANSACTION",
+  "EDIT_TRANSACTION" = "EDIT_TRANSACTION",
+}
+
 export interface SearchParams {
   [key: string]: string;
 }
