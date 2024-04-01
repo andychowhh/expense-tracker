@@ -84,6 +84,7 @@ export function TransactionModal({
     note,
   }: TransactionFormData) => {
     try {
+      // TODO React-Hook-Form dirty field for update transaction
       const res = await onSubmit({
         amount,
         category,
