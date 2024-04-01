@@ -1,6 +1,9 @@
 export const getErrorMessage = (error: unknown): string => {
   let message: string;
-  if (error instanceof Error) {
+  // TODO fix typing
+  if (error?.response?.data?.message) {
+    message = error.response.data.message;
+  } else if (error instanceof Error) {
     message = error.message;
   } else if (error && typeof error === "object" && "message" in error) {
     message = String(error.message);

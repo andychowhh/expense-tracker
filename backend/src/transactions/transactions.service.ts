@@ -7,6 +7,7 @@ import { Transaction } from './interfaces/transaction.interface';
 import { CreateTransactionDto } from './dto/create-transaction.dto';
 import moment from 'moment';
 import { UserPayload } from '../users/interfaces/user.interface';
+import { UpdateTransactionDto } from './dto/update-transaction.dto';
 
 @Injectable({ scope: Scope.REQUEST })
 export class TransactionsService {
@@ -40,5 +41,11 @@ export class TransactionsService {
 
   async deleteTransaction(id: string) {
     return this.transactionModel.findByIdAndDelete(id);
+  }
+
+  async updateTransaction(id: string, patchObj: UpdateTransactionDto) {
+    return this.transactionModel.findByIdAndUpdate({ _id: id }, patchObj, {
+      new: true,
+    });
   }
 }
