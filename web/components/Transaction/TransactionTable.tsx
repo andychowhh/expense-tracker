@@ -1,15 +1,14 @@
 import React from "react";
 import Image from "next/image";
-import moment from "moment";
-import { DEFAULT_DATE_FORMAT } from "@/constants";
 import { getCookie } from "@/utils";
 import { Transaction } from "@/types";
 import { TransactionTableItem } from "./TransactionTableItem";
+import { formatDate } from "@/utils/date";
 
 export const TransactionTable = async ({ date }: { date: string }) => {
   const raw = await fetch(
     `${process.env.NEXT_PUBLIC_WEB_URL}/api/transactions?date=${
-      date ? date : moment().format(DEFAULT_DATE_FORMAT)
+      date ? date : formatDate(new Date())
     }`,
     {
       next: { tags: ["transactions"] },

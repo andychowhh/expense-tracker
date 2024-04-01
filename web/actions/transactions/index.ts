@@ -14,13 +14,12 @@ export async function createTransation({
   date,
   note,
 }: Omit<Transaction, "_id">) {
-  console.log({ amount, category, paymentMethod, date, note });
   try {
     await axios.post(`/transactions`, {
       amount,
       category,
       paymentMethod,
-      date: moment(date).format(DEFAULT_DATE_FORMAT),
+      date,
       note,
     });
     revalidateTag("transactions");
@@ -55,7 +54,6 @@ export async function updateTransation(
     });
     revalidateTag("transactions");
   } catch (err) {
-    // console.log("csss", err.response.data);
     return {
       success: false,
       message: getErrorMessage(err),
