@@ -6,6 +6,7 @@ import { PAYMENT_METHOD, Transaction } from "@/types";
 import { CATEGORIES } from "@/constants";
 import { deleteTransation, updateTransation } from "@/actions/transactions";
 import { TransactionModal } from "../TransactionModal";
+import { toLocalDate } from "@/utils/date";
 
 export const TransactionTableItem = ({
   _id,
@@ -17,6 +18,7 @@ export const TransactionTableItem = ({
 }: Transaction) => {
   const [isTransactionModalOpen, toggleIsTransactionModalOpen] = useToggle();
   const categoryObj = CATEGORIES.find((c) => c.value === category);
+
   return (
     <>
       <TransactionModal
@@ -25,7 +27,7 @@ export const TransactionTableItem = ({
           note,
           category,
           paymentMethod,
-          date: new Date(date),
+          date: toLocalDate(date),
         }}
         isOpen={isTransactionModalOpen}
         onClose={toggleIsTransactionModalOpen}

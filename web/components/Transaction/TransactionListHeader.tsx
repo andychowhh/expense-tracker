@@ -1,19 +1,22 @@
 "use client";
 
 import React from "react";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import DatePicker from "react-datepicker";
 import { Controller, useForm } from "react-hook-form";
 import moment from "moment";
-import { DEFAULT_DATE_FORMAT } from "../../constants";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/solid";
 import "react-datepicker/dist/react-datepicker.css";
+import { formatDate } from "@/utils/date";
 
 interface FormInput {
   date: Date;
 }
 
 export const TransactionListHeader = () => {
+  const searchParams = useSearchParams();
+  const dateParam = searchParams.get("date");
+
   const {
     control,
     watch,
@@ -21,18 +24,18 @@ export const TransactionListHeader = () => {
     formState: { errors },
   } = useForm<FormInput>({
     defaultValues: {
-      date: new Date(),
+      date: dateParam ? new Date(dateParam) : new Date(),
     },
   });
   const date = watch("date");
   const { push } = useRouter();
 
   const updateDateQueryParam = (date: Date) => {
-    push(`/transactions?date=${moment(date).format(DEFAULT_DATE_FORMAT)}`);
+    push(`/transactions?date=${formatDate(date)}`);
   };
 
   return (
-    <div className="flex justify-between items-center py-3 px-5">
+    <div className="flex justify-center items-center py-3 px-5">
       <div className="invisible">CA$0</div>
       <div className="flex gap-5">
         <button
@@ -63,9 +66,9 @@ export const TransactionListHeader = () => {
               }}
               customInput={
                 <div className="w-29 cursor-pointer rounded-md bg-indigo-600 px-3.5 py-2 text-sm text-center font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
-                  {moment(field.value).isSame(moment(), "day")
+                  {formatDate(field.value) === formatDate(new Date())
                     ? "Today"
-                    : moment(field.value).format(DEFAULT_DATE_FORMAT)}
+                    : formatDate(field.value)}
                 </div>
               }
             />
@@ -86,7 +89,6 @@ export const TransactionListHeader = () => {
           />
         </button>
       </div>
-      <div>CA$0</div>
     </div>
   );
 };

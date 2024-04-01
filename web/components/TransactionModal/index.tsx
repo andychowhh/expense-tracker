@@ -10,16 +10,16 @@ import { string, number, date } from "yup";
 import { CurrencyDollarIcon, CreditCardIcon } from "@heroicons/react/24/solid";
 import AutosizeInput from "react-input-autosize";
 
-import { CategorySelectGrid } from "@/components";
-import { CATEGORIES, DEFAULT_DATE_FORMAT } from "@/constants";
+import { CategorySelectGrid } from "../CategorySelectGrid";
+import { CATEGORIES } from "@/constants";
 import { PAYMENT_METHOD, Transaction } from "@/types";
 
 import "react-datepicker/dist/react-datepicker.css";
 import { UserContext } from "../../context/UserContext";
-import moment from "moment";
 import { isEmpty } from "lodash";
 import { SubmitButton } from "./SubmitButton";
 import { DefaultResponse } from "@/types";
+import { formatDate } from "@/utils/date";
 
 export interface TransactionFormData {
   date: Date;
@@ -89,7 +89,7 @@ export function TransactionModal({
         amount,
         category,
         paymentMethod,
-        date: date.toString(),
+        date: formatDate(date),
         note,
       });
       if (res?.message) {
@@ -157,9 +157,7 @@ export function TransactionModal({
                               maxDate={new Date()}
                               customInput={
                                 <span className="border rounded-3xl bg-gray-200 py-1 px-2 hover:cursor-pointer">
-                                  {moment(field.value).format(
-                                    DEFAULT_DATE_FORMAT
-                                  )}
+                                  {formatDate(field.value)}
                                 </span>
                               }
                               onChange={(date) => field.onChange(date)}

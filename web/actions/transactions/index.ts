@@ -1,8 +1,6 @@
 "use server";
 
 import { revalidateTag } from "next/cache";
-import moment from "moment";
-import { DEFAULT_DATE_FORMAT } from "../../constants";
 import axios from "../../app/api/axios";
 import { Transaction } from "@/types";
 import { getErrorMessage } from "@/utils";
@@ -14,13 +12,12 @@ export async function createTransation({
   date,
   note,
 }: Omit<Transaction, "_id">) {
-  console.log({ amount, category, paymentMethod, date, note });
   try {
     await axios.post(`/transactions`, {
       amount,
       category,
       paymentMethod,
-      date: moment(date).format(DEFAULT_DATE_FORMAT),
+      date,
       note,
     });
     revalidateTag("transactions");
@@ -49,13 +46,9 @@ export async function updateTransation(
   payload: Partial<Transaction>
 ) {
   try {
-    await axios.patch(`/transactions/${id}`, {
-      ...payload,
-      date: moment(payload?.date).format(DEFAULT_DATE_FORMAT),
-    });
+    await axios.patch(`/transactions/${id}`, payload);
     revalidateTag("transactions");
   } catch (err) {
-    // console.log("csss", err.response.data);
     return {
       success: false,
       message: getErrorMessage(err),
