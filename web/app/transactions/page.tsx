@@ -9,7 +9,7 @@ export default function TransactionsPage({
   searchParams?: { date?: string };
 }) {
   return (
-    <div className="m-3 mt-0">
+    <div className="flex flex-col items-center m-auto mt-0 max-w-7xl">
       <TransactionListHeader />
       <TransactionTable date={searchParams?.date ?? ""} />
     </div>

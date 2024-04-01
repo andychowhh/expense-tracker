@@ -15,7 +15,7 @@ I am currently using a personal finance application called Fortune City. I like 
 |     Functionality     | To Do | In Progress | Completed |
 | :-------------------: | :---: | :---------: | :-------: |
 |  Google Login/Logout  |       |             |     ✓     |
-| Add/View Transactions |       |             |     ✓     |
+| Add/Edit/Delete/View Transactions |       |             |     ✓     |
 
 ## Architecture
 

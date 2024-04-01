@@ -26,7 +26,7 @@ export const TransactionTable = async ({ date }: { date: string }) => {
   const transactions: Transaction[] = transactionsRes.data;
 
   return (
-    <div className="overflow-scroll max-h-[635px] rounded-lg border border-gray-200 shadow-md">
+    <div className="overflow-scroll max-h-[635px] rounded-lg border border-gray-200 shadow-md w-full">
       <table className="w-full border-collapse bg-white text-left text-sm text-gray-500">
         <thead className="bg-gray-50">
           <tr>
