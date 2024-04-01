@@ -38,6 +38,26 @@ export async function deleteTransation(id: string) {
     revalidateTag("transactions");
   } catch (err) {
     return {
+      success: false,
+      message: getErrorMessage(err),
+    };
+  }
+}
+
+export async function updateTransation(
+  id: string,
+  payload: Partial<Transaction>
+) {
+  try {
+    await axios.patch(`/transactions/${id}`, {
+      ...payload,
+      date: moment(payload?.date).format(DEFAULT_DATE_FORMAT),
+    });
+    revalidateTag("transactions");
+  } catch (err) {
+    // console.log("csss", err.response.data);
+    return {
+      success: false,
       message: getErrorMessage(err),
     };
   }

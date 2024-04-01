@@ -3,7 +3,7 @@
 import { PlusCircleIcon } from "@heroicons/react/24/solid";
 import useToggle from "beautiful-react-hooks/useToggle";
 import { TransactionModal } from "../TransactionModal";
-import { TRANSACTION_MODAL_ACTION, Transaction } from "@/types";
+import { Transaction } from "@/types";
 import { createTransation } from "@/actions/transactions";
 
 export const AddTransactionButton = () => {
@@ -11,10 +11,12 @@ export const AddTransactionButton = () => {
   return (
     <>
       <TransactionModal
-        action={TRANSACTION_MODAL_ACTION.ADD_TRANSACTION}
+        defaultValues={null}
         isOpen={isAddNewRecordModalOpen}
         onClose={toggleAddNewRecordModal}
-        onSubmit={async (props: Transaction) => await createTransation(props)}
+        onSubmit={async (props: Omit<Transaction, "_id">) =>
+          await createTransation(props)
+        }
       />
       <button
         className={`group relative rounded-xl p-2 text-blue-600 hover:bg-gray-50`}

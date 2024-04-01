@@ -12,7 +12,7 @@ import AutosizeInput from "react-input-autosize";
 
 import { CategorySelectGrid } from "@/components";
 import { CATEGORIES, DEFAULT_DATE_FORMAT } from "@/constants";
-import { PAYMENT_METHOD, TRANSACTION_MODAL_ACTION, Transaction } from "@/types";
+import { PAYMENT_METHOD, Transaction } from "@/types";
 
 import "react-datepicker/dist/react-datepicker.css";
 import { UserContext } from "../../context/UserContext";
@@ -30,8 +30,7 @@ export interface TransactionFormData {
 }
 
 interface TransactionModalProp {
-  action: TRANSACTION_MODAL_ACTION;
-  defaultValues?: TransactionFormData;
+  defaultValues?: TransactionFormData | null;
   isOpen: boolean;
   onClose: () => void;
   onSubmit: (
@@ -51,7 +50,6 @@ const schema = yup.object({
 });
 
 export function TransactionModal({
-  action,
   defaultValues,
   isOpen,
   onClose,
@@ -68,11 +66,14 @@ export function TransactionModal({
   } = useForm<TransactionFormData>({
     mode: "onSubmit",
     resolver: yupResolver(schema),
-    defaultValues: defaultValues ?? {
-      date: new Date(),
-      paymentMethod: PAYMENT_METHOD.CASH,
-      category: CATEGORIES[0].value,
-    },
+    defaultValues:
+      defaultValues === null
+        ? {
+            date: new Date(),
+            paymentMethod: PAYMENT_METHOD.CASH,
+            category: CATEGORIES[0].value,
+          }
+        : defaultValues,
   });
 
   const addTransaction = async ({
@@ -104,7 +105,14 @@ export function TransactionModal({
 
   return (
     <Transition.Root show={isOpen} as={Fragment}>
-      <Dialog as="div" className="relative z-10 bg-red-100" onClose={onClose}>
+      <Dialog
+        as="div"
+        className="relative z-10 bg-red-100"
+        onClose={() => {
+          reset();
+          onClose();
+        }}
+      >
         <Transition.Child
           as={Fragment}
           enter="ease-out duration-300"
