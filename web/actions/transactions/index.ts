@@ -1,8 +1,6 @@
 "use server";
 
 import { revalidateTag } from "next/cache";
-import moment from "moment";
-import { DEFAULT_DATE_FORMAT } from "../../constants";
 import axios from "../../app/api/axios";
 import { Transaction } from "@/types";
 import { getErrorMessage } from "@/utils";
@@ -48,10 +46,7 @@ export async function updateTransation(
   payload: Partial<Transaction>
 ) {
   try {
-    await axios.patch(`/transactions/${id}`, {
-      ...payload,
-      date: moment(payload?.date).format(DEFAULT_DATE_FORMAT),
-    });
+    await axios.patch(`/transactions/${id}`, payload);
     revalidateTag("transactions");
   } catch (err) {
     return {
