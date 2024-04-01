@@ -10,7 +10,7 @@ import { string, number, date } from "yup";
 import { CurrencyDollarIcon, CreditCardIcon } from "@heroicons/react/24/solid";
 import AutosizeInput from "react-input-autosize";
 
-import { CategorySelectGrid } from "@/components";
+import { CategorySelectGrid } from "../CategorySelectGrid";
 import { CATEGORIES } from "@/constants";
 import { PAYMENT_METHOD, Transaction } from "@/types";
 
