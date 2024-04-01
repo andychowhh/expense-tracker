@@ -7,7 +7,7 @@ import { Controller, useForm } from "react-hook-form";
 import moment from "moment";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/solid";
 import "react-datepicker/dist/react-datepicker.css";
-import { formatDate } from "@/utils/date";
+import { formatDate, toLocalDate } from "@/utils/date";
 
 interface FormInput {
   date: Date;
@@ -16,7 +16,6 @@ interface FormInput {
 export const TransactionListHeader = () => {
   const searchParams = useSearchParams();
   const dateParam = searchParams.get("date");
-
   const {
     control,
     watch,
@@ -24,7 +23,7 @@ export const TransactionListHeader = () => {
     formState: { errors },
   } = useForm<FormInput>({
     defaultValues: {
-      date: dateParam ? new Date(dateParam) : new Date(),
+      date: dateParam ? toLocalDate(dateParam) : new Date(),
     },
   });
   const date = watch("date");
@@ -33,16 +32,6 @@ export const TransactionListHeader = () => {
   const updateDateQueryParam = (date: Date) => {
     push(`/transactions?date=${formatDate(date)}`);
   };
-
-  // https://nextjs.org/docs/messages/react-hydration-error#solution-1-using-useeffect-to-run-on-the-client-only
-  const [isClient, setIsClient] = useState(false);
-  useEffect(() => {
-    setIsClient(true);
-  }, []);
-
-  if (!isClient) {
-    return null;
-  }
 
   return (
     <div className="flex justify-center items-center py-3 px-5">
