@@ -1,7 +1,7 @@
 "use client";
 
-import React from "react";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import React, { useEffect, useState } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
 import DatePicker from "react-datepicker";
 import { Controller, useForm } from "react-hook-form";
 import moment from "moment";
@@ -33,6 +33,16 @@ export const TransactionListHeader = () => {
   const updateDateQueryParam = (date: Date) => {
     push(`/transactions?date=${formatDate(date)}`);
   };
+
+  // https://nextjs.org/docs/messages/react-hydration-error#solution-1-using-useeffect-to-run-on-the-client-only
+  const [isClient, setIsClient] = useState(false);
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
+  if (!isClient) {
+    return null;
+  }
 
   return (
     <div className="flex justify-center items-center py-3 px-5">
