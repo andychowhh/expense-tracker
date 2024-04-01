@@ -38,7 +38,6 @@ export const Navbar = () => {
                   <LoginButton />
                 ) : (
                   <>
-                    {/* <AddNewRecordButton /> */}
                     <ProfileDropdown />
                   </>
                 )}
