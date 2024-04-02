@@ -14,10 +14,10 @@ export default async function ExpenseChartSection() {
   );
 
   return (
-    <div className="bg-white">
-      <div className="flex justify-between border-b p-4">
+    <div className="bg-white basis-2/5 rounded">
+      <div className="flex justify-between items-center border-b p-4">
         <Dropdown />
-        <div className="text-red-600">{`-CA$${totalAmount}`}</div>
+        <div className="text-red-600 bg-gray-100 rounded-md px-3 py-1">{`-CA$${totalAmount}`}</div>
       </div>
       <div className="p-4">
         <CategoryDonutChart data={formattedSummaryData} />
