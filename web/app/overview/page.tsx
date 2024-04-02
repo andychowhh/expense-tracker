@@ -9,8 +9,16 @@ export default async function OverviewPage() {
   const formattedSummaryData = formatSummaryData(summaryData);
 
   return (
-    <div className="w-6/12 h-6/12">
-      <CategoryDonutChart data={formattedSummaryData} />
+    <div className="w-3/12 h-3/12">
+      <div className="bg-white">
+        <div className="flex justify-between border-b p-4">
+          <div>Expense</div>
+          <div>-CA$2453.44</div>
+        </div>
+        <div className="p-4">
+          <CategoryDonutChart data={formattedSummaryData} />
+        </div>
+      </div>
     </div>
   );
 }
