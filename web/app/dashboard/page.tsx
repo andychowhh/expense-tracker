@@ -1,8 +1,12 @@
-import { LineChartCard, FinancialInsight } from "@/components/Dashboard";
+import {
+  LineChartCard,
+  FinancialInsight,
+  CategoryPieChart,
+} from "@/components/Dashboard";
 
 export default async function DashboardPage() {
   return (
-    <div className="flex flex-col mt-3 gap-3">
+    <div className="flex flex-col mt-3 gap-4">
       <div className="flex justify-between">
         <div className="flex flex-col">
           <div>Good Morning, Andy</div>
@@ -19,8 +23,9 @@ export default async function DashboardPage() {
         <LineChartCard label="Total Balance" amount={10000} />
       </div>
 
-      <div>
+      <div className="flex justify-between gap-4">
         <FinancialInsight />
+        <CategoryPieChart />
       </div>
 
       <div>
