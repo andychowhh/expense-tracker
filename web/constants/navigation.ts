@@ -1,4 +1,8 @@
-import { HomeIcon, CurrencyYenIcon } from "@heroicons/react/24/solid";
+import {
+  HomeIcon,
+  CurrencyDollarIcon,
+  Squares2X2Icon,
+} from "@heroicons/react/24/solid";
 
 interface Navigation {
   id: string;
@@ -10,9 +14,15 @@ interface Navigation {
 export const navigation: Navigation[] = [
   { id: "home", name: "Home", href: "/", IconComponent: HomeIcon },
   {
+    id: "dashboard",
+    name: "Dashboard",
+    href: "/dashboard",
+    IconComponent: Squares2X2Icon,
+  },
+  {
     id: "transactions",
     name: "Transactions",
     href: "/transactions",
-    IconComponent: CurrencyYenIcon,
+    IconComponent: CurrencyDollarIcon,
   },
 ];

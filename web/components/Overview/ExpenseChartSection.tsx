@@ -5,7 +5,7 @@ import { CategoryDonutChart } from "./CategoryDonutChart";
 import Dropdown from "@/components/Dropdown/Dropdown";
 
 export default async function ExpenseChartSection() {
-  const summaryData: Summary[] = (await axios.get("/summary?period=2024-03"))
+  const summaryData: Summary[] = (await axios.get("/summary?period=2024-04"))
     .data;
   const formattedSummaryData = formatSummaryData(summaryData);
   const totalAmount = summaryData.reduce(
