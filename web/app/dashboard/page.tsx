@@ -1,8 +1,8 @@
-import { LineChartCard } from "@/components/Dashboard";
+import { LineChartCard, FinancialInsight } from "@/components/Dashboard";
 
 export default async function DashboardPage() {
   return (
-    <div className="flex flex-col mt-3">
+    <div className="flex flex-col mt-3 gap-3">
       <div className="flex justify-between">
         <div className="flex flex-col">
           <div>Good Morning, Andy</div>
@@ -20,8 +20,7 @@ export default async function DashboardPage() {
       </div>
 
       <div>
-        <div>Financial insights</div>
-        <div>chart</div>
+        <FinancialInsight />
       </div>
 
       <div>
