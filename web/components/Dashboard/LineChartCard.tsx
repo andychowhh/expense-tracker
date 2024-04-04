@@ -45,7 +45,7 @@ export const LineChartCard = ({
             width={730}
             height={250}
             data={data}
-            margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
+            margin={{ top: 5, left: 20, bottom: 5 }}
           >
             <Area
               type="linear"

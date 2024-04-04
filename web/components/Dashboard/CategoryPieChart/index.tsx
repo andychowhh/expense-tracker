@@ -14,7 +14,7 @@ const data = [
 
 export const CategoryPieChart = () => {
   return (
-    <div className="flex-1 flex flex-col items-center bg-white rounded p-4">
+    <div className="basis-1/3 flex flex-col items-center bg-white rounded p-4">
       <div className="w-full flex justify-center">
         <TransactionTypeTab />
       </div>
