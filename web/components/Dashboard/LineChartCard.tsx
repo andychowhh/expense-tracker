@@ -1,93 +1,68 @@
 "use client";
 
 import React from "react";
-import { AreaChart, Area, ResponsiveContainer } from "recharts";
-import { ArrowUpIcon } from "@heroicons/react/24/solid";
-
-const data = [
-  {
-    name: "Page A",
-    uv: 4000,
-    pv: 2400,
-    amt: 2400,
-  },
-  {
-    name: "Page B",
-    uv: 3000,
-    pv: 1398,
-    amt: 2210,
-  },
-  {
-    name: "Page C",
-    uv: 2000,
-    pv: 9800,
-    amt: 2290,
-  },
-  {
-    name: "Page D",
-    uv: 2780,
-    pv: 3908,
-    amt: 2000,
-  },
-  {
-    name: "Page E",
-    uv: 1890,
-    pv: 4800,
-    amt: 2181,
-  },
-  {
-    name: "Page F",
-    uv: 2390,
-    pv: 3800,
-    amt: 2500,
-  },
-  {
-    name: "Page G",
-    uv: 3490,
-    pv: 4300,
-    amt: 2100,
-  },
-];
+import { Area, ResponsiveContainer, Line, ComposedChart } from "recharts";
+import { ArrowUpIcon, ArrowDownIcon } from "@heroicons/react/24/solid";
+import { ChartData } from "@/types";
 
 interface LineChartCardProp {
+  data: ChartData[];
   label: string;
-  amount: number;
+  priceChange: number;
 }
 
-export const LineChartCard = ({ label, amount }: LineChartCardProp) => {
+export const LineChartCard = ({
+  label,
+  data,
+  priceChange,
+}: LineChartCardProp) => {
+  const amount = data.reduce((total, item) => (total += item.pv), 0);
   return (
     <div className="flex flex-1 bg-white rounded p-3">
       <div className="flex flex-col flex-1">
-        <div className="text-sm">{label}</div>
+        <div className="text-sm text-gray-400">{label}</div>
         <div className="text-2xl bold">{`$${amount}`}</div>
       </div>
 
       <div className="flex-1">
-        <div className="flex justify-end items-center">
+        <div
+          className={`flex justify-end items-center ${
+            priceChange > 0 ? "text-green-700" : "text-red-500"
+          }`}
+        >
           <div>
-            <ArrowUpIcon height={16} width={16} />
+            {priceChange > 0 ? (
+              <ArrowUpIcon height={18} width={18} />
+            ) : (
+              <ArrowDownIcon height={18} width={18} />
+            )}
           </div>
-          <div>+5%</div>
+          <div>{`${priceChange}%`}</div>
         </div>
+
         <ResponsiveContainer width="100%" height={200}>
-          <AreaChart
-            width={200}
-            height={200}
+          <ComposedChart
+            width={730}
+            height={250}
             data={data}
-            syncId="anyId"
-            margin={{
-              top: 10,
-              left: 0,
-              bottom: 0,
-            }}
+            margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
           >
             <Area
-              type="monotone"
+              type="linear"
               dataKey="pv"
-              stroke="#82ca9d"
-              fill="#82ca9d"
+              stroke="none"
+              fill={
+                priceChange > 0 ? "rgb(141, 218, 171)" : "rgb(254, 178, 178)"
+              }
             />
-          </AreaChart>
+            <Line
+              type="linear"
+              stroke={priceChange > 0 ? "rgb(21, 128, 61)" : "rgb(239, 68, 68)"}
+              strokeWidth={2}
+              dot={false}
+              dataKey="pv"
+            />
+          </ComposedChart>
         </ResponsiveContainer>
       </div>
     </div>

@@ -3,6 +3,7 @@ import {
   FinancialInsight,
   CategoryPieChart,
 } from "@/components/Dashboard";
+import { MOCK_TOTAL_EXPENSE, MOCK_TOTAL_INCOME } from "@/constants/dashboard";
 
 export default async function DashboardPage() {
   return (
@@ -18,9 +19,21 @@ export default async function DashboardPage() {
       </div>
 
       <div className="flex justify-between gap-4">
-        <LineChartCard label="Total Balance" amount={30000} />
-        <LineChartCard label="Income" amount={40000} />
-        <LineChartCard label="Total Balance" amount={10000} />
+        <LineChartCard
+          label="Total Balance"
+          data={MOCK_TOTAL_EXPENSE}
+          priceChange={-5}
+        />
+        <LineChartCard
+          label="Income"
+          data={MOCK_TOTAL_INCOME}
+          priceChange={20}
+        />
+        <LineChartCard
+          label="Expense"
+          data={MOCK_TOTAL_EXPENSE}
+          priceChange={-10}
+        />
       </div>
 
       <div className="flex justify-between gap-4">

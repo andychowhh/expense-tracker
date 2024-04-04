@@ -47,3 +47,8 @@ export interface Summary {
 }
 
 export type CategoryDonutChartData = ChartData<"doughnut", number[], unknown>;
+
+export interface ChartData {
+  name: string;
+  pv: number;
+}
