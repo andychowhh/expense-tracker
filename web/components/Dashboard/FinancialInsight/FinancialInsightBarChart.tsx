@@ -24,7 +24,7 @@ export const FinancialInsightBarChart = ({
     <ResponsiveContainer width="100%" height="100%">
       <BarChart
         width={800}
-        height={300}
+        height={250}
         data={data}
         margin={{
           top: 5,

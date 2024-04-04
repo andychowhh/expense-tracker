@@ -5,7 +5,7 @@ interface FinancialInsightProp {}
 
 export const FinancialInsight = ({}: FinancialInsightProp) => {
   return (
-    <div className="basis-2/3 flex flex-col bg-white p-3">
+    <div className="basis-2/3 flex flex-col bg-white p-4 h-full">
       <div className="flex justify-between">
         <div className="font-semibold">Financial Insights</div>
         <div>Dropdown</div>

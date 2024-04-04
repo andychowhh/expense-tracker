@@ -7,17 +7,7 @@ import { MOCK_TOTAL_EXPENSE, MOCK_TOTAL_INCOME } from "@/constants/dashboard";
 
 export default async function DashboardPage() {
   return (
-    <div className="flex flex-col mt-3 gap-4">
-      <div className="flex justify-between">
-        <div className="flex flex-col">
-          <div>Good Morning, Andy</div>
-          <div>Welcome to your financial insights</div>
-        </div>
-        <div>
-          <button>Export</button>
-        </div>
-      </div>
-
+    <div className="flex flex-col mt-3 gap-4 h-screen">
       <div className="flex justify-between gap-4">
         <LineChartCard
           label="Total Balance"
@@ -36,13 +26,9 @@ export default async function DashboardPage() {
         />
       </div>
 
-      <div className="flex justify-between gap-4">
+      <div className="flex-1 flex justify-between gap-4 max-h-96">
         <FinancialInsight />
         <CategoryPieChart />
-      </div>
-
-      <div>
-        <div>Recent Transactions</div>
       </div>
     </div>
   );

@@ -1,6 +1,6 @@
 "use client";
 
-import { PieChart, Pie, Sector, Cell, ResponsiveContainer } from "recharts";
+import { PieChart, Pie, ResponsiveContainer } from "recharts";
 import { TransactionTypeTab } from "./TransactionTypeTab";
 
 const data = [
@@ -18,18 +18,20 @@ export const CategoryPieChart = () => {
       <div className="w-full flex justify-center">
         <TransactionTypeTab />
       </div>
-      <div className="flex-1">
-        <PieChart width={400} height={400}>
-          <Pie
-            dataKey="value"
-            data={data}
-            cx="50%"
-            cy="50%"
-            outerRadius={80}
-            fill="#8884d8"
-            label
-          />
-        </PieChart>
+      <div className="flex-1 w-full h-full">
+        <ResponsiveContainer width="100%" height="100%">
+          <PieChart width={400} height={400}>
+            <Pie
+              dataKey="value"
+              data={data}
+              cx="50%"
+              cy="50%"
+              outerRadius={80}
+              fill="#8884d8"
+              label
+            />
+          </PieChart>
+        </ResponsiveContainer>
       </div>
     </div>
   );
