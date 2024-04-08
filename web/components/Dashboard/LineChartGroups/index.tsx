@@ -1,5 +1,5 @@
 import React from "react";
-import { LineChartCard } from "..";
+import { LineChartCard } from "./LineChartCard";
 import axios from "@/app/api/axios";
 import { Summary } from "@/types";
 
