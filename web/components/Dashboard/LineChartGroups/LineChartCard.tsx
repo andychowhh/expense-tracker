@@ -12,12 +12,14 @@ interface LineChartCardProp {
 
 export const LineChartCard = ({ label, data }: LineChartCardProp) => {
   const amount = data.reduce((total, item) => (total += item.pv), 0);
-  const priceChange = parseFloat(
-    (
-      (data[data.length - 1].pv - data[data.length - 2].pv) /
-      data[data.length - 2].pv
-    ).toFixed(2)
-  );
+  const priceChange =
+    parseFloat(
+      (
+        ((data[data.length - 1].pv - data[data.length - 2].pv) /
+          data[data.length - 2].pv) *
+        100
+      ).toFixed(0)
+    ) / 100;
 
   return (
     <div className="flex flex-1 bg-white rounded p-3">
@@ -29,15 +31,16 @@ export const LineChartCard = ({ label, data }: LineChartCardProp) => {
       <div className="flex-1">
         <div
           className={`flex justify-end items-center ${
-            priceChange > 0 ? "text-green-700" : "text-red-500"
+            priceChange >= 0 ? "text-green-700" : "text-red-500"
           }`}
         >
           <div>
-            {priceChange > 0 ? (
-              <ArrowUpIcon height={18} width={18} />
-            ) : (
-              <ArrowDownIcon height={18} width={18} />
-            )}
+            {priceChange !== 0 &&
+              (priceChange > 0 ? (
+                <ArrowUpIcon height={18} width={18} />
+              ) : (
+                <ArrowDownIcon height={18} width={18} />
+              ))}
           </div>
           <div>{`${priceChange}%`}</div>
         </div>
@@ -54,12 +57,14 @@ export const LineChartCard = ({ label, data }: LineChartCardProp) => {
               dataKey="pv"
               stroke="none"
               fill={
-                priceChange > 0 ? "rgb(141, 218, 171)" : "rgb(254, 178, 178)"
+                priceChange >= 0 ? "rgb(141, 218, 171)" : "rgb(254, 178, 178)"
               }
             />
             <Line
               type="linear"
-              stroke={priceChange > 0 ? "rgb(21, 128, 61)" : "rgb(239, 68, 68)"}
+              stroke={
+                priceChange >= 0 ? "rgb(21, 128, 61)" : "rgb(239, 68, 68)"
+              }
               strokeWidth={2}
               dot={false}
               dataKey="pv"

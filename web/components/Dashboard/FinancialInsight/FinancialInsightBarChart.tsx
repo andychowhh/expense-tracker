@@ -14,7 +14,7 @@ import {
 } from "recharts";
 
 interface FinancialInsightBarChartProp {
-  data: ChartData[];
+  data: { name: string; income: number; expense: number }[];
 }
 
 export const FinancialInsightBarChart = ({
@@ -33,7 +33,7 @@ export const FinancialInsightBarChart = ({
           bottom: 5,
         }}
       >
-        <CartesianGrid strokeDasharray="3 3" vertical={false}/>
+        <CartesianGrid strokeDasharray="3 3" vertical={false} />
         <XAxis dataKey="name" />
         <YAxis />
         <Tooltip />

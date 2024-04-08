@@ -1,9 +1,13 @@
+import { Summary } from "@/types";
 import { FinancialInsightBarChart } from "./FinancialInsightBarChart";
-import { MOCK_MONTHLY_OVERVIEW } from "@/constants/dashboard";
+import axios from "@/app/api/axios";
 
 interface FinancialInsightProp {}
 
-export const FinancialInsight = ({}: FinancialInsightProp) => {
+export const FinancialInsight = async ({}: FinancialInsightProp) => {
+  const summary = await axios.get("/summary/last-year");
+  const summaryData: Summary[] = summary.data;
+
   return (
     <div className="basis-2/3 flex flex-col bg-white p-4 h-full">
       <div className="flex justify-between">
@@ -11,7 +15,11 @@ export const FinancialInsight = ({}: FinancialInsightProp) => {
         <div>Dropdown</div>
       </div>
       <div className="flex-1 mt-2">
-        <FinancialInsightBarChart data={MOCK_MONTHLY_OVERVIEW} />
+        <FinancialInsightBarChart
+          data={summaryData.map(({ _id, totalIncome, totalExpense }) => {
+            return { name: _id, income: totalIncome, expense: totalExpense };
+          })}
+        />
       </div>
     </div>
   );
