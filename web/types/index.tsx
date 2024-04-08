@@ -40,12 +40,6 @@ export interface DefaultResponse<T> {
   data?: T;
 }
 
-export interface Summary {
-  _id: string;
-  totalAmount: number;
-  count: number;
-}
-
 export type CategoryDonutChartData = ChartData<"doughnut", number[], unknown>;
 
 export interface ChartData {

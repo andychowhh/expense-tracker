@@ -2,10 +2,17 @@ import React from "react";
 import { LineChartCard } from "./LineChartCard";
 import axios from "@/app/api/axios";
 import { Summary } from "@/types";
+import { isGuest } from "@/utils";
+import { MOCK_LAST_YEAR_SUMMARY } from "@/constants/dashboard";
 
 export const LineChartGroups = async () => {
-  const summary = await axios.get("/summary/last-year");
-  const summaryData: Summary[] = summary.data;
+  let summaryData: Summary[] = [];
+  if (isGuest()) {
+    summaryData = MOCK_LAST_YEAR_SUMMARY;
+  } else {
+    const summary = await axios.get("/summary/last-year");
+    summaryData = summary.data;
+  }
 
   const balance = summaryData.map(({ _id, totalIncome, totalExpense }) => {
     return { name: _id, pv: totalIncome - totalExpense };
