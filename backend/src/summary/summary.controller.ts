@@ -11,6 +11,6 @@ export class SummaryController {
   // }
   @Get('last-year')
   findAll() {
-    return this.summaryService.findLastYearOverview();
+    return this.summaryService.findLastYearSummary();
   }
 }

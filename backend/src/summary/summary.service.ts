@@ -35,7 +35,7 @@ export class SummaryService {
   //   ]);
   // }
 
-  async findLastYearOverview() {
+  async findLastYearSummary() {
     const today = new Date();
     const twelveMonthsAgo = new Date(today.getFullYear() - 1, 4, 1);
 
