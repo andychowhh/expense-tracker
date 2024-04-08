@@ -5,8 +5,12 @@ import { SummaryService } from './summary.service';
 export class SummaryController {
   constructor(private readonly summaryService: SummaryService) {}
 
-  @Get()
-  findAll(@Query('type') type: string, @Query('period') period: string) {
-    return this.summaryService.findAll(type, period);
+  // @Get()
+  // findAll(@Query('type') type: string, @Query('period') period: string) {
+  //   return this.summaryService.findAll(type, period);
+  // }
+  @Get('last-year')
+  findAll() {
+    return this.summaryService.findLastYearOverview();
   }
 }
