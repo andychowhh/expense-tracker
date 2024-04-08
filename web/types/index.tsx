@@ -50,6 +50,12 @@ export type CategoryDonutChartData = ChartData<"doughnut", number[], unknown>;
 
 export interface ChartData {
   name: string;
-  pv?: number;
+  pv: number;
   uv?: number;
+}
+
+export interface Summary {
+  _id: string;
+  totalExpense: number;
+  totalIncome: number;
 }

@@ -8,15 +8,17 @@ import { ChartData } from "@/types";
 interface LineChartCardProp {
   data: ChartData[];
   label: string;
-  priceChange: number;
 }
 
-export const LineChartCard = ({
-  label,
-  data,
-  priceChange,
-}: LineChartCardProp) => {
+export const LineChartCard = ({ label, data }: LineChartCardProp) => {
   const amount = data.reduce((total, item) => (total += item.pv), 0);
+  const priceChange = parseFloat(
+    (
+      (data[data.length - 1].pv - data[data.length - 2].pv) /
+      data[data.length - 2].pv
+    ).toFixed(2)
+  );
+
   return (
     <div className="flex flex-1 bg-white rounded p-3">
       <div className="flex flex-col flex-1">
