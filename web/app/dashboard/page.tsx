@@ -1,10 +1,8 @@
 import {
-  LineChartCard,
   FinancialInsight,
   CategoryPieChart,
   LineChartGroups,
 } from "@/components/Dashboard";
-import { MOCK_TOTAL_EXPENSE, MOCK_TOTAL_INCOME } from "@/constants/dashboard";
 
 export default async function DashboardPage() {
   return (

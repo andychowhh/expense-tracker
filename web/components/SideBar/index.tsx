@@ -10,7 +10,7 @@ export const SideBar = () => {
   const pathname = usePathname();
 
   return (
-    <div className="hidden bg-gray-100 text-gray-900 sm:flex">
+    <div className="hidden bg-gray-100 text-gray-900 md:flex">
       <aside className="flex h-screen px-7 flex-col items-center border-r border-neutral-200 bg-white">
         <nav className="flex flex-1 flex-col items-center gap-y-6 pt-10">
           {navigation.map(({ id, name, href, IconComponent }) => (

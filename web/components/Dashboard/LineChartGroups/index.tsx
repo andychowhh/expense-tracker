@@ -4,6 +4,7 @@ import axios from "@/app/api/axios";
 import { Summary } from "@/types";
 import { isGuest } from "@/utils";
 import { MOCK_LAST_YEAR_SUMMARY } from "@/constants/dashboard";
+import { LineChartCarousell } from "./LineChartCarousell";
 
 export const LineChartGroups = async () => {
   let summaryData: Summary[] = [];
@@ -25,10 +26,19 @@ export const LineChartGroups = async () => {
   });
 
   return (
-    <div className="flex justify-between gap-4">
-      <LineChartCard label="Total Balance" data={balance} />
-      <LineChartCard label="Income" data={income} />
-      <LineChartCard label="Expense" data={expense} />
-    </div>
+    <>
+      <div className="hidden md:flex justify-between gap-4">
+        <LineChartCard label="Total Balance" data={balance} />
+        <LineChartCard label="Income" data={income} />
+        <LineChartCard label="Expense" data={expense} />
+      </div>
+      <div className="md:hidden w-full">
+        <LineChartCarousell>
+          <LineChartCard label="Total Balance" data={balance} />
+          <LineChartCard label="Income" data={income} />
+          <LineChartCard label="Expense" data={expense} />
+        </LineChartCarousell>
+      </div>
+    </>
   );
 };
