@@ -1,11 +1,11 @@
 import React, { useContext } from "react";
 import { CredentialResponse, GoogleLogin } from "@react-oauth/google";
 import { UserContext } from "../../../context/UserContext";
-import { useRouter } from 'next/navigation'
+import { useRouter } from "next/navigation";
 
 export function LoginButton() {
   const { setUser } = useContext(UserContext) ?? {};
-  const router = useRouter()
+  const router = useRouter();
 
   const login = async (credentialResponse: CredentialResponse) => {
     const loginRes = await fetch("/api/auth/google-login", {
@@ -19,7 +19,7 @@ export function LoginButton() {
     if (setUser) {
       setUser(user ? user : {});
     }
-    router.refresh()
+    router.refresh();
   };
 
   return (
