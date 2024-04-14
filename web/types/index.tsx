@@ -1,7 +1,11 @@
+import { ChartData } from "chart.js";
+
 export interface Category {
   label: string;
   value: string;
   avatar: string;
+  backgroundColor: string;
+  borderColor: string;
 }
 
 export interface User {
@@ -34,4 +38,18 @@ export interface DefaultResponse<T> {
   success: boolean;
   message?: string;
   data?: T;
+}
+
+export type CategoryDonutChartData = ChartData<"doughnut", number[], unknown>;
+
+export interface ChartData {
+  name: string;
+  pv: number;
+  uv?: number;
+}
+
+export interface Summary {
+  _id: string;
+  totalExpense: number;
+  totalIncome: number;
 }
