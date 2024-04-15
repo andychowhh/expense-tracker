@@ -11,7 +11,7 @@ export default async function DashboardPage() {
         <LineChartGroups />
       </div>
 
-      <div className="flex-1 flex justify-between gap-4 max-h-96">
+      <div className="flex-1 flex flex-col justify-between gap-4 max-h-96 md:flex-row">
         <FinancialInsight />
         <CategoryPieChart />
       </div>
