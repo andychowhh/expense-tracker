@@ -12,7 +12,7 @@ interface Navigation {
 }
 
 export const navigation: Navigation[] = [
-  { id: "home", name: "Home", href: "/", IconComponent: HomeIcon },
+  // { id: "home", name: "Home", href: "/", IconComponent: HomeIcon },
   {
     id: "dashboard",
     name: "Dashboard",

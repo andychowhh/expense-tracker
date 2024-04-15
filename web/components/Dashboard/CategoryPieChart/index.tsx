@@ -14,11 +14,11 @@ const data = [
 
 export const CategoryPieChart = () => {
   return (
-    <div className="basis-1/3 flex flex-col items-center bg-white rounded p-4">
+    <div className="flex-1 flex flex-col items-center bg-white rounded p-4 lg:basis-1/3">
       <div className="w-full flex justify-center">
         <TransactionTypeTab />
       </div>
-      <div className="flex-1 w-full h-full">
+      <div className="flex-auto w-full h-auto">
         <ResponsiveContainer width="100%" height="100%">
           <PieChart width={400} height={400}>
             <Pie
