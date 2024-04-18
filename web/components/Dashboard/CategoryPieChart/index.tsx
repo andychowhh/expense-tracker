@@ -1,23 +1,26 @@
 "use client";
 
-import { PieChart, Pie, ResponsiveContainer } from "recharts";
+import { PieChart, Pie, ResponsiveContainer, Sector } from "recharts";
 import { TransactionTypeTab } from "./TransactionTypeTab";
+import { useState } from "react";
+
+const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042"];
 
 const data = [
-  { name: "Group A", value: 400 },
-  { name: "Group B", value: 300 },
-  { name: "Group C", value: 300 },
-  { name: "Group D", value: 200 },
-  { name: "Group E", value: 278 },
-  { name: "Group F", value: 189 },
+  { name: "Food", value: 600, fill: "#0088FE" },
+  { name: "Snack", value: 200, fill: "#00C49F" },
+  { name: "Medical", value: 300, fill: "#FFBB28" },
+  { name: "Transportation", value: 300, fill: "#FF8042" },
+  { name: "Entertainment", value: 278, fill: "#800080" },
+  { name: "Income", value: 189, fill: "#32CD32" },
 ];
 
 export const CategoryPieChart = () => {
   return (
     <div className="flex-1 flex flex-col items-center bg-white rounded p-4 lg:basis-1/3">
-      <div className="w-full flex justify-center">
+      {/* <div className="w-full flex justify-center">
         <TransactionTypeTab />
-      </div>
+      </div> */}
       <div className="flex-auto w-full h-auto">
         <ResponsiveContainer width="100%" height="100%">
           <PieChart width={400} height={400}>
@@ -28,7 +31,10 @@ export const CategoryPieChart = () => {
               cy="50%"
               outerRadius={80}
               fill="#8884d8"
-              label
+              label={(entry) =>
+                `${entry.name}-${(entry.percent * 100).toFixed(0)}%`
+              }
+              labelLine={false}
             />
           </PieChart>
         </ResponsiveContainer>
