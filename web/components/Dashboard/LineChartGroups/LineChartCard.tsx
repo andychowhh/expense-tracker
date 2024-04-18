@@ -22,7 +22,7 @@ export const LineChartCard = ({ label, data }: LineChartCardProp) => {
     ) / 100;
 
   return (
-    <div className="flex flex-1 bg-white rounded px-3 py-3">
+    <div className="flex flex-1 bg-white rounded px-3 py-5 lg:py-3">
       <div className="flex flex-col flex-1">
         <div className="text-sm text-gray-400">{label}</div>
         <div className="text-2xl bold">{`$${amount}`}</div>
