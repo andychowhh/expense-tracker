@@ -47,3 +47,7 @@ input[type="number"] {
     box-shadow: unset;
   }
 }
+
+.react-multi-carousel-dot-list  {
+  bottom: 2px !important;
+}
