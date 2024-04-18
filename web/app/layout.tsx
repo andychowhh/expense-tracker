@@ -31,7 +31,9 @@ export default async function RootLayout({
             <Navbar />
             <div className="flex bg-gray-100 lg:h-[calc(100vh-112px)]">
               <SideBar />
-              <main className="flex-1 px-8 py-6 max-w-full">{children}</main>
+              <main className="px-4 py-4 flex-1 lg:px-8 lg:py-6 max-w-full">
+                {children}
+              </main>
             </div>
             <SpeedInsights />
           </body>

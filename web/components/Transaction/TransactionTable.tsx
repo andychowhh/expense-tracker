@@ -5,6 +5,13 @@ import { Transaction } from "@/types";
 import { TransactionTableItem } from "./TransactionTableItem";
 import { formatDate } from "@/utils/date";
 
+const TABLE_HEADERS = [
+  { label: "Category", value: "category" },
+  { label: "Payment Method", value: "paymentMethod" },
+  { label: "Amount", value: "amount" },
+  { label: "", value: "emptyHeader" },
+];
+
 export const TransactionTable = async ({ date }: { date: string }) => {
   const raw = await fetch(
     `${process.env.NEXT_PUBLIC_WEB_URL}/api/transactions?date=${
@@ -29,24 +36,16 @@ export const TransactionTable = async ({ date }: { date: string }) => {
     <div className="overflow-scroll max-h-[635px] rounded-lg border border-gray-200 shadow-md w-full">
       <table className="w-full border-collapse bg-white text-left text-sm text-gray-500">
         <thead className="bg-gray-50">
-          <tr>
-            <th scope="col" className="px-6 py-4 font-medium text-gray-900">
-              Category
-            </th>
-            <th scope="col" className="px-6 py-4 font-medium text-gray-900">
-              Payment Method
-            </th>
-            <th scope="col" className="px-6 py-4 font-medium text-gray-900">
-              Amount
-            </th>
-            <th
-              scope="col"
-              className="px-6 py-4 font-medium text-gray-900"
-            ></th>
+          <tr className="text-gray-900">
+            {TABLE_HEADERS.map(({ label, value }) => (
+              <th key={value} scope="col" className="px-3 py-3 lg:px-6 lg:py-4">
+                {label}
+              </th>
+            ))}
           </tr>
         </thead>
         {transactions.length > 0 ? (
-          <tbody className="divide-y divide-gray-100 border-t border-gray-100">
+          <tbody className="overflow-scroll divide-y divide-gray-100 border-t border-gray-100">
             {transactions.map(
               ({ _id, amount, category, paymentMethod, note, date }) => (
                 <TransactionTableItem

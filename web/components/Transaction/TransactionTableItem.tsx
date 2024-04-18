@@ -36,7 +36,7 @@ export const TransactionTableItem = ({
         }
       />
       <tr className="hover:bg-gray-50">
-        <th className="flex gap-3 px-6 py-4 font-normal text-gray-900">
+        <th className="flex gap-3 px-3 py-3 lg:px-6 lg:py-4 font-normal text-gray-900">
           <div className="relative h-10 w-10">
             <Image
               src={categoryObj?.avatar ?? ""}
@@ -51,7 +51,7 @@ export const TransactionTableItem = ({
             <div className="text-gray-400">{note}</div>
           </div>
         </th>
-        <td className="px-6 py-4">
+        <td className="px-3 py-3 lg:px-6 lg:py-4">
           <span
             className={`inline-flex items-center gap-1 rounded-full px-2 py-1 text-xs font-semibold ${
               paymentMethod === PAYMENT_METHOD.CASH
@@ -62,10 +62,11 @@ export const TransactionTableItem = ({
             {paymentMethod}
           </span>
         </td>
-        <td className="px-6 py-4">CA${amount}</td>
-        <td className="px-6 py-4">
-          <div className="flex justify-end gap-4">
+        <td className="px-3 py-3 lg:px-6 lg:py-4">CA${amount}</td>
+        <td className="px-3 py-3 lg:px-6 lg:py-4">
+          <div className="flex justify-end gap-3 lg:gap-4">
             <button
+              className="w-6 h-6"
               onClick={() => {
                 if (window.confirm("Confirm to delete?")) {
                   deleteTransation(_id);
@@ -79,7 +80,10 @@ export const TransactionTableItem = ({
                 width={24}
               />
             </button>
-            <button onClick={() => toggleIsTransactionModalOpen()}>
+            <button
+              className="w-6 h-6"
+              onClick={() => toggleIsTransactionModalOpen()}
+            >
               <Image
                 src="/images/edit-action.svg"
                 alt="edit-icon"
