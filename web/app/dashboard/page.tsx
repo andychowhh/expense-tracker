@@ -6,12 +6,12 @@ import {
 
 export default async function DashboardPage() {
   return (
-    <div className="flex flex-col mt-3 gap-4 min-h-screen">
+    <div className="flex flex-col mt-3 gap-4 h-full">
       <div>
         <LineChartGroups />
       </div>
 
-      <div className="flex-1 flex flex-col justify-between gap-4 lg:flex-row lg:max-h-96">
+      <div className="flex-1 flex flex-col justify-between gap-4 h-full lg:flex-row lg:max-h-96">
         <FinancialInsight />
         <CategoryPieChart />
       </div>
