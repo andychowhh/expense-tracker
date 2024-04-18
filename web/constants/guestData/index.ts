@@ -1,4 +1,4 @@
-import { Transaction } from "@/types";
+import { PAYMENT_METHOD, Transaction } from "@/types";
 
 export const guestTransactions: Transaction[] = [
   {
@@ -7,6 +7,7 @@ export const guestTransactions: Transaction[] = [
     category: "food",
     date: "2024-03-23",
     note: "Fried Rice",
+    paymentMethod: PAYMENT_METHOD.CASH,
   },
   {
     _id: "2",
@@ -14,6 +15,7 @@ export const guestTransactions: Transaction[] = [
     category: "snack",
     date: "2024-03-23",
     note: "Chocolate",
+    paymentMethod: PAYMENT_METHOD.CREDIT_CARD,
   },
   {
     _id: "3",
@@ -21,6 +23,7 @@ export const guestTransactions: Transaction[] = [
     category: "transportation",
     date: "2024-03-23",
     note: "Bus",
+    paymentMethod: PAYMENT_METHOD.CASH,
   },
   {
     _id: "4",
@@ -28,6 +31,7 @@ export const guestTransactions: Transaction[] = [
     category: "shopping",
     date: "2024-03-23",
     note: "Jacket",
+    paymentMethod: PAYMENT_METHOD.CASH,
   },
   {
     _id: "5",
@@ -35,5 +39,6 @@ export const guestTransactions: Transaction[] = [
     category: "entertainment",
     date: "2024-03-23",
     note: "Badminton",
+    paymentMethod: PAYMENT_METHOD.CREDIT_CARD,
   },
 ];
