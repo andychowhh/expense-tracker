@@ -26,7 +26,7 @@ export default async function RootLayout({
     <UserContextProvider accessToken={accessToken}>
       <GoogleOAuthProvider clientId={process.env.GOOGLE_CLIENT_ID ?? ""}>
         <html lang="en">
-          <body className={inter.className}>
+          <body className={[inter.className, "bg-gray-100"].join(" ")}>
             {!Boolean(accessToken) && <GuestAlert />}
             <Navbar />
             <div className="flex bg-gray-100 lg:h-[calc(100vh-112px)]">

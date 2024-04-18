@@ -19,6 +19,10 @@ const config: Config = {
         "warning": "#FEEBC8",
         "info": "#BEE3F8",
       },
+      spacing: {
+        "nav-bar": '64px',
+        "alert": '48px'
+      }
     },
   },
   plugins: [require("@tailwindcss/forms")],
