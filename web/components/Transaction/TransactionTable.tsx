@@ -4,6 +4,7 @@ import { getCookie } from "@/utils";
 import { Transaction } from "@/types";
 import { TransactionTableItem } from "./TransactionTableItem";
 import { formatDate } from "@/utils/date";
+import { TransactionListHeader } from "./TransactionListHeader";
 
 const TABLE_HEADERS = [
   { label: "Category", value: "category" },
@@ -33,9 +34,10 @@ export const TransactionTable = async ({ date }: { date: string }) => {
   const transactions: Transaction[] = transactionsRes.data;
 
   return (
-    <div className="overflow-scroll max-h-[635px] rounded-lg border border-gray-200 shadow-md w-full">
-      <table className="w-full border-collapse bg-white text-left text-sm text-gray-500">
-        <thead className="bg-gray-50">
+    <div className="overflow-scroll max-h-[635px] rounded-lg border bg-white border-gray-200 shadow-md w-full">
+      <TransactionListHeader />
+      <table className="w-full border-collapse text-left text-sm text-gray-500">
+        <thead>
           <tr className="text-gray-900">
             {TABLE_HEADERS.map(({ label, value }) => (
               <th key={value} scope="col" className="px-3 py-3 lg:px-6 lg:py-4">
