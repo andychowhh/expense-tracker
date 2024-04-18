@@ -6,7 +6,7 @@ import {
 
 export default async function DashboardPage() {
   return (
-    <div className="flex flex-col mt-3 gap-4 h-full">
+    <div className="flex flex-col gap-4 h-full">
       <div>
         <LineChartGroups />
       </div>

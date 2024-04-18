@@ -29,9 +29,9 @@ export default async function RootLayout({
           <body className={inter.className}>
             {!Boolean(accessToken) && <GuestAlert />}
             <Navbar />
-            <div className="flex bg-gray-100 h-[calc(100vh-112px)]">
+            <div className="flex bg-gray-100 lg:h-[calc(100vh-112px)]">
               <SideBar />
-              <main className="flex-1 px-8 py-3 max-w-full">{children}</main>
+              <main className="flex-1 px-8 py-6 max-w-full">{children}</main>
             </div>
             <SpeedInsights />
           </body>
