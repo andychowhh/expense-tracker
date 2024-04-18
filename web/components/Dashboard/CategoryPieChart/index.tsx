@@ -1,8 +1,6 @@
 "use client";
 
-import { PieChart, Pie, ResponsiveContainer, Sector } from "recharts";
-import { TransactionTypeTab } from "./TransactionTypeTab";
-import { useState } from "react";
+import { PieChart, Pie, ResponsiveContainer, Sector, Label } from "recharts";
 
 const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042"];
 
@@ -32,9 +30,10 @@ export const CategoryPieChart = () => {
               outerRadius={80}
               fill="#8884d8"
               label={(entry) =>
-                `${entry.name}-${(entry.percent * 100).toFixed(0)}%`
+                `${entry.name} ${(entry.percent * 100).toFixed(0)}%`
               }
               labelLine={false}
+              style={{outline: 'none'}}
             />
           </PieChart>
         </ResponsiveContainer>
