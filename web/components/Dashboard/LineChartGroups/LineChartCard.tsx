@@ -22,7 +22,7 @@ export const LineChartCard = ({ label, data }: LineChartCardProp) => {
     ) / 100;
 
   return (
-    <div className="flex flex-1 bg-white rounded px-3 py-5">
+    <div className="flex flex-1 bg-white rounded px-3 py-3">
       <div className="flex flex-col flex-1">
         <div className="text-sm text-gray-400">{label}</div>
         <div className="text-2xl bold">{`$${amount}`}</div>
@@ -45,7 +45,7 @@ export const LineChartCard = ({ label, data }: LineChartCardProp) => {
           <div>{`${priceChange}%`}</div>
         </div>
 
-        <ResponsiveContainer width="100%" height={200}>
+        <ResponsiveContainer width="100%" height={150}>
           <ComposedChart
             width={730}
             height={250}
