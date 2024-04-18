@@ -68,7 +68,7 @@ export const CategoryPieChart = () => {
       </div> */}
       <div className="flex-auto w-full h-auto">
         <ResponsiveContainer width="100%" height="100%">
-          <PieChart width={400} height={400}>
+          <PieChart width={400} height={400} style={{ outline: "none" }}>
             <Pie
               dataKey="value"
               data={data}
