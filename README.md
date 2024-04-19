@@ -19,6 +19,7 @@ I am currently using a personal finance application called Fortune City. I like 
 
 ## Publications
 [**Full Stack Development — Architecture Choices from Local to Production**](https://medium.com/javascript-in-plain-english/full-stack-development-architecture-choices-from-local-to-production-b7b2cf54370c)
+
 [**NextJS Authentication Flow — Store JWT In Cookie**](https://medium.com/javascript-in-plain-english/nextjs-authentication-flow-store-jwt-in-cookie-fa6e6c8c0dca)
 
 ## Architecture
