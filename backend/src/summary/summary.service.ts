@@ -1,39 +1,21 @@
-import { Inject, Injectable } from '@nestjs/common';
+import { BadRequestException, Inject, Injectable } from '@nestjs/common';
 import { REQUEST } from '@nestjs/core';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { Transaction } from '../transactions/interfaces/transaction.interface';
 import { UserPayload } from '../users/interfaces/user.interface';
+import moment from 'moment';
 
 @Injectable()
 export class SummaryService {
   constructor(
     @InjectModel('Transaction') private transactionModel: Model<Transaction>,
-    @Inject(REQUEST) private request: Request & { user: UserPayload },
+    @Inject(REQUEST)
+    private request: Request & {
+      user: UserPayload;
+      query: { from: string; to: string };
+    },
   ) {}
-
-  // findAll(type: string, period: string) {
-  //   const [year, month] = period.split('-'); // e.g. 2024-03
-  //   return this.transactionModel.aggregate([
-  //     {
-  //       $match: {
-  //         $expr: {
-  //           $and: [
-  //             { $eq: [{ $month: '$date' }, parseInt(month)] },
-  //             { $eq: [{ $year: '$date' }, parseInt(year)] },
-  //           ],
-  //         },
-  //       },
-  //     },
-  //     {
-  //       $group: {
-  //         _id: '$category',
-  //         totalAmount: { $sum: '$amount' },
-  //         count: { $sum: 1 },
-  //       },
-  //     },
-  //   ]);
-  // }
 
   async findLastYearSummary() {
     const today = new Date();
@@ -94,5 +76,36 @@ export class SummaryService {
       }
     }
     return results;
+  }
+
+  async findCategoriesSummary() {
+    const { from, to } = this.request.query;
+    if (!from || !to) {
+      throw new BadRequestException('Please specify the date range!');
+    }
+    const lastDayOfMonth = moment(to).endOf('month').format('YYYY-MM-DD');
+
+    const summaryResult = await this.transactionModel.aggregate([
+      {
+        $match: {
+          date: {
+            $gte: new Date(from),
+            $lte: new Date(`${lastDayOfMonth}T23:59:59.999Z`),
+          },
+        },
+      },
+      {
+        $group: {
+          _id: '$category',
+          totalAmount: {
+            $sum: '$amount',
+          },
+          // items: {
+          //   $push: '$$ROOT', // Push the original documents into the 'items' array
+          // },
+        },
+      },
+    ]);
+    return summaryResult;
   }
 }
