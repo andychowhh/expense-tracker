@@ -17,8 +17,8 @@ export const FinancialInsight = async ({}: FinancialInsightProp) => {
 
   return (
     <div className="flex-1 flex flex-col bg-white p-4 lg:basis-2/3">
-      <div className="flex">
-        <div className="font-semibold">Financial Insights</div>
+      <div className="flex justify-center">
+        <div className="font-semibold text-lg">Financial Insights</div>
       </div>
       <div className="flex-auto mt-2 h-96 lg:h-auto lg:flex-1">
         <FinancialInsightBarChart

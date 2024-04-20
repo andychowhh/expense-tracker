@@ -1,6 +1,6 @@
 import {
   FinancialInsight,
-  CategoryPieChart,
+  CategoryOverview,
   LineChartGroups,
 } from "@/components/Dashboard";
 
@@ -13,7 +13,7 @@ export default async function DashboardPage() {
 
       <div className="flex flex-col justify-between gap-4 h-full lg:flex-row">
         <FinancialInsight />
-        <CategoryPieChart />
+        <CategoryOverview />
       </div>
     </div>
   );

@@ -1,3 +1,3 @@
 export * from "./FinancialInsight";
-export * from "./CategoryPieChart";
+export * from "./CategoryOverview";
 export * from "./LineChartGroups";
