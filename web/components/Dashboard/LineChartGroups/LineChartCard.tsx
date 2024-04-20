@@ -25,7 +25,9 @@ export const LineChartCard = ({ label, data }: LineChartCardProp) => {
     <div className="flex flex-1 bg-white rounded px-3 py-5 lg:py-3">
       <div className="flex flex-col flex-1">
         <div className="text-sm text-gray-400">{label}</div>
-        <div className="text-2xl bold">{`$${amount}`}</div>
+        <div className="text-2xl bold">
+          {amount >= 0 ? `$${amount}` : `-$${Math.abs(amount)}`}
+        </div>
       </div>
 
       <div className="flex-1">
