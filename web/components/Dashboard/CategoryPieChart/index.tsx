@@ -66,6 +66,7 @@ export const CategoryPieChart = () => {
       {/* <div className="w-full flex justify-center">
         <TransactionTypeTab />
       </div> */}
+      <h1 className="font-semibold text-lg">Categories</h1>
       <div className="flex-auto w-full h-auto">
         <ResponsiveContainer width="100%" height="100%">
           <PieChart width={400} height={400} style={{ outline: "none" }}>
