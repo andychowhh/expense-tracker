@@ -47,6 +47,9 @@ export const CategoryPieChart = ({ data }: CategoryPieChartProp) => {
     const y = cy + radius * Math.sin(-midAngle * RADIAN);
 
     const imageSize = 30; // Size of the image
+    if (percent * 100 < 1) {
+      return null;
+    }
 
     return (
       <g>
@@ -69,7 +72,7 @@ export const CategoryPieChart = ({ data }: CategoryPieChartProp) => {
       </g>
     );
   };
-  
+
   return (
     <ResponsiveContainer width="100%" height="100%">
       <PieChart width={400} height={400} style={{ outline: "none" }}>
@@ -83,11 +86,7 @@ export const CategoryPieChart = ({ data }: CategoryPieChartProp) => {
           label={renderCustomizedLabel}
           labelLine={false}
           style={{ outline: "none" }}
-        >
-          {data.map((entry, index) => (
-            <Cell key={`cell-${index}`} />
-          ))}
-        </Pie>
+        />
       </PieChart>
     </ResponsiveContainer>
   );
