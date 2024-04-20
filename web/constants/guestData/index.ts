@@ -42,3 +42,18 @@ export const guestTransactions: Transaction[] = [
     paymentMethod: PAYMENT_METHOD.CREDIT_CARD,
   },
 ];
+
+export const guestCategoriesOverview = [
+  { _id: "food", totalAmount: 600 },
+  { _id: "snack", totalAmount: 200 },
+  { _id: "medical", totalAmount: 300 },
+  {
+    _id: "transportation",
+    totalAmount: 300,
+  },
+  {
+    _id: "entertainment",
+    totalAmount: 278,
+  },
+  { _id: "income", totalAmount: 189 },
+];
