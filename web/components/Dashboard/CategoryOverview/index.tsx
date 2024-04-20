@@ -20,7 +20,7 @@ export const CategoryOverview = async () => {
         <TransactionTypeTab />
       </div> */}
       <h1 className="font-semibold text-lg">Categories</h1>
-      <div className="flex-auto w-full h-auto">
+      <div className="flex-auto w-full h-96 lg:h-auto">
         <CategoryPieChart
           data={categoriesData.map(({ _id, totalAmount }) => {
             const category = CATEGORIES.find((c) => c.value === _id)!;
