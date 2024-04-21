@@ -1,8 +1,8 @@
 import React, { Fragment, useContext } from "react";
-import Image from "next/image";
 import { Menu, Transition } from "@headlessui/react";
 import { UserContext } from "../../../context/UserContext";
 import { useRouter } from "next/navigation";
+import ProfileImage from "./ProfileImage";
 
 function classNames(...classes: any) {
   return classes.filter(Boolean).join(" ");
@@ -28,16 +28,7 @@ export function ProfileDropdown() {
         <Menu.Button className="relative flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
           <span className="absolute -inset-1.5" />
           <span className="sr-only">Open user menu</span>
-          <div className="h-8 w-8 rounded-full relative">
-            <Image
-              src={user ? user.picture : ""}
-              alt="user icon"
-              height={32}
-              width={32}
-              objectFit="cover"
-              className="rounded-full"
-            />
-          </div>
+          <ProfileImage size={32} picture={user ? user.picture : ""} />
         </Menu.Button>
       </div>
       <Transition

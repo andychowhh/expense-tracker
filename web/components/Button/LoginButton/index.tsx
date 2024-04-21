@@ -23,17 +23,14 @@ export function LoginButton() {
   };
 
   return (
-    // Offset the margin from iframe
-    <div className="ml-[10px] mt-[2px]"> 
-      <GoogleLogin
-        text="signin"
-        size="large"
-        width={100}
-        onSuccess={login}
-        onError={() => {
-          console.log("Login Failed");
-        }}
-      />
-    </div>
+    <GoogleLogin
+      text="signin"
+      size="large"
+      width={100}
+      onSuccess={login}
+      onError={() => {
+        console.log("Login Failed");
+      }}
+    />
   );
 }
