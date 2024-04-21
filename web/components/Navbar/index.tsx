@@ -33,16 +33,8 @@ export const Navbar = () => {
                 />
                 <span className="text-lg font-semibold ml-2">FinTrack</span>
               </div>
-              <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-                {isEmpty(user) ? (
-                  <div className="hidden lg:block">
-                    <LoginButton />
-                  </div>
-                ) : (
-                  <>
-                    <ProfileDropdown />
-                  </>
-                )}
+              <div className="hidden absolute inset-y-0 right-0 items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0 lg:block">
+                {isEmpty(user) ? <LoginButton /> : <ProfileDropdown />}
               </div>
             </div>
           </div>
