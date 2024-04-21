@@ -140,7 +140,8 @@ export function TransactionModal({
               <Dialog.Panel className="h-screen relative transform overflow-hidden bg-white text-left shadow-xl transition-all sm:rounded-lg sm:h-auto sm:my-8 sm:w-full sm:max-w-lg">
                 <form action={handleSubmit(addTransaction)}>
                   <div className="bg-white">
-                    <div className="flex justify-center border-b py-2">
+                    <div className="flex justify-between items-center border-b py-2 px-5">
+                      <button className="invisible">X</button>
                       <Dialog.Title
                         as="h3"
                         className="text-base leading-6 text-gray-900 py-1"
@@ -168,6 +169,7 @@ export function TransactionModal({
                           )}
                         />
                       </Dialog.Title>
+                      <button onClick={() => onClose()} className="text-xl">X</button>
                     </div>
 
                     <div className="flex justify-between mt-2 py-2 px-4">

@@ -1,6 +1,5 @@
 "use client";
 
-import { ChartData } from "@/types";
 import React from "react";
 import {
   BarChart,
