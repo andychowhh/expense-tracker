@@ -10,7 +10,7 @@ function classNames(...classes: any) {
 
 export function MobilePageLinks() {
   return (
-    <div className="space-y-1 px-2 pb-3 pt-2">
+    <div className="space-y-2 px-2 pb-3 pt-2">
       {navigation.map((item) => (
         <Disclosure.Button
           key={item.name}

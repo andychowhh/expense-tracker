@@ -20,6 +20,7 @@ import { isEmpty } from "lodash";
 import { SubmitButton } from "./SubmitButton";
 import { DefaultResponse } from "@/types";
 import { formatDate } from "@/utils/date";
+import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 
 export interface TransactionFormData {
   date: Date;
@@ -141,7 +142,12 @@ export function TransactionModal({
                 <form action={handleSubmit(addTransaction)}>
                   <div className="bg-white">
                     <div className="flex justify-between items-center border-b py-2 px-5">
-                      <button className="invisible">X</button>
+                      <button className="invisible">
+                        <XMarkIcon
+                          className="block h-6 w-6"
+                          aria-hidden="true"
+                        />
+                      </button>
                       <Dialog.Title
                         as="h3"
                         className="text-base leading-6 text-gray-900 py-1"
@@ -169,7 +175,15 @@ export function TransactionModal({
                           )}
                         />
                       </Dialog.Title>
-                      <button onClick={() => onClose()} className="text-xl">X</button>
+                      <button
+                        className="text-neutral-400 hover:text-neutral-500"
+                        onClick={() => onClose()}
+                      >
+                        <XMarkIcon
+                          className="block h-6 w-6"
+                          aria-hidden="true"
+                        />
+                      </button>
                     </div>
 
                     <div className="flex justify-between mt-2 py-2 px-4">
