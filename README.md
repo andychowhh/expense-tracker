@@ -12,15 +12,18 @@ I am currently using a personal finance application called Fortune City. I like 
 
 ## Functionalities
 
-|     Functionality     | To Do | In Progress | Completed |
-| :-------------------: | :---: | :---------: | :-------: |
-|  Google Login/Logout  |       |             |     ✓     |
+|           Functionality           | To Do | In Progress | Completed |
+| :-------------------------------: | :---: | :---------: | :-------: |
+|        Google Login/Logout        |       |             |     ✓     |
 | Add/Edit/Delete/View Transactions |       |             |     ✓     |
 
 ## Publications
+
 [**Full Stack Development — Architecture Choices from Local to Production**](https://medium.com/javascript-in-plain-english/full-stack-development-architecture-choices-from-local-to-production-b7b2cf54370c)
 
 [**NextJS Authentication Flow — Store JWT In Cookie**](https://medium.com/javascript-in-plain-english/nextjs-authentication-flow-store-jwt-in-cookie-fa6e6c8c0dca)
+
+[**NextJS Rate Limiting using Vercel KV**](https://medium.com/@hohin523/nextjs-rate-limiting-using-vercel-kv-5c474466e0ea)
 
 ## Architecture
 
