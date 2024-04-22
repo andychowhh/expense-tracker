@@ -1,4 +1,4 @@
-name: Run Tests
+name: Run Frontend Tests
 
 on:
   pull_request:
@@ -6,8 +6,11 @@ on:
       - master
 
 jobs:
-  test:
+  frontend_test:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./web
 
     steps:
       - name: Checkout repository
@@ -19,7 +22,7 @@ jobs:
           node-version: "18"
 
       - name: Install dependencies
-        run: cd web && npm install --legacy-peer-deps
+        run: npm install --legacy-peer-deps
 
       - name: Run Jest tests
         run: npm test
