@@ -1,5 +1,3 @@
-# husky is disabled now - https://typicode.github.io/husky/how-to.html#for-a-gui-or-globally
-
 #!/usr/bin/env sh
 . "$(dirname -- "$0")/_/husky.sh"
 

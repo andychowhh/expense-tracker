@@ -1,16 +1,13 @@
-name: Run Frontend Tests
+name: Run Tests
 
 on:
   pull_request:
     branches:
-      - master
+      - main
 
 jobs:
-  frontend_test:
+  test:
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: ./web
 
     steps:
       - name: Checkout repository
@@ -23,9 +20,6 @@ jobs:
 
       - name: Install dependencies
         run: npm install --legacy-peer-deps
-
-      - name: Install ts-node
-        run: npm install --save-dev ts-node
 
       - name: Run Jest tests
         run: npm test
