@@ -7,3 +7,14 @@ export const formatDate = (date: Date): string => {
 export const toLocalDate = (dateStr: string): Date => {
   return moment(dateStr, "YYYY-MM-DD").toDate();
 };
+
+export const getYearMonthRangetoday = (today: Date) => {
+  const dateFormat = "YYYY-MM";
+  const fromDate = moment(today)
+    .subtract(1, "year")
+    .add(1, "month")
+    .format(dateFormat);
+  const toDate = moment(today).endOf("month").format(dateFormat);
+
+  return [fromDate, toDate];
+};
