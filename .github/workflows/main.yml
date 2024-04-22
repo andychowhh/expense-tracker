@@ -24,5 +24,8 @@ jobs:
       - name: Install dependencies
         run: npm install --legacy-peer-deps
 
+      - name: Install ts-node
+        run: npm install --save-dev ts-node
+
       - name: Run Jest tests
         run: npm test
