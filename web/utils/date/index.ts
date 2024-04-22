@@ -8,9 +8,7 @@ export const toLocalDate = (dateStr: string): Date => {
   return moment(dateStr, "YYYY-MM-DD").toDate();
 };
 
-export const getYearMonthRangetoday = (today: Date) => {
-  console.log('scss');
-  
+export const getYearMonthRangetoday = (today: Date) => {  
   const dateFormat = "YYYY-MM";
   const fromDate = moment(today)
     .subtract(1, "year")
