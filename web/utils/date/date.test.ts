@@ -23,7 +23,7 @@ describe("getYearMonthRangetoday", () => {
     const lastDateOfYear = new Date("2024-12-31");
     expect(getYearMonthRangetoday(lastDateOfYear)).toEqual([
       "2024-01",
-      "2024-1234",
+      "2024-12",
     ]);
   });
 });
