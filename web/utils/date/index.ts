@@ -9,7 +9,7 @@ export const toLocalDate = (dateStr: string): Date => {
 };
 
 export const getYearMonthRangetoday = (today: Date) => {
-  console.log('sc');
+  console.log('scss');
   
   const dateFormat = "YYYY-MM";
   const fromDate = moment(today)
