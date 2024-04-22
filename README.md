@@ -82,6 +82,10 @@ GCP is used in this project, services including
 - Artifact Registry
 - Secret Manager
 
+### CI/CD
+
+- Github Actions
+
 ### API Doc
 
 - Swagger
