@@ -1,7 +1,7 @@
 on:
   # The issue.opened event below is only needed for the "immediate" mode.
   issues:
-    types: [ opened ]
+    types: [opened]
 
 jobs:
   create_issue_branch_job:
@@ -9,11 +9,12 @@ jobs:
     steps:
       - name: Create Issue Branch
         uses: robvanderleek/create-issue-branch@main
-        openPR: true
-        branches:
-          - label: enhancement
-            prefix: feature/
-          - label: bug
-            prefix: bugfix/
+        with:   
+          openPR: true
+          branches:
+            - label: enhancement
+              prefix: feature/
+            - label: bug
+              prefix: bugfix/
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
