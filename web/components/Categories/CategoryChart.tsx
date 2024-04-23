@@ -2,22 +2,23 @@ import React from "react";
 import { CategoryPieChart } from "../Dashboard/CategoryOverview/CategoryPieChart";
 import { isGuest } from "@/utils";
 import { guestCategoriesOverview } from "@/constants/guestData";
-import moment from "moment";
 import axios from "@/app/api/axios";
 import { CATEGORIES } from "@/constants";
 import { CategoryDropdown } from "./CategoryDropdown";
-import { CategoryDatePicker } from "./CategoryDatePicker";
+import moment from "moment";
 
-export function CategoryChart() {
+export async function CategoryChart({
+  dateRange = moment().format("YYYY-MM"),
+}: {
+  dateRange: string;
+}) {
   let categoriesData: { _id: string; totalAmount: number }[] = [];
   if (isGuest()) {
     categoriesData = guestCategoriesOverview;
   } else {
-    // const lastTwelveMonths = getLastTwelveMonths(moment());
-    // const [from, to] = [lastTwelveMonths[0], lastTwelveMonths[11]];
-    // categoriesData = (
-    //   await axios.get(`/summary/categories?from=${from}&to=${to}`)
-    // ).data;
+    categoriesData = (
+      await axios.get(`/summary/categories?from=${dateRange}&to=${dateRange}`)
+    ).data;
   }
 
   return (

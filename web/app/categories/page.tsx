@@ -2,7 +2,11 @@ import { CategoryChart, CategoryDetailsTable } from "@/components/Categories";
 import { CategoryDatePicker } from "@/components/Categories/CategoryDatePicker";
 import { CategoryChartContextProvider } from "@/context/CategoryChartContext";
 
-export default async function CategoriesPage() {
+export default async function CategoriesPage({
+  searchParams,
+}: {
+  searchParams: { date_range: string };
+}) {
   return (
     <div className="flex flex-col gap-2 h-full">
       <div>
@@ -11,7 +15,7 @@ export default async function CategoriesPage() {
       <div className="flex-1 flex gap-4 flex-col lg:flex-row">
         <div className="flex-1">
           <CategoryChartContextProvider>
-            <CategoryChart />
+            <CategoryChart dateRange={searchParams.date_range} />
           </CategoryChartContextProvider>
         </div>
         <div className="flex-1">
