@@ -60,7 +60,7 @@ input[type="number"] {
   .react-datepicker__month-container {
     display: flex;
     flex-direction: column;
-    width: 250px;
+    width: 280px;
     max-width: 100%;
 
     .react-datepicker__header {
@@ -80,7 +80,8 @@ input[type="number"] {
         display: flex;
         justify-content: center;
         align-items: center;
-        padding: 1rem 0;
+        gap: 0.75rem;
+        padding: 1rem;
 
         .react-datepicker__month-text {
           font-size: 1.5rem;
