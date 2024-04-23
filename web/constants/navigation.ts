@@ -1,5 +1,5 @@
 import {
-  HomeIcon,
+  ChartPieIcon,
   CurrencyDollarIcon,
   Squares2X2Icon,
 } from "@heroicons/react/24/solid";
@@ -18,6 +18,12 @@ export const navigation: Navigation[] = [
     name: "Dashboard",
     href: "/dashboard",
     IconComponent: Squares2X2Icon,
+  },
+  {
+    id: "categories",
+    name: "Categories",
+    href: "/categories",
+    IconComponent: ChartPieIcon,
   },
   {
     id: "transactions",
