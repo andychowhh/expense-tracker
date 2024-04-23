@@ -1,4 +1,5 @@
 mode: immediate
+branchName: full
 autoLinkIssue: true
 autoCloseIssue: false
 createPR: true
