@@ -23,7 +23,7 @@ export async function CategoryChart({
   }
 
   return (
-    <div className="flex flex-col bg-white rounded h-full">
+    <div className="flex flex-col bg-white rounded h-full shadow-lg" >
       <div className="flex justify-between items-center border-b">
         <CategoryDropdown />
         <div className="flex gap-3 mr-3 items-center">
@@ -31,7 +31,7 @@ export async function CategoryChart({
           <div className="bg-gray-200 rounded-lg py-1 px-2 ">-CA$797.49</div>
         </div>
       </div>
-      <div className="flex-1 h-96">
+      <div className="flex-1 h-72">
         <CategoryPieChart
           data={categoriesData.map(({ _id, totalAmount }) => {
             const category = CATEGORIES.find((c) => c.value === _id)!;

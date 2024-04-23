@@ -34,7 +34,7 @@ export async function CategoryDetailsTable({
     <section className="antialiased bg-gray-100 text-gray-600 h-full">
       <div className="flex flex-col h-full">
         <div className="w-full h-full mx-auto bg-white shadow-lg rounded-sm border border-gray-200">
-          <header className="px-5 py-4 border-b border-gray-100">
+          <header className="px-5 py-4 border-b border-gray-300">
             <h2 className="font-semibold text-gray-800">Categories Details</h2>
           </header>
           <div className="p-3">
