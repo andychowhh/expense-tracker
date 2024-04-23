@@ -17,67 +17,6 @@ export class SummaryService {
     },
   ) {}
 
-  async findLastYearSummary() {
-    const today = new Date();
-    const twelveMonthsAgo = new Date(today.getFullYear() - 1, 4, 1);
-
-    const summaryResult = await this.transactionModel.aggregate([
-      {
-        $match: {
-          date: { $gte: twelveMonthsAgo },
-        },
-      },
-      {
-        $sort: { date: -1 },
-      },
-      {
-        $group: {
-          _id: { $dateToString: { format: '%Y-%m', date: '$date' } },
-          totalExpense: {
-            $sum: {
-              $cond: [{ $ne: ['$category', 'income'] }, '$amount', 0],
-            },
-          },
-          totalIncome: {
-            $sum: {
-              $cond: [{ $eq: ['$category', 'income'] }, '$amount', 0],
-            },
-          },
-        },
-      },
-    ]);
-
-    let currentMonth = twelveMonthsAgo.getMonth();
-    let currentYear = twelveMonthsAgo.getFullYear();
-    const results = [];
-
-    for (let i = 0; i < 12; i++) {
-      const monthYearKey = `${currentYear}-${String(currentMonth + 1).padStart(
-        2,
-        '0',
-      )}`;
-      const found = summaryResult.find((d) => d._id === monthYearKey);
-      if (found) {
-        results.push(found);
-      } else {
-        results.push({
-          _id: monthYearKey,
-          totalExpense: 0,
-          totalIncome: 0,
-        });
-      }
-
-      // Increment month and year appropriately
-      if (currentMonth === 11) {
-        currentMonth = 0;
-        currentYear++;
-      } else {
-        currentMonth++;
-      }
-    }
-    return results;
-  }
-
   async findAmountSummary() {
     const { from, to } = this.request.query;
     if (!from || !to) {
