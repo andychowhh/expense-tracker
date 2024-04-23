@@ -16,7 +16,7 @@ export const SideBar = () => {
           {navigation.map(({ id, name, href, IconComponent }) => (
             <Link
               href={href}
-              className={`group relative rounded-xl p-2 text-blue-600 hover:bg-gray-50 ${
+              className={`z-20 group relative rounded-xl p-2 text-blue-600 hover:bg-gray-50 ${
                 pathname === href ? "bg-gray-100" : ""
               }`}
               key={id}
