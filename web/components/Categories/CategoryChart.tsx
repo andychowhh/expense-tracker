@@ -31,7 +31,7 @@ export async function CategoryChart({
           <div className="bg-gray-200 rounded-lg py-1 px-2 ">-CA$797.49</div>
         </div>
       </div>
-      <div className="flex-1 h-72">
+      <div className="flex-auto h-72">
         <CategoryPieChart
           data={categoriesData.map(({ _id, totalAmount }) => {
             const category = CATEGORIES.find((c) => c.value === _id)!;

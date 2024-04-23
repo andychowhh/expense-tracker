@@ -46,9 +46,7 @@ export async function CategoryDetailsTable({
                       <div className="font-semibold text-left">Category</div>
                     </th>
                     <th className="p-2 whitespace-nowrap">
-                      <div className="font-semibold text-left">
-                        Number of transactions
-                      </div>
+                      <div className="font-semibold text-left">Counts</div>
                     </th>
                     <th className="p-2 whitespace-nowrap">
                       <div className="font-semibold text-left">Amount</div>
