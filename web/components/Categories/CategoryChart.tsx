@@ -6,6 +6,7 @@ import moment from "moment";
 import axios from "@/app/api/axios";
 import { CATEGORIES } from "@/constants";
 import { CategoryDropdown } from "./CategoryDropdown";
+import { CategoryDatePicker } from "./CategoryDatePicker";
 
 export function CategoryChart() {
   let categoriesData: { _id: string; totalAmount: number }[] = [];
