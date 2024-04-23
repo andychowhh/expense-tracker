@@ -3,14 +3,16 @@ import { CategoryPieChart } from "./CategoryPieChart";
 import { CATEGORIES } from "@/constants";
 import { isGuest } from "@/utils";
 import { guestCategoriesOverview } from "@/constants/guestData";
-import { getYearMonthRangetoday } from "@/utils/date";
+import { getLastTwelveMonths } from "@/utils/date";
+import moment from "moment";
 
 export const CategoryOverview = async () => {
   let categoriesData: { _id: string; totalAmount: number }[] = [];
   if (isGuest()) {
     categoriesData = guestCategoriesOverview;
   } else {
-    const [from, to] = getYearMonthRangetoday(new Date());
+    const lastTwelveMonths = getLastTwelveMonths(moment());
+    const [from, to] = [lastTwelveMonths[0], lastTwelveMonths[11]];
     categoriesData = (
       await axios.get(`/summary/categories?from=${from}&to=${to}`)
     ).data;

@@ -17,14 +17,21 @@ export class SummaryService {
     },
   ) {}
 
-  async findLastYearSummary() {
-    const today = new Date();
-    const twelveMonthsAgo = new Date(today.getFullYear() - 1, 4, 1);
+  async findAmountSummary() {
+    const { from, to } = this.request.query;
+    if (!from || !to) {
+      throw new BadRequestException('Please specify the date range!');
+    }
+
+    const lastDayOfMonth = moment(to).endOf('month').format('YYYY-MM-DD');
 
     const summaryResult = await this.transactionModel.aggregate([
       {
         $match: {
-          date: { $gte: twelveMonthsAgo },
+          date: {
+            $gte: new Date(from),
+            $lte: new Date(`${lastDayOfMonth}T23:59:59.999Z`),
+          },
         },
       },
       {
@@ -46,36 +53,7 @@ export class SummaryService {
         },
       },
     ]);
-
-    let currentMonth = twelveMonthsAgo.getMonth();
-    let currentYear = twelveMonthsAgo.getFullYear();
-    const results = [];
-
-    for (let i = 0; i < 12; i++) {
-      const monthYearKey = `${currentYear}-${String(currentMonth + 1).padStart(
-        2,
-        '0',
-      )}`;
-      const found = summaryResult.find((d) => d._id === monthYearKey);
-      if (found) {
-        results.push(found);
-      } else {
-        results.push({
-          _id: monthYearKey,
-          totalExpense: 0,
-          totalIncome: 0,
-        });
-      }
-
-      // Increment month and year appropriately
-      if (currentMonth === 11) {
-        currentMonth = 0;
-        currentYear++;
-      } else {
-        currentMonth++;
-      }
-    }
-    return results;
+    return summaryResult;
   }
 
   async findCategoriesSummary() {
