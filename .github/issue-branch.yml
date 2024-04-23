@@ -1,5 +1,6 @@
 mode: immediate
 branchName: full
+defaultBranch: 'master'
 autoLinkIssue: true
 autoCloseIssue: false
 createPR: true
