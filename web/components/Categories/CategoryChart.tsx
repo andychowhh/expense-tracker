@@ -6,13 +6,14 @@ import axios from "@/app/api/axios";
 import { CATEGORIES } from "@/constants";
 import { CategoryDropdown } from "./CategoryDropdown";
 import moment from "moment";
+import { CategoryOverviewResponseData } from "@/types";
 
 export async function CategoryChart({
   dateRange = moment().format("YYYY-MM"),
 }: {
   dateRange: string;
 }) {
-  let categoriesData: { _id: string; totalAmount: number }[] = [];
+  let categoriesData: CategoryOverviewResponseData[] = [];
   if (isGuest()) {
     categoriesData = guestCategoriesOverview;
   } else {

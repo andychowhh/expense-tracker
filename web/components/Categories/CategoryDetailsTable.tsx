@@ -5,25 +5,30 @@ import moment from "moment";
 import React from "react";
 import { CATEGORIES } from "@/constants";
 import Image from "next/image";
+import { CategoryOverviewResponseData } from "@/types";
 
 export async function CategoryDetailsTable({
   dateRange = moment().format("YYYY-MM"),
 }: {
   dateRange: string;
 }) {
-  const categoriesData: { _id: string; totalAmount: number }[] = isGuest()
+  const categoriesData: CategoryOverviewResponseData[] = isGuest()
     ? guestCategoriesOverview
     : (await axios.get(`/summary/categories?from=${dateRange}&to=${dateRange}`))
         .data;
-  const formattedCategoriesData = categoriesData.map(({ _id, totalAmount }) => {
-    const category = CATEGORIES.find(({ value }) => value === _id)!;
-    return {
-      _id,
-      totalAmount,
-      label: category.label,
-      iconUrl: category.avatar,
-    };
-  });
+
+  const formattedCategoriesData = categoriesData.map(
+    ({ _id, totalAmount, count }) => {
+      const category = CATEGORIES.find(({ value }) => value === _id)!;
+      return {
+        _id,
+        totalAmount,
+        count,
+        label: category.label,
+        iconUrl: category.avatar,
+      };
+    }
+  );
 
   return (
     <section className="antialiased bg-gray-100 text-gray-600 h-full">
@@ -52,7 +57,7 @@ export async function CategoryDetailsTable({
                 </thead>
                 <tbody className="text-sm divide-y divide-gray-100">
                   {formattedCategoriesData.map(
-                    ({ _id, label, iconUrl, totalAmount }) => (
+                    ({ _id, label, count, iconUrl, totalAmount }) => (
                       <tr key={_id}>
                         <td className="p-2 whitespace-nowrap">
                           <div className="flex items-center">
@@ -70,10 +75,10 @@ export async function CategoryDetailsTable({
                           </div>
                         </td>
                         <td className="p-2 whitespace-nowrap">
-                          <div className="text-left">alexshatov@gmail.com</div>
+                          <div className="text-left text-base">{count}</div>
                         </td>
                         <td className="p-2 whitespace-nowrap">
-                          <div className="text-left font-medium">
+                          <div className="text-left font-medium text-base">
                             ${totalAmount}
                           </div>
                         </td>
