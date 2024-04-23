@@ -78,6 +78,45 @@ export class SummaryService {
     return results;
   }
 
+  async findAmountSummary() {
+    const { from, to } = this.request.query;
+    if (!from || !to) {
+      throw new BadRequestException('Please specify the date range!');
+    }
+
+    const lastDayOfMonth = moment(to).endOf('month').format('YYYY-MM-DD');
+
+    const summaryResult = await this.transactionModel.aggregate([
+      {
+        $match: {
+          date: {
+            $gte: new Date(from),
+            $lte: new Date(`${lastDayOfMonth}T23:59:59.999Z`),
+          },
+        },
+      },
+      {
+        $sort: { date: -1 },
+      },
+      {
+        $group: {
+          _id: { $dateToString: { format: '%Y-%m', date: '$date' } },
+          totalExpense: {
+            $sum: {
+              $cond: [{ $ne: ['$category', 'income'] }, '$amount', 0],
+            },
+          },
+          totalIncome: {
+            $sum: {
+              $cond: [{ $eq: ['$category', 'income'] }, '$amount', 0],
+            },
+          },
+        },
+      },
+    ]);
+    return summaryResult;
+  }
+
   async findCategoriesSummary() {
     const { from, to } = this.request.query;
     if (!from || !to) {

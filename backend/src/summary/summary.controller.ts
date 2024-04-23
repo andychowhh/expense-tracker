@@ -1,6 +1,7 @@
 import { Controller, Get, Query } from '@nestjs/common';
 import { SummaryService } from './summary.service';
 import { ApiQuery } from '@nestjs/swagger';
+import { Public } from '../auth/guards/auth.guard';
 
 @Controller('summary')
 export class SummaryController {
@@ -13,6 +14,13 @@ export class SummaryController {
   @Get('last-year')
   findAll() {
     return this.summaryService.findLastYearSummary();
+  }
+
+  @ApiQuery({ name: 'to' })
+  @ApiQuery({ name: 'from' })
+  @Get('amount')
+  findAmountSummary() {
+    return this.summaryService.findAmountSummary();
   }
 
   @ApiQuery({ name: 'to' })
