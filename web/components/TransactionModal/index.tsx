@@ -105,6 +105,8 @@ export function TransactionModal({
     }
   };
 
+  if(!isOpen) return null;
+
   return (
     <Transition.Root show={isOpen} as={Fragment}>
       <Dialog
@@ -177,7 +179,10 @@ export function TransactionModal({
                       </Dialog.Title>
                       <button
                         className="text-neutral-400 hover:text-neutral-500"
-                        onClick={() => onClose()}
+                        onClick={() => {
+                          onClose();
+                          reset();
+                        }}
                       >
                         <XMarkIcon
                           className="block h-6 w-6"
