@@ -1,7 +1,6 @@
 import { Controller, Get, Query } from '@nestjs/common';
 import { SummaryService } from './summary.service';
 import { ApiQuery } from '@nestjs/swagger';
-import { Public } from '../auth/guards/auth.guard';
 
 @Controller('summary')
 export class SummaryController {
