@@ -3,10 +3,7 @@ import { FinancialInsightBarChart } from "./FinancialInsightBarChart";
 import axios from "@/app/api/axios";
 import { isGuest } from "@/utils";
 import { MOCK_LAST_YEAR_SUMMARY } from "@/constants/dashboard";
-import {
-  getLastTwelveMonths,
-  getYearMonthRangeForLastYear,
-} from "@/utils/date";
+import { getLastTwelveMonths } from "@/utils/date";
 import moment from "moment";
 
 interface FinancialInsightProp {}
@@ -16,11 +13,11 @@ export const FinancialInsight = async ({}: FinancialInsightProp) => {
   if (isGuest()) {
     summaryData = MOCK_LAST_YEAR_SUMMARY;
   } else {
-    const [from, to] = getYearMonthRangeForLastYear(new Date());
+    const lastTwelveMonths = getLastTwelveMonths(moment());
+    const [from, to] = [lastTwelveMonths[0], lastTwelveMonths[11]];
     const summaryAmountData: Summary[] = (
       await axios.get(`/summary/amount?from=${from}&to=${to}`)
     ).data;
-    const lastTwelveMonths = getLastTwelveMonths(moment());
     summaryData = lastTwelveMonths.map((yearMonth) => {
       const item = summaryAmountData.find(({ _id }) => _id === yearMonth);
       return item
