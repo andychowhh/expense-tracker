@@ -1,6 +1,6 @@
 "use client";
 
-import { Fragment } from "react";
+import { Fragment, CSSProperties } from "react";
 import { Menu, Transition } from "@headlessui/react";
 import { ChevronDownIcon } from "@heroicons/react/20/solid";
 
@@ -12,19 +12,24 @@ interface DropdownProp {
   selected: string;
   options: { label: string; value: string }[];
   onSelect: (opt: string) => void;
+  menuButtonStyle?: CSSProperties;
 }
 
 export default function Dropdown({
   selected,
   options,
   onSelect,
+  menuButtonStyle,
 }: DropdownProp) {
   const currentOption = options.find((opt) => opt.value === selected);
   return (
     <Menu as="div" className="relative inline-block text-left">
       <div>
-        <Menu.Button className="inline-flex w-full justify-center gap-x-1.5 rounded-md bg-white px-3 py-4 text-sm  text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50">
-          <h2 className="text-base">{currentOption?.label}</h2>{}
+        <Menu.Button
+          className="inline-flex w-full justify-center gap-x-1.5 rounded-md bg-white px-3 py-4 text-sm  text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
+          style={menuButtonStyle}
+        >
+          <h2 className="text-base">{currentOption?.label}</h2>
           <ChevronDownIcon
             className="-mr-1 h-5 w-5 text-gray-400"
             aria-hidden="true"
@@ -42,14 +47,14 @@ export default function Dropdown({
         leaveTo="transform opacity-0 scale-95"
       >
         <Menu.Items className="absolute left-0 z-10 w-full origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-          <div className="py-1">
+          <div>
             {options.map(({ label, value }) => (
               <Menu.Item key={value}>
                 {({ active }) => (
                   <button
                     className={classNames(
                       active ? "bg-gray-100 text-gray-900" : "text-gray-700",
-                      "block px-4 py-2 text-sm"
+                      "block px-4 py-4 w-full text-left"
                     )}
                     onClick={() => onSelect(value)}
                   >

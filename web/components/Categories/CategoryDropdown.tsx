@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import React, { useContext } from "react";
 import Dropdown from "../Dropdown/Dropdown";
@@ -24,6 +24,7 @@ export const CategoryDropdown = () => {
       selected={transactionType}
       options={TRANSACTION_TYPE_OPTIONS}
       onSelect={(opt) => setTransactionType(opt)}
+      menuButtonStyle={{ boxShadow: "none" }}
     />
   );
 };
