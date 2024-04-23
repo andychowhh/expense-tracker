@@ -12,16 +12,16 @@ export default async function CategoriesPage({
       <div>
         <CategoryDatePicker />
       </div>
-      <div className="flex-1 flex gap-4 flex-col lg:flex-row">
-        <div className="flex-1">
-          <CategoryChartContextProvider>
+      <CategoryChartContextProvider>
+        <div className="flex-1 flex gap-4 flex-col lg:flex-row">
+          <div className="flex-1">
             <CategoryChart dateRange={searchParams.date_range} />
-          </CategoryChartContextProvider>
+          </div>
+          <div className="flex-1">
+            <CategoryDetailsTable dateRange={searchParams.date_range}/>
+          </div>
         </div>
-        <div className="flex-1">
-          <CategoryDetailsTable />
-        </div>
-      </div>
+      </CategoryChartContextProvider>
     </div>
   );
 }
