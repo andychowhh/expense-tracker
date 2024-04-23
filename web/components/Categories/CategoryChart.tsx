@@ -13,22 +13,32 @@ export async function CategoryChart({
 }: {
   dateRange: string;
 }) {
-  let categoriesData: CategoryOverviewResponseData[] = [];
-  if (isGuest()) {
-    categoriesData = guestCategoriesOverview;
-  } else {
-    categoriesData = (
-      await axios.get(`/summary/categories?from=${dateRange}&to=${dateRange}`)
-    ).data;
-  }
+  const categoriesData: CategoryOverviewResponseData[] = isGuest()
+    ? guestCategoriesOverview
+    : (await axios.get(`/summary/categories?from=${dateRange}&to=${dateRange}`))
+        .data;
+  const balance = categoriesData.reduce(
+    (total, category) =>
+      (total +=
+        category._id === "income"
+          ? category.totalAmount
+          : -category.totalAmount),
+    0
+  );
 
   return (
-    <div className="flex flex-col bg-white rounded h-full shadow-lg" >
+    <div className="flex flex-col bg-white rounded h-full shadow-lg">
       <div className="flex justify-between items-center border-b">
         <CategoryDropdown />
         <div className="flex gap-3 mr-3 items-center">
           <div>Balance</div>
-          <div className="bg-gray-200 rounded-lg py-1 px-2 ">-CA$797.49</div>
+          <div
+            className={`bg-gray-200 rounded-lg py-1 px-3 ${
+              balance > 0 ? "text-green-700" : "text-red-500"
+            }`}
+          >
+            {balance >= 0 ? `$${balance}` : `-$${Math.abs(balance)}`}
+          </div>
         </div>
       </div>
       <div className="flex-auto h-72">

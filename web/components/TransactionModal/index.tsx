@@ -20,7 +20,7 @@ import { isEmpty } from "lodash";
 import { SubmitButton } from "./SubmitButton";
 import { DefaultResponse } from "@/types";
 import { formatDate } from "@/utils/date";
-import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
+import { XMarkIcon } from "@heroicons/react/24/outline";
 
 export interface TransactionFormData {
   date: Date;
