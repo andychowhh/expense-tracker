@@ -1,10 +1,20 @@
 "use client";
 
-import React, { forwardRef } from "react";
+import React, { forwardRef, useState } from "react";
 import DatePicker from "react-datepicker";
 import { CalendarIcon } from "@heroicons/react/24/solid";
+import { useRouter } from "next/navigation";
+import moment from "moment";
 
 export function CategoryDatePicker() {
+  const [startDate, setStartDate] = useState(new Date());
+  const { push } = useRouter();
+
+  const onDateUpdate = (date: Date) => {
+    setStartDate(date);
+    push(`/categories?date_range=${moment(date).format("YYYY-MM")}`);
+  };
+
   const renderMonthContent = (
     month: number,
     shortMonth: string,
@@ -30,15 +40,18 @@ export function CategoryDatePicker() {
       <div>{value}</div>
     </button>
   ));
+
   return (
     <div className="category-date-picker">
       <DatePicker
-        selected={new Date()}
         renderMonthContent={renderMonthContent}
         customInput={<CustomInput />}
         showMonthYearPicker
         dateFormat="yyyy-MM"
         withPortal={true}
+        maxDate={new Date()}
+        selected={startDate}
+        onChange={onDateUpdate}
       />
     </div>
   );
