@@ -6,7 +6,7 @@ import { CalendarIcon } from "@heroicons/react/24/solid";
 import { useRouter } from "next/navigation";
 import moment from "moment";
 
-export function CategoryDatePicker() {
+export const CategoryDatePicker = () => {
   const [startDate, setStartDate] = useState(new Date());
   const { push } = useRouter();
 
@@ -40,6 +40,7 @@ export function CategoryDatePicker() {
       <div>{value}</div>
     </button>
   ));
+  CustomInput.displayName = 'CustomInput';
 
   return (
     <div className="category-date-picker">
@@ -55,4 +56,4 @@ export function CategoryDatePicker() {
       />
     </div>
   );
-}
+};

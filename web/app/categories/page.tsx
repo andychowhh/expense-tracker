@@ -1,5 +1,8 @@
-import { CategoryChart, CategoryDetailsTable } from "@/components/Categories";
-import { CategoryDatePicker } from "@/components/Categories/CategoryDatePicker";
+import {
+  CategoryChart,
+  CategoryDetailsTable,
+  CategoryDatePicker,
+} from "@/components/Categories";
 import { CategoryChartContextProvider } from "@/context/CategoryChartContext";
 
 export default async function CategoriesPage({
@@ -18,7 +21,7 @@ export default async function CategoriesPage({
             <CategoryChart dateRange={searchParams.date_range} />
           </div>
           <div className="flex-1">
-            <CategoryDetailsTable dateRange={searchParams.date_range}/>
+            <CategoryDetailsTable dateRange={searchParams.date_range} />
           </div>
         </div>
       </CategoryChartContextProvider>
