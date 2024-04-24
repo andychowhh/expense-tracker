@@ -53,3 +53,9 @@ export interface Summary {
   totalExpense: number;
   totalIncome: number;
 }
+
+export interface CategoryOverviewResponseData {
+  _id: string;
+  totalAmount: number;
+  count: number;
+}

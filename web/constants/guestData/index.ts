@@ -1,4 +1,8 @@
-import { PAYMENT_METHOD, Transaction } from "@/types";
+import {
+  CategoryOverviewResponseData,
+  PAYMENT_METHOD,
+  Transaction,
+} from "@/types";
 
 export const guestTransactions: Transaction[] = [
   {
@@ -43,17 +47,19 @@ export const guestTransactions: Transaction[] = [
   },
 ];
 
-export const guestCategoriesOverview = [
-  { _id: "food", totalAmount: 600 },
-  { _id: "snack", totalAmount: 200 },
-  { _id: "medical", totalAmount: 300 },
+export const guestCategoriesOverview: CategoryOverviewResponseData[] = [
+  { _id: "food", totalAmount: 600, count: 5 },
+  { _id: "snack", totalAmount: 200, count: 1 },
+  { _id: "medical", totalAmount: 300, count: 5 },
   {
     _id: "transportation",
     totalAmount: 300,
+    count: 10,
   },
   {
     _id: "entertainment",
     totalAmount: 278,
+    count: 2,
   },
-  { _id: "income", totalAmount: 189 },
+  { _id: "income", totalAmount: 189, count: 3 },
 ];

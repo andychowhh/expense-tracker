@@ -1,25 +1,6 @@
 "use client";
 
-import { PieChart, Pie, ResponsiveContainer, Cell } from "recharts";
-
-// const data = [
-//   { name: "Food", value: 600, fill: "#0088FE", icon: "/images/food.png" },
-//   { name: "Snack", value: 200, fill: "#00C49F", icon: "/images/snack.png" },
-//   { name: "Medical", value: 300, fill: "#FFBB28", icon: "/images/medical.png" },
-//   {
-//     name: "Transportation",
-//     value: 300,
-//     fill: "#FF8042",
-//     icon: "/images/transportation.png",
-//   },
-//   {
-//     name: "Entertainment",
-//     value: 278,
-//     fill: "#800080",
-//     icon: "/images/entertainment.png",
-//   },
-//   { name: "Income", value: 189, fill: "#32CD32", icon: "/images/income.png" },
-// ];
+import { PieChart, Pie, ResponsiveContainer } from "recharts";
 
 interface CategoryPieChartProp {
   data: {
