@@ -1,6 +1,5 @@
 mode: immediate
-branchName: full
-defaultBranch: 'master'
+branchName: '${issue.number}-${issue.title}'
 autoLinkIssue: true
 autoCloseIssue: false
 createPR: true
