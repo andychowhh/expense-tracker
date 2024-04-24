@@ -1,8 +1,8 @@
 mode: immediate
-branchName: '${issue.number}-${issue.title}'
+branchName: full
 autoLinkIssue: true
-autoCloseIssue: false
-createPR: true
+autoCloseIssue: true
+openPR: true
 branches:
   - label: enhancement
     prefix: feature/
