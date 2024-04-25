@@ -10,8 +10,10 @@ import { CategoryOverviewResponseData } from "@/types";
 
 export async function CategoryChart({
   dateRange = moment().format("YYYY-MM"),
+  transactionType = "expense",
 }: {
   dateRange: string;
+  transactionType: string;
 }) {
   const categoriesData: CategoryOverviewResponseData[] = isGuest()
     ? guestCategoriesOverview
@@ -43,15 +45,19 @@ export async function CategoryChart({
       </div>
       <div className="flex-auto h-72">
         <CategoryPieChart
-          data={categoriesData.map(({ _id, totalAmount }) => {
-            const category = CATEGORIES.find((c) => c.value === _id)!;
-            return {
-              name: category.label,
-              value: totalAmount,
-              fill: category.backgroundColor,
-              icon: category.avatar,
-            };
-          })}
+          data={categoriesData
+            .filter(({ _id }) =>
+              transactionType === "income" ? _id === "income" : _id !== "income"
+            )
+            .map(({ _id, totalAmount }) => {
+              const category = CATEGORIES.find((c) => c.value === _id)!;
+              return {
+                name: category.label,
+                value: totalAmount,
+                fill: category.backgroundColor,
+                icon: category.avatar,
+              };
+            })}
         />
       </div>
     </div>
