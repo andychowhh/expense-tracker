@@ -1,8 +1,7 @@
 "use client";
 
-import React, { useContext } from "react";
+import React, { useState } from "react";
 import Dropdown from "../Dropdown/Dropdown";
-import { CategoryChartContext } from "@/context/CategoryChartContext";
 import { useUpdateQueryParams } from "@/hooks/useUpdateQueryParams";
 
 const TRANSACTION_TYPE_OPTIONS = [
@@ -17,8 +16,7 @@ const TRANSACTION_TYPE_OPTIONS = [
 ];
 
 export const CategoryDropdown = () => {
-  const { transactionType, setTransactionType } =
-    useContext(CategoryChartContext)!;
+  const [transactionType, setTransactionType] = useState("expense");
   const { updateQueryParams } = useUpdateQueryParams();
 
   return (
