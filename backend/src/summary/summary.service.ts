@@ -78,6 +78,9 @@ export class SummaryService {
           totalAmount: {
             $sum: '$amount',
           },
+          count: {
+            $sum: 1,
+          },
           // items: {
           //   $push: '$$ROOT', // Push the original documents into the 'items' array
           // },

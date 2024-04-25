@@ -20,7 +20,7 @@ import { isEmpty } from "lodash";
 import { SubmitButton } from "./SubmitButton";
 import { DefaultResponse } from "@/types";
 import { formatDate } from "@/utils/date";
-import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
+import { XMarkIcon } from "@heroicons/react/24/outline";
 
 export interface TransactionFormData {
   date: Date;
@@ -105,6 +105,8 @@ export function TransactionModal({
     }
   };
 
+  if(!isOpen) return null;
+
   return (
     <Transition.Root show={isOpen} as={Fragment}>
       <Dialog
@@ -177,7 +179,10 @@ export function TransactionModal({
                       </Dialog.Title>
                       <button
                         className="text-neutral-400 hover:text-neutral-500"
-                        onClick={() => onClose()}
+                        onClick={() => {
+                          onClose();
+                          reset();
+                        }}
                       >
                         <XMarkIcon
                           className="block h-6 w-6"

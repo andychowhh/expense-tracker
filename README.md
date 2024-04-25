@@ -10,12 +10,13 @@ I am currently using a personal finance application called Fortune City. I like 
 
 [**Try out the demo!**](https://expense-tracker-six-blush.vercel.app/)
 
-## Functionalities
+<!-- ## Functionalities
 
 |           Functionality           | To Do | In Progress | Completed |
 | :-------------------------------: | :---: | :---------: | :-------: |
-|        Google Login/Logout        |       |             |     ✓     |
+|        Google Authentication      |       |             |     ✓     |
 | Add/Edit/Delete/View Transactions |       |             |     ✓     |
+| Dashboard |       |             |     ✓     | -->
 
 ## Publications
 
@@ -24,6 +25,8 @@ I am currently using a personal finance application called Fortune City. I like 
 [**NextJS Authentication Flow — Store JWT In Cookie**](https://medium.com/javascript-in-plain-english/nextjs-authentication-flow-store-jwt-in-cookie-fa6e6c8c0dca)
 
 [**NextJS Rate Limiting using Vercel KV**](https://medium.com/@hohin523/nextjs-rate-limiting-using-vercel-kv-5c474466e0ea)
+
+[**Automate branch creation for each issue using Github Actions**](https://medium.com/@hohin523/automate-branch-creation-for-each-issue-using-github-actions-54944b96c4f7)
 
 ## Architecture
 
