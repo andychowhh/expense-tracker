@@ -8,11 +8,15 @@ import { CategoryDropdown } from "./CategoryDropdown";
 import moment from "moment";
 import { CategoryOverviewResponseData } from "@/types";
 
+interface CategoryChartProp {
+  dateRange: string;
+  transactionType: string;
+}
+
 export async function CategoryChart({
   dateRange = moment().format("YYYY-MM"),
-}: {
-  dateRange: string;
-}) {
+  transactionType = "expense",
+}: CategoryChartProp) {
   const categoriesData: CategoryOverviewResponseData[] = isGuest()
     ? guestCategoriesOverview
     : (await axios.get(`/summary/categories?from=${dateRange}&to=${dateRange}`))
@@ -43,15 +47,19 @@ export async function CategoryChart({
       </div>
       <div className="flex-auto h-72">
         <CategoryPieChart
-          data={categoriesData.map(({ _id, totalAmount }) => {
-            const category = CATEGORIES.find((c) => c.value === _id)!;
-            return {
-              name: category.label,
-              value: totalAmount,
-              fill: category.backgroundColor,
-              icon: category.avatar,
-            };
-          })}
+          data={categoriesData
+            .filter(({ _id }) =>
+              transactionType === "income" ? _id === "income" : _id !== "income"
+            )
+            .map(({ _id, totalAmount }) => {
+              const category = CATEGORIES.find((c) => c.value === _id)!;
+              return {
+                name: category.label,
+                value: totalAmount,
+                fill: category.backgroundColor,
+                icon: category.avatar,
+              };
+            })}
         />
       </div>
     </div>

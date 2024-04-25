@@ -3,16 +3,20 @@
 import React, { forwardRef, useState } from "react";
 import DatePicker from "react-datepicker";
 import { CalendarIcon } from "@heroicons/react/24/solid";
-import { useRouter } from "next/navigation";
 import moment from "moment";
+import { useQueryParams } from "@/hooks/useQueryParams";
 
 export const CategoryDatePicker = () => {
-  const [startDate, setStartDate] = useState(new Date());
-  const { push } = useRouter();
+  const { updateQueryParams, getQueryParam } = useQueryParams();
+  const dateRange = getQueryParam("date_range");
+
+  const [startDate, setStartDate] = useState(
+    dateRange ? new Date(`${dateRange}-02`) : new Date()
+  );
 
   const onDateUpdate = (date: Date) => {
     setStartDate(date);
-    push(`/categories?date_range=${moment(date).format("YYYY-MM")}`);
+    updateQueryParams("date_range", moment(date).format("YYYY-MM"));
   };
 
   const renderMonthContent = (
@@ -40,7 +44,7 @@ export const CategoryDatePicker = () => {
       <div>{value}</div>
     </button>
   ));
-  CustomInput.displayName = 'CustomInput';
+  CustomInput.displayName = "CustomInput";
 
   return (
     <div className="category-date-picker">
