@@ -3,11 +3,11 @@ import { Inter } from "next/font/google";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import { Navbar, SideBar } from "@/components";
 import { UserContextProvider } from "../context/UserContext";
-import { getCookie } from ".././utils";
+import { getCookie, isGuest } from ".././utils";
 import "./globals.css";
 import { GuestAlert } from "@/components/GuestAlert";
 import { SpeedInsights } from "@vercel/speed-insights/next";
-import { Analytics } from "@vercel/analytics/react"
+import { Analytics } from "@vercel/analytics/react";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -30,7 +30,13 @@ export default async function RootLayout({
           <body className={[inter.className, "bg-gray-100"].join(" ")}>
             {!Boolean(accessToken) && <GuestAlert />}
             <Navbar />
-            <div className="flex bg-gray-100 lg:h-[calc(100vh-112px)]">
+            <div
+              className={`flex bg-gray-100 ${
+                isGuest()
+                  ? "lg:h-[calc(100vh-112px)]"
+                  : "lg:h-[calc(100vh-64px)]"
+              }`}
+            >
               <SideBar />
               <main className="px-4 py-4 flex-1 lg:px-8 lg:py-6 max-w-full">
                 {children}
