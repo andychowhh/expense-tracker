@@ -1,6 +1,6 @@
 "use client";
 
-import { PieChart, Pie, ResponsiveContainer } from "recharts";
+import { PieChart, Pie, ResponsiveContainer, Label } from "recharts";
 
 interface CategoryPieChartProp {
   data: {
@@ -53,21 +53,37 @@ export const CategoryPieChart = ({ data }: CategoryPieChartProp) => {
       </g>
     );
   };
-
+  
   return (
     <ResponsiveContainer width="100%" height="100%">
       <PieChart width={400} height={400} style={{ outline: "none" }}>
-        <Pie
-          dataKey="value"
-          data={data}
-          cx="50%"
-          cy="50%"
-          outerRadius={80}
-          fill="#8884d8"
-          label={renderCustomizedLabel}
-          labelLine={false}
-          style={{ outline: "none" }}
-        />
+        {data && data.length > 0 ? (
+          <Pie
+            dataKey="value"
+            data={data}
+            fill="#8884d8"
+            cx="50%"
+            cy="50%"
+            outerRadius={80}
+            label={renderCustomizedLabel}
+            labelLine={false}
+            style={{ outline: "none" }}
+          />
+        ) : (
+          <Pie
+            dataKey={"value"}
+            data={[{ name: "No Data", value: 1 }]}
+            fill="#8884d8"
+            cx="50%"
+            cy="50%"
+            outerRadius={80}
+            innerRadius={50}
+          >
+            <Label width={30} position="center">
+              No Data
+            </Label>
+          </Pie>
+        )}
       </PieChart>
     </ResponsiveContainer>
   );
