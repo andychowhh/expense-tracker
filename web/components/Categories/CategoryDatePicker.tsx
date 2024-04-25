@@ -7,8 +7,12 @@ import moment from "moment";
 import { useQueryParams } from "@/hooks/useQueryParams";
 
 export const CategoryDatePicker = () => {
-  const [startDate, setStartDate] = useState(new Date());
-  const { updateQueryParams } = useQueryParams();
+  const { updateQueryParams, getQueryParam } = useQueryParams();
+  const dateRange = getQueryParam("date_range");
+
+  const [startDate, setStartDate] = useState(
+    dateRange ? new Date(`${dateRange}-02`) : new Date()
+  );
 
   const onDateUpdate = (date: Date) => {
     setStartDate(date);
