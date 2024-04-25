@@ -16,8 +16,11 @@ const TRANSACTION_TYPE_OPTIONS = [
 ];
 
 export const CategoryDropdown = () => {
-  const [transactionType, setTransactionType] = useState("expense");
-  const { updateQueryParams } = useQueryParams();
+  const { updateQueryParams, getQueryParam } = useQueryParams();
+  
+  const [transactionType, setTransactionType] = useState(
+    getQueryParam("transaction_type") ?? "expense"
+  );
 
   return (
     <Dropdown
