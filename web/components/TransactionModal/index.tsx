@@ -126,10 +126,10 @@ export function TransactionModal({
           leaveFrom="opacity-100"
           leaveTo="opacity-0"
         >
-          <div className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" />
+          <div className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity backdrop-blur-sm" />
         </Transition.Child>
 
-        <div className="fixed inset-0 z-10 w-screen overflow-y-auto">
+        <div className="fixed inset-0 z-30 w-screen overflow-y-auto">
           <div className="sm:flex sm:justify-center h-full items-center">
             <Transition.Child
               as={Fragment}
@@ -178,7 +178,7 @@ export function TransactionModal({
                         />
                       </Dialog.Title>
                       <div
-                        className="text-neutral-400 hover:text-neutral-500"
+                        className="text-neutral-400 cursor-pointer hover:text-neutral-500"
                         onClick={() => {
                           onClose();
                           reset();
