@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import Dropdown from "../Dropdown/Dropdown";
-import { useUpdateQueryParams } from "@/hooks/useUpdateQueryParams";
+import { useQueryParams } from "@/hooks/useQueryParams";
 
 const TRANSACTION_TYPE_OPTIONS = [
   {
@@ -17,7 +17,7 @@ const TRANSACTION_TYPE_OPTIONS = [
 
 export const CategoryDropdown = () => {
   const [transactionType, setTransactionType] = useState("expense");
-  const { updateQueryParams } = useUpdateQueryParams();
+  const { updateQueryParams } = useQueryParams();
 
   return (
     <Dropdown

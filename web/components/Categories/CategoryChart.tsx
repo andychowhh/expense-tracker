@@ -8,13 +8,15 @@ import { CategoryDropdown } from "./CategoryDropdown";
 import moment from "moment";
 import { CategoryOverviewResponseData } from "@/types";
 
+interface CategoryChartProp {
+  dateRange: string;
+  transactionType: string;
+}
+
 export async function CategoryChart({
   dateRange = moment().format("YYYY-MM"),
   transactionType = "expense",
-}: {
-  dateRange: string;
-  transactionType: string;
-}) {
+}: CategoryChartProp) {
   const categoriesData: CategoryOverviewResponseData[] = isGuest()
     ? guestCategoriesOverview
     : (await axios.get(`/summary/categories?from=${dateRange}&to=${dateRange}`))

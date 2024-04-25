@@ -4,11 +4,11 @@ import React, { forwardRef, useState } from "react";
 import DatePicker from "react-datepicker";
 import { CalendarIcon } from "@heroicons/react/24/solid";
 import moment from "moment";
-import { useUpdateQueryParams } from "@/hooks/useUpdateQueryParams";
+import { useQueryParams } from "@/hooks/useQueryParams";
 
 export const CategoryDatePicker = () => {
   const [startDate, setStartDate] = useState(new Date());
-  const { updateQueryParams } = useUpdateQueryParams();
+  const { updateQueryParams } = useQueryParams();
 
   const onDateUpdate = (date: Date) => {
     setStartDate(date);
