@@ -17,7 +17,7 @@ export const SideBar = () => {
             <Link
               href={href}
               className={`z-20 group relative rounded-xl p-2 text-blue-600 hover:bg-gray-50 ${
-                pathname === href ? "bg-gray-100" : ""
+                pathname === href ? "bg-gray-100 pointer-events-none" : ""
               }`}
               key={id}
             >

@@ -144,12 +144,12 @@ export function TransactionModal({
                 <form action={handleSubmit(addTransaction)}>
                   <div className="bg-white">
                     <div className="flex justify-between items-center border-b py-2 px-5">
-                      <button className="invisible">
+                      <div className="invisible">
                         <XMarkIcon
                           className="block h-6 w-6"
                           aria-hidden="true"
                         />
-                      </button>
+                      </div>
                       <Dialog.Title
                         as="h3"
                         className="text-base leading-6 text-gray-900 py-1"
@@ -177,7 +177,7 @@ export function TransactionModal({
                           )}
                         />
                       </Dialog.Title>
-                      <button
+                      <div
                         className="text-neutral-400 hover:text-neutral-500"
                         onClick={() => {
                           onClose();
@@ -188,7 +188,7 @@ export function TransactionModal({
                           className="block h-6 w-6"
                           aria-hidden="true"
                         />
-                      </button>
+                      </div>
                     </div>
 
                     <div className="flex justify-between mt-2 py-2 px-4">
@@ -237,7 +237,7 @@ export function TransactionModal({
                               className="autosize-input"
                               autoFocus
                               value={field.value}
-                              onChange={(item: number) => field.onChange(item)}
+                              onChange={(item) => field.onChange(item)}
                             />
                           )}
                         />

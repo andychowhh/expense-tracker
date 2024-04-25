@@ -39,9 +39,7 @@ export const Navbar = () => {
             </div>
           </div>
 
-          <Disclosure.Panel className="border-y border-neutral-200 absolute z-10 bg-white w-full lg:hidden">
-            <MobilePageLinks />
-          </Disclosure.Panel>
+          <MobilePageLinks />
         </>
       )}
     </Disclosure>
