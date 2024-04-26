@@ -27,13 +27,21 @@ export function UploadReceiptModal({
   const onSubmit = async (event) => {
     event.preventDefault();
     console.log("Submitting...");
-    
+
     const worker = await createWorker("eng");
     console.log({ imagePath });
 
     const res = await worker.recognize(imagePath);
-    console.log({res});
+    console.log({ res });
     await worker.terminate();
+
+    const openAiRes = await fetch("/api/open-ai", {
+      method: "POST",
+      body: JSON.stringify({
+        messages: "How are you?",
+      }),
+    });
+    console.log({ openAiRes });
   };
 
   return (
@@ -79,7 +87,11 @@ export function UploadReceiptModal({
                       </div>
                     )}
                     <div>
-                      <input type="file" accept="image/*" onChange={handleImageChange} />
+                      <input
+                        type="file"
+                        accept="image/*"
+                        onChange={handleImageChange}
+                      />
                     </div>
                   </div>
                   <div className="px-4 py-5 sm:flex sm:flex-row-reverse sm:px-6">
