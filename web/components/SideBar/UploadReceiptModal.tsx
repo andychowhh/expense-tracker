@@ -2,7 +2,6 @@
 
 import { Fragment, useRef, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
-import { ExclamationTriangleIcon } from "@heroicons/react/24/outline";
 import { SubmitButton } from "../TransactionModal/SubmitButton";
 import { createWorker } from "tesseract.js";
 
@@ -80,7 +79,7 @@ export function UploadReceiptModal({
                       </div>
                     )}
                     <div>
-                      <input type="file" onChange={handleImageChange} />
+                      <input type="file" accept="image/*" onChange={handleImageChange} />
                     </div>
                   </div>
                   <div className="px-4 py-5 sm:flex sm:flex-row-reverse sm:px-6">

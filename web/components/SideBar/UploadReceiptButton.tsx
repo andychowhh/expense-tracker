@@ -2,9 +2,6 @@
 
 import { ArrowUpOnSquareIcon } from "@heroicons/react/24/solid";
 import useToggle from "beautiful-react-hooks/useToggle";
-import { TransactionModal } from "../TransactionModal";
-import { Transaction } from "@/types";
-import { createTransation } from "@/actions/transactions";
 import { UploadReceiptModal } from "./UploadReceiptModal";
 
 export const UploadReceiptButton = () => {
@@ -12,14 +9,6 @@ export const UploadReceiptButton = () => {
     useToggle();
   return (
     <>
-      {/* <TransactionModal
-        defaultValues={null}
-        isOpen={isAddNewRecordModalOpen}
-        onClose={toggleAddNewRecordModal}
-        onSubmit={async (props: Omit<Transaction, "_id">) =>
-          await createTransation(props)
-        }
-      /> */}
       <UploadReceiptModal
         isOpen={isUploadReceiptModalOpen}
         onClose={toggleIsUploadReceiptModalOpen}
