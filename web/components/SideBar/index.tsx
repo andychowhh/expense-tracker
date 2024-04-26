@@ -5,6 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { navigation } from "@/constants";
 import { AddTransactionButton } from "./AddTransactionButton";
+import { UploadReceiptButton } from "./UploadReceiptButton";
 
 export const SideBar = () => {
   const pathname = usePathname();
@@ -37,6 +38,7 @@ export const SideBar = () => {
             </Link>
           ))}
           <AddTransactionButton />
+          <UploadReceiptButton/>
         </nav>
       </aside>
     </div>
