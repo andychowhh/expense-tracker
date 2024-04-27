@@ -10,9 +10,11 @@ import { ProfileDropdown } from "../Dropdown";
 import { MobilePageLinks } from "../Link";
 
 import { UserContext } from "../../context/UserContext";
+import { useBreakpoint } from "@/hooks/useBreakPoint";
 
 export const Navbar = () => {
   const { user } = useContext(UserContext) ?? {};
+  const { isLg } = useBreakpoint("lg");
 
   return (
     <Disclosure as="nav">
@@ -21,9 +23,11 @@ export const Navbar = () => {
           <div className="bg-white px-2 sm:px-6 lg:px-8">
             <div className="relative flex h-nav-bar items-center justify-between">
               {/* Mobile Menu */}
-              <div className="absolute inset-y-0 right-0 flex items-center lg:hidden">
-                <MobileMenuButton isOpen={open} />
-              </div>
+              {!isLg && (
+                <div className="absolute inset-y-0 right-0 flex items-center">
+                  <MobileMenuButton isOpen={open} />
+                </div>
+              )}
               <div className="flex items-center">
                 <Image
                   src="/images/wallet-icon-48.png"
@@ -38,8 +42,7 @@ export const Navbar = () => {
               </div>
             </div>
           </div>
-
-          <MobilePageLinks />
+          {!isLg && <MobilePageLinks />}
         </>
       )}
     </Disclosure>
