@@ -37,7 +37,7 @@ export function MobilePageLinks() {
           await createTransation(props)
         }
       />
-      <Disclosure.Panel className="border-y border-neutral-200 absolute z-10 bg-white w-full lg:hidden">
+      <Disclosure.Panel className="border-y border-neutral-200 absolute z-10 bg-white w-full">
         <div className="flex flex-col gap-2 px-2 pb-3 pt-2 text-gray-700">
           {navigation.map((item) => (
             <Disclosure.Button
