@@ -22,26 +22,20 @@ export function LineChartGroupItems({ data }: LineChartGroupItemsProp) {
   });
   const { isMd } = useBreakpoint("md");
 
-  function LineChartCardGroup() {
-    return (
-      <>
-        <LineChartCard label="Total Balance" data={balance} />
-        <LineChartCard label="Income" data={income} />
-        <LineChartCard label="Expense" data={expense} />
-      </>
-    );
-  }
-
   return (
     <>
       {isMd ? (
         <div className="flex justify-between gap-4">
-          <LineChartCardGroup />
+          <LineChartCard label="Total Balance" data={balance} />
+          <LineChartCard label="Income" data={income} />
+          <LineChartCard label="Expense" data={expense} />
         </div>
       ) : (
         <div className="w-full">
           <LineChartCarousell>
-            <LineChartCardGroup />
+            <LineChartCard label="Total Balance" data={balance} />
+            <LineChartCard label="Income" data={income} />
+            <LineChartCard label="Expense" data={expense} />
           </LineChartCarousell>
         </div>
       )}
