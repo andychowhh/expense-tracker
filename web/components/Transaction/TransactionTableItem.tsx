@@ -5,7 +5,7 @@ import useToggle from "beautiful-react-hooks/useToggle";
 import { PAYMENT_METHOD, Transaction } from "@/types";
 import { CATEGORIES } from "@/constants";
 import { deleteTransation, updateTransation } from "@/actions/transactions";
-import { TransactionModal } from "../TransactionModal";
+import TransactionModal from "../TransactionModal";
 import { toLocalDate } from "@/utils/date";
 
 export const TransactionTableItem = ({

@@ -8,7 +8,7 @@ import { UserContext } from "@/context/UserContext";
 import { isEmpty } from "lodash";
 import ProfileImage from "@/components/Dropdown/ProfileDropdown/ProfileImage";
 import { usePathname, useRouter } from "next/navigation";
-import { TransactionModal } from "@/components/TransactionModal";
+import TransactionModal from "@/components/TransactionModal";
 import useToggle from "beautiful-react-hooks/useToggle";
 import { Transaction } from "@/types";
 import { createTransation } from "@/actions/transactions";

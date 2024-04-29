@@ -2,7 +2,7 @@
 
 import { PlusCircleIcon } from "@heroicons/react/24/solid";
 import useToggle from "beautiful-react-hooks/useToggle";
-import { TransactionModal } from "../TransactionModal";
+import TransactionModal from "../TransactionModal";
 import { Transaction } from "@/types";
 import { createTransation } from "@/actions/transactions";
 
