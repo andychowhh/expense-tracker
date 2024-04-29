@@ -4,12 +4,12 @@ import { useContext } from "react";
 import Image from "next/image";
 import { Disclosure } from "@headlessui/react";
 import { isEmpty } from "lodash";
-
 import { LoginButton, MobileMenuButton } from "../Button";
 import { ProfileDropdown } from "../Dropdown";
-import { MobilePageLinks } from "../Link";
-
 import { UserContext } from "../../context/UserContext";
+import dynamic from 'next/dynamic'
+ 
+const MobilePageLinks = dynamic(() => import('../Link/MobilePageLinks'))
 
 export const Navbar = () => {
   const { user } = useContext(UserContext) ?? {};

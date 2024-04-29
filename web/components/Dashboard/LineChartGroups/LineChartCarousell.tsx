@@ -27,10 +27,12 @@ const responsive = {
   //   },
 };
 
-export const LineChartCarousell = ({ children }: { children: ReactNode }) => {
+const LineChartCarousell = ({ children }: { children: ReactNode }) => {
   return (
     <Carousel responsive={responsive} showDots={true} arrows={false}>
       {children}
     </Carousel>
   );
 };
+
+export default LineChartCarousell;

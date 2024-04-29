@@ -4,9 +4,11 @@ import axios from "@/app/api/axios";
 import { Summary } from "@/types";
 import { isGuest } from "@/utils";
 import { MOCK_LAST_YEAR_SUMMARY } from "@/constants/dashboard";
-import { LineChartCarousell } from "./LineChartCarousell";
 import { getLastTwelveMonths } from "@/utils/date";
 import moment from "moment";
+import dynamic from 'next/dynamic'
+ 
+const LineChartCarousell = dynamic(() => import('./LineChartCarousell'))
 
 export const LineChartGroups = async () => {
   let summaryData: Summary[] = [];

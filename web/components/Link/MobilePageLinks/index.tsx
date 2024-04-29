@@ -15,7 +15,7 @@ import dynamic from "next/dynamic";
 
 const TransactionModal = dynamic(() => import("@/components/TransactionModal"));
 
-export function MobilePageLinks() {
+export default function MobilePageLinks() {
   const [isAddNewRecordModalOpen, toggleAddNewRecordModal] = useToggle();
   const pathname = usePathname();
   const { user, setUser } = useContext(UserContext) ?? {};
