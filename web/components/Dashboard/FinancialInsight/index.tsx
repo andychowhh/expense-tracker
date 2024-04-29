@@ -24,8 +24,8 @@ export const FinancialInsight = async ({}: FinancialInsightProp) => {
         ? item
         : {
             _id: yearMonth,
-            totalExpense: 0,
-            totalIncome: 0,
+            totalExpense: null, // prevent Tooltip rendering when there is no totalExpense and totalIncome
+            totalIncome: null,
           };
     });
   }
