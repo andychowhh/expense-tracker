@@ -50,7 +50,7 @@ const schema = yup.object({
   note: string(),
 });
 
-export function TransactionModal({
+export default function TransactionModal({
   defaultValues,
   isOpen,
   onClose,
