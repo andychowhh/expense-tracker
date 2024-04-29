@@ -1,13 +1,19 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { GoogleOAuthProvider } from "@react-oauth/google";
-import { Navbar, SideBar } from "@/components";
+import { Navbar } from "@/components";
 import { UserContextProvider } from "../context/UserContext";
 import { getCookie } from ".././utils";
 import "./globals.css";
 import { GuestAlert } from "@/components/GuestAlert";
 import { SpeedInsights } from "@vercel/speed-insights/next";
-import { Analytics } from "@vercel/analytics/react"
+import { Analytics } from "@vercel/analytics/react";
+import dynamic from "next/dynamic";
+
+const SideBar = dynamic(async () => {
+  const { SideBar } = await import("@/components");
+  return { default: SideBar };
+});
 
 const inter = Inter({ subsets: ["latin"] });
 
