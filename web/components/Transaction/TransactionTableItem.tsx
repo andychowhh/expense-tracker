@@ -5,8 +5,10 @@ import useToggle from "beautiful-react-hooks/useToggle";
 import { PAYMENT_METHOD, Transaction } from "@/types";
 import { CATEGORIES } from "@/constants";
 import { deleteTransation, updateTransation } from "@/actions/transactions";
-import TransactionModal from "../TransactionModal";
 import { toLocalDate } from "@/utils/date";
+import dynamic from "next/dynamic";
+
+const TransactionModal = dynamic(() => import("../TransactionModal"));
 
 export const TransactionTableItem = ({
   _id,

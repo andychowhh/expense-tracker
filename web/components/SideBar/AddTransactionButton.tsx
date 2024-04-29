@@ -2,9 +2,11 @@
 
 import { PlusCircleIcon } from "@heroicons/react/24/solid";
 import useToggle from "beautiful-react-hooks/useToggle";
-import TransactionModal from "../TransactionModal";
 import { Transaction } from "@/types";
 import { createTransation } from "@/actions/transactions";
+import dynamic from "next/dynamic";
+
+const TransactionModal = dynamic(() => import("../TransactionModal"));
 
 export const AddTransactionButton = () => {
   const [isAddNewRecordModalOpen, toggleAddNewRecordModal] = useToggle();
