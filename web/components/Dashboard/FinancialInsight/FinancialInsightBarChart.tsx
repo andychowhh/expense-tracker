@@ -13,7 +13,7 @@ import {
 } from "recharts";
 
 interface FinancialInsightBarChartProp {
-  data: { name: string; income: number; expense: number }[];
+  data: { name: string; income: number | null; expense: number | null }[];
 }
 
 export const FinancialInsightBarChart = ({

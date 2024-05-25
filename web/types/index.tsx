@@ -50,8 +50,8 @@ export interface ChartData {
 
 export interface Summary {
   _id: string;
-  totalExpense: number;
-  totalIncome: number;
+  totalExpense: number | null;
+  totalIncome: number | null;
 }
 
 export interface CategoryOverviewResponseData {
