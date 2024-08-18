@@ -16,13 +16,14 @@ export const config = {
   matcher: ["/dashboard", "/transactions"],
 };
 
-export default async function middleware(request: NextRequest) {
-  // You could alternatively limit based on user ID or similar
-  const ip = request.ip ?? "127.0.0.1";
-  const { success, pending, limit, reset, remaining } = await ratelimit.limit(
-    ip
-  );
-  return success
-    ? NextResponse.next()
-    : NextResponse.redirect(new URL("/blocked", request.url));
-}
+// Comment out because KV Store was inactive and deleted by Vercel
+// export default async function middleware(request: NextRequest) {
+//   // You could alternatively limit based on user ID or similar
+//   const ip = request.ip ?? "127.0.0.1";
+//   const { success, pending, limit, reset, remaining } = await ratelimit.limit(
+//     ip
+//   );
+//   return success
+//     ? NextResponse.next()
+//     : NextResponse.redirect(new URL("/blocked", request.url));
+// }
